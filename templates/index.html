@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block header %}
+<a href="/" class="logo">
+			<img src="static/images/logo1.png" alt="">
+		</a>
+		<ul id="navigation">
+			<li class="selected">
+				<a href="/">Home</a>
+			</li>
+			<li>
+				<a href="/about">About Me</a>
+			</li>
+			<li>
+				<a href="/gallery">Gallery</a>
+			</li>
+			<li>
+				<a href="/rickroll">Rick</a>
+			</li>
+			<li>
+				<a href="/contact">Contact</a>
+			</li>
+		</ul>
+{% endblock %}
+
+
+
+{% block content %}
+ <center><h1>Welcome to Faceboard!</h1></center>
+ 
+        <center>
+        <span class="center"><img src="/static/faceboard/2.jpg" width='700' /></span>
+        <br>
+        <br>
+        <h3>This is a digital version of UMW's Faceboard</h3>
+		<p><br>
+		The date is: {{dt.date}}<br>
+		The time is: {{dt.time}} ZULU<br>
+		</p>
+		
+		{% if day == 'Friday' %}
+		<p><br>Thank Goodness Its Friday!</p>
+		{% endif %}
+		{% if day == 'Thursday' %}
+		<p><br>Tomorrow is Friday!</p>
+		{% endif %}
+		{% if day == 'Wednesday' %}
+		<p><br>Two more days until Friday!</p>
+		{% endif %}
+		{% if day == 'Tuesday' %}
+		<p><br>Three more days until Friday!</p>
+		{% endif %}
+		{% if day == 'Monday' %}
+		<p><br>Somebody's got a case of The Mondays...</p>
+		{% endif %}
+		{% if day == 'Sunday' %}
+		<p><br>ITS THE WEEKEND!</p>
+		{% endif %}
+		{% if day == 'Saturday' %}
+		<p><br>ITS THE WEEKEND!</p>
+		{% endif %}
+		
+		<br>
+		</center>
+{% endblock %}
