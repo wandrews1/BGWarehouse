@@ -9,6 +9,7 @@ Please see [contributing guidelines](CONTRIBUTING.md) before reporting an issue.
 
   
 ## Grading:
+This section has notes for Dr. Zacharski & Mikaela. 
 See [Grading](GRADING.md).
 
 
