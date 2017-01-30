@@ -8,10 +8,10 @@ Please see [contributing guidelines](CONTRIBUTING.md) before reporting an issue.
   
 ## Grading:
 
--There are 2 Simple Variables in the [Server](server.py), date and time, which are kept in a python dictionary and regurgitated for the user on the [Index page](/templates/index.html). 
--The Conditional statement is [Index](templates/index.html). The days of the week are kept in a variable and will print out a little message according to the day of the week.
--The For Loop is in [Gallery](/templates/gallery.html). The images are kept in a list, and the for loop cycles through the list, showing the gallery of images.
--The website has 5 pages.
+*There are 2 Simple Variables in the [Server](server.py), date and time, which are kept in a python dictionary and regurgitated for the user on the [Index page](/templates/index.html). 
+*The Conditional statement is [Index](templates/index.html). The days of the week are kept in a variable and will print out a little message according to the day of the week.
+*The For Loop is in [Gallery](/templates/gallery.html). The images are kept in a list, and the for loop cycles through the list, showing the gallery of images.
+*The website has 5 pages.
 
 
 
