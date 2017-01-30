@@ -4,10 +4,11 @@
 
 This is the webserver that is being used to host Faceboard, assignment 1 for CS350. This will constantly be updated throughout the semester with various projects being worked on.
 
+## Contributing:
 Please see [contributing guidelines](CONTRIBUTING.md) before reporting an issue.
+
   
 ## Grading:
-
 See [Grading](GRADING.md).
 
 
