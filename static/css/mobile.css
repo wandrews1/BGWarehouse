@@ -3,7 +3,7 @@ body {
 	min-width: 0;
 }
 #header {
-	padding: 20px 0;
+	padding: 0;
 	position: relative;
 	width: 100%;
 }
@@ -15,9 +15,10 @@ body {
 }
 #mobile-navigation {
 	background: url(../images/mobile-menu.png) no-repeat 0 0;
+	position: fixed;
 	display: block;
 	height: 50px;
-	margin: 30px auto 0;
+	margin: 15px auto 0;
 	padding: 0;
 	width: 50px;
 }
