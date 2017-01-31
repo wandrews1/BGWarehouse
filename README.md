@@ -1,6 +1,7 @@
-<p style="text-align: center;">![FACEBOARD](/static/faceboard/logo1.png)
+<center> ![FACEBOARD](/static/faceboard/logo1.png)
 
-### Up and running @ [Google Cloud - 35.185.30.255](http://35.185.30.255/) </p>
+### Up and running @ [Google Cloud - 35.185.30.255](http://35.185.30.255/)
+</center>
 
 This is the webserver that is being used to host Faceboard, assignment 1 for CS350. This will constantly be updated throughout the semester with various projects being worked on.
 
