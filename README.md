@@ -1,4 +1,4 @@
-<center>![FACEBOARD](/static/images/logo1.png)
+<center>![FACEBOARD](/static/faceboard/logo1.png)
 
 ### Up and running @ [Google Cloud - 35.185.30.255](http://35.185.30.255/) </center>
 

@@ -373,7 +373,7 @@ p a:hover {
 	overflow: hidden;
 	padding: 0;
 	text-align: center;
-
+	width: 860px;
 }
 #footer div p {
 	color: #fff;
@@ -409,5 +409,5 @@ p a:hover {
 	background: url("../faceboard/gitb.png") no-repeat fixed center; 
 }
 #footer div ul li #gitlab:hover {
-	background: url("../gitc.png");
+	background: url("../faceboard/gitc.png");
 }
