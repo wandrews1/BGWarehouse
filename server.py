@@ -28,14 +28,9 @@ def showGallery():
 	p4 = '/static/faceboard/4.jpg'
 	p5 = '/static/faceboard/5.jpg'
 	p6 = '/static/faceboard/6.jpg'
-	photos = {p1, p2, p3, p4, p5, p6}
+	p7 = '/static/faceboard/Thor.jpg'
+	photos = {p7, p1, p2, p3, p4, p5, p6}
 	return render_template('gallery.html', photos=photos)
-	
-@app.route('/rickroll')
-def showRick():
-	theLyrics = "Never gonna give you up."
-	return render_template('rickroll.html', lyrics=theLyrics)
-
 
 	
 # Start the server

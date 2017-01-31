@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 
+
 {% block header %}
 <a href="/" class="logo">
-			<img src="static/images/logo1.png" alt="">
+			<img src="static/faceboard/logo1.png" alt="">
 		</a>
 		<ul id="navigation">
 			<li class="selected">
@@ -17,22 +18,16 @@
 			<li>
 				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
 			</li>
-			<li>
-				<a href="/contact">Contact</a>
-			</li>
 		</ul>
 {% endblock %}
-
 
 
 {% block content %}
  <center><h1>Welcome to Faceboard!</h1></center>
  
         <center>
-        <span class="center"><img src="/static/faceboard/2.jpg" width='700' /></span>
-        <br>
-        <br>
-        <h3>This is a digital version of UMW's Faceboard</h3>
+        <span class="center"><img src="/static/faceboard/4.jpg" width='500' /></span>
+
 		<p><br>
 		The date is: {{dt.date}}<br>
 		The time is: {{dt.time}} ZULU<br>
