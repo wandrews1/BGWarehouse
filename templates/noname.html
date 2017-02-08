@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+
+{% block header %}
+<a href="/" class="logo">
+			<img src="static/faceboard/logo1.png" alt="">
+		</a>
+		<ul id="navigation">
+			<li>
+				<a href="/">Home</a>
+			</li>
+			<li>
+				<a href="/about">About Me</a>
+			</li>
+			<li>
+				<a href="/gallery">Gallery</a>
+			</li>
+			<li class="selected">
+				<a href="/form">Signup</a>
+			</li>
+			<li>
+				<a href="/form2">Database</a>
+			</li>
+			<li>
+				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
+			</li>
+		</ul>
+{% endblock %}
+
+
+{% block content %}
+<br>
+<br>
+ 	<center>
+ 		<h1>FACEBOARD SIGNUP</h1>
+  
+		<h2 style="color:red;">FIRST AND LAST NAME ARE REQUIRED</h2>
+		<form method="POST" action="/form2">
+			<table>
+				<tr>
+					<td>First Name:* </td>
+					<td><input type="text" name="fname" placeholder="First Name" /></td>
+				</tr>
+				<tr>
+					<td>Last Name:* </td>
+					<td><input type="text" name="lname" placeholder="Last Name" /></td>
+				</tr>
+				<tr>
+					<td>Email:* </td>
+					<td><input type="email" name="email" placeholder="Email Address" /></td>
+				</tr>
+				<tr>
+					<td>Date of Birth: </td>
+					<td><input type="date" name="dob" /></td>
+				</tr>
+				<tr>
+					<td>Password:* </td>
+					<td><input type="password" name="pw1" placeholder="Password"/></td>
+				</tr>
+				<tr>
+					<td>Retype Password:* </td>
+					<td><input type="password" name="pw2" placeholder="Retype Password"/></td>
+				</tr>
+				<br>
+				<tr>
+					<td><input type="submit" value="SUBMIT" /></td>
+				</tr>
+			</table>
+		</form>
+		* denotes a required field
+	</center>
+<br>	
+{% endblock %}

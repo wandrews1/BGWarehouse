@@ -53,7 +53,7 @@ p a:hover {
 #header {
 	align-self: center;
 	background-color: white;
-	position: fixed;
+	position: fixed;	
 	top: 0;
 	margin: 0 auto;
 	padding: 20px 0 20px;
@@ -98,8 +98,8 @@ p a:hover {
 }
 #body {
 	top: 50px;
-	margin: 0 auto ;
-	padding: 0 0 10px;
+	margin: 0 auto;
+	padding: 10px 0 10px;
 	text-align: center;
 }
 #body h1 {

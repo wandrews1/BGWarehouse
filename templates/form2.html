@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 
+
 {% block header %}
 <a href="/" class="logo">
 			<img src="static/faceboard/logo1.png" alt="">
@@ -12,13 +13,13 @@
 			<li>
 				<a href="/about">About Me</a>
 			</li>
-			<li class="selected">
+			<li>
 				<a href="/gallery">Gallery</a>
 			</li>
 			<li>
 				<a href="/form">Signup</a>
 			</li>
-			<li>
+			<li class="selected">
 				<a href="/form2">Database</a>
 			</li>
 			<li>
@@ -29,16 +30,29 @@
 
 
 {% block content %}
-<br><br>
- <center><h1>Gallery</h1></center>
+<br>
+<br>
+ 	<center>
+ 		<h1>FACEBOARD USERS</h1>
+  
+		<h2>Congratulations {{fname}} {{lname}}! <br><br>You have successfully registered for FaceBoard.</h2>
 
-        <center>
-        	
-        {% for img in photos %}
-	 	<span class="center"><img src={{img}} width='500'/></span><br>
- 		{% endfor %} 
-        
-        <br>
-        </center>
-        
+		<h3>Currently registered FaceBoarders:</h3>
+		<table>
+			<tr>
+				<th>NAME</th>
+				<th>DOB</th>
+				<th>EMAIL</th>
+			</tr>
+			{% for person in people %}
+			<tr>
+				<td>{{person.name}}</td>
+				<td>{{person.dob}}</td>
+				<td>{{person.email}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+
+	</center>
+<br>
 {% endblock %}

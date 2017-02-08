@@ -1,7 +1,12 @@
 import datetime
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
+
+
+people = [	{'name':'Billy Andrews', 'email':'scripture187@gmail.com','dob':'1984-10-10'},
+			{'name':'Whitney Esposito', 'email':'wespo796@gmail.com','dob':'1990-02-12'},
+			{'name':'Justina Andrews', 'email':'salsajustini@gmail.com','dob':'1980-02-11'}]
 
 
 @app.route('/')
@@ -19,6 +24,42 @@ def showAbout():
 @app.route('/contact')
 def showContact():
 	return render_template('contact.html')
+	
+@app.route('/form', methods=['GET','POST'])
+def showForm():
+	return render_template('form.html')
+	
+@app.route('/form2', methods=['GET','POST'])
+def showForm2():
+	if request.method == 'POST':
+		if request.form['fname'] != "":
+			if request.form['lname'] != "":
+				if request.form['email'] != "":
+					if request.form['pw1'] == request.form['pw2']:
+						people.append({
+						'name': request.form['fname']+" "+request.form['lname'],
+						'email': request.form['email'],
+						'dob': request.form['dob'],
+						'pw1': request.form['pw1'],
+						'pw2': request.form['pw2']
+						})
+					else:
+						return render_template('badform.html')
+				else:
+					return render_template('noemail.html')
+			else:
+				return render_template('noname.html')
+		else:
+			return render_template('noname.html')
+		fname=request.form['fname']
+		lname=request.form['lname']
+		return render_template('form2.html', fname=fname, lname=lname, people=people)
+	else:
+		return render_template('form3.html', people=people)
+
+@app.route('/form3', methods=['GET','POST'])
+def showForm3():
+	return render_template('form3.html', people=people)
 
 @app.route('/gallery')
 def showGallery():
