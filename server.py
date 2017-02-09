@@ -4,10 +4,11 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
-people = [	{'name':'Billy Andrews', 'email':'scripture187@gmail.com','dob':'1984-10-10'},
-			{'name':'Whitney Esposito', 'email':'wespo796@gmail.com','dob':'1990-02-12'},
-			{'name':'Justina Andrews', 'email':'salsajustini@gmail.com','dob':'1980-02-11'}]
+people = [	{'fname':'Billy', 'lname':'Andrews', 'email':'scripture187@gmail.com','dob':'1984-10-10'},
+			{'fname':'Whitney', 'lname':'Esposito', 'email':'wespo796@gmail.com','dob':'1990-02-12'},
+			{'fname':'Justina', 'lname':'Andrews', 'email':'salsajustini@gmail.com','dob':'1980-02-11'}]
 
+errors = [{'email':'EMAIL REQUIRED','fname':'FIRST NAME REQUIRED','lname':'LAST NAME REQUIRED','password':'PASSWORDS DO NOT MATCH'}]
 
 @app.route('/')
 def mainIndex():
@@ -17,49 +18,52 @@ def mainIndex():
 	day = datetime.datetime.now().strftime('%A')
 	return render_template('index.html', dt=dt, day=day)
 	
+	
 @app.route('/about')
 def showAbout():
 	return render_template('about.html')
+	
 	
 @app.route('/contact')
 def showContact():
 	return render_template('contact.html')
 	
+	
 @app.route('/form', methods=['GET','POST'])
 def showForm():
 	return render_template('form.html')
 	
+	
 @app.route('/form2', methods=['GET','POST'])
 def showForm2():
+	fname=request.form['fname']
+	lname=request.form['lname']
+	email=request.form['email']
+	pw1=request.form['pw1']
+	pw2=request.form['pw2']
+	dob=request.form['dob']
 	if request.method == 'POST':
-		if request.form['fname'] != "":
-			if request.form['lname'] != "":
-				if request.form['email'] != "":
-					if request.form['pw1'] == request.form['pw2']:
-						people.append({
-						'name': request.form['fname']+" "+request.form['lname'],
-						'email': request.form['email'],
-						'dob': request.form['dob'],
-						'pw1': request.form['pw1'],
-						'pw2': request.form['pw2']
-						})
-					else:
-						return render_template('badform.html')
-				else:
-					return render_template('noemail.html')
-			else:
-				return render_template('noname.html')
+		if (fname != "" and lname != "" and email != "" and pw1 == pw2):
+			people.append({
+			'fname': fname,
+			'lname': lname,
+			'email': email,
+			'dob': dob,
+			'pw1': pw1,
+			'pw2': pw2,
+			'signup': datetime.datetime.now().strftime('%Y-%B-%e')
+			})
+			return render_template('form2.html', fname=fname, people=people)
 		else:
-			return render_template('noname.html')
-		fname=request.form['fname']
-		lname=request.form['lname']
-		return render_template('form2.html', fname=fname, lname=lname, people=people)
+			return render_template('badform.html', fname=fname, lname=lname, people=people, email=email, pw1=pw1, pw2=pw2, errors=errors)
 	else:
 		return render_template('form3.html', people=people)
+
 
 @app.route('/form3', methods=['GET','POST'])
 def showForm3():
 	return render_template('form3.html', people=people)
+
 
 @app.route('/gallery')
 def showGallery():

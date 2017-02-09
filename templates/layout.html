@@ -2,11 +2,11 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
 	<title>Faceboard</title>
 	<link rel="icon" href="static/faceboard/favicon-32x32.png">
 	<link rel="stylesheet" type="text/css" href="static/css/style.css">
-	<link rel="stylesheet" type="text/css" href="static/css/mobile.css" media="screen and (max-width : 568px)">
+	<link rel="stylesheet" type="text/css" href="static/css/mobile.css" media="screen and (max-width : 800px)">
 	<script type="text/javascript" src="static/js/mobile.js"></script>
 	<style>
 	table, th, td {
@@ -24,7 +24,7 @@
 	
 	</div>
 	
-	<div class="content">
+	<div id="content">
 	
 	{% block content %}{% endblock %}
 	
@@ -32,11 +32,17 @@
 	
 	
 	<div id="footer">
-		<div><center>
-			<p><br>&copy; 2017 by WSA. All rights reserved.<br>
-			<a href="https://gitlab.com/wandrews1/webserver" id="gitlab"><img src="/static/faceboard/gitc.png" width=44px></a></p>
+		<div>
+			<center>
+				<p>
+					<br>
+					&copy; 2017 by WSA. All rights reserved.
+					<br>
+					<a href="https://gitlab.com/wandrews1/webserver" id="gitlab"><img src="/static/faceboard/gitc.png" width=44px></a>
+				</p>
 			</center>
 		</div>
 	</div>
+	
 </body>
 </html>

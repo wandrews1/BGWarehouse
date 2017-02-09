@@ -1,14 +1,21 @@
 /* Website Template by freewebsitetemplates.com */
+@media only screen and (max-width: 800px) {
 body {
 	min-width: 0;
 }
+p {
+	margin: 0;
+	padding: 0;
+	width: inherit;
+	text-align: left;
+}
 #header {
 	padding: 0;
-	position: relative;
+	position: fixed;
 	width: 100%;
 }
 #header a.logo {
-	width: 80%;
+	width: 95%;
 }
 #header a.logo img {
 	width: 100%;
@@ -18,7 +25,7 @@ body {
 	position: fixed;
 	display: block;
 	height: 50px;
-	margin: 15px auto 0;
+	margin: 0 auto 0;
 	padding: 0;
 	width: 50px;
 }
@@ -80,8 +87,12 @@ body {
 	top: 0;
 	width: 50px;
 }
+#content {
+    width: 100%;
+    margin: 0 auto;
+}
 #body {
-	width: 100%;
+	width: 80%;
 }
 #body h1 {
 	display: block;
@@ -98,13 +109,27 @@ body {
 	padding: 0 5%;
 	width: 90%;
 }
-#body > div img {
-	margin: 24px 0 30px;
+#body div p {
+	margin: 0;
+	padding: 0;
+	width: inherit;
+	text-align: left;
+}
+#body div {
+	margin: 0;
 	width: 90%
+}
+#body div img {
+	margin: 0;
+	width: 50px;
+}
+#body > div img {
+	margin: 0;
+	width: 90%;
 }
 #body > div .article {
 	padding: 0;
-	width: 100%;
+	width: 90%;
 }
 #body > div .article h2, #body > div .article h4 {
 	font-size: 18px;
@@ -115,7 +140,7 @@ body {
 	margin: 0 0 20px
 }
 #body #featured img {
-	min-width: 960px;
+	width: 90%;
 }
 #body #featured div {
 	left: 0;
@@ -137,6 +162,7 @@ body {
 	font-size: 14px;
 	margin: 10px 0;
 	padding: 10px;
+	width: 100%;
 }
 #body #featured div a {
 	font-size: 14px;
@@ -187,7 +213,7 @@ body {
 	width: 100%;
 }
 #body div ul li .figure img {
-	width: 100%;
+	width: 98%;
 }
 #body div ul li div {
 	float: none;
@@ -210,19 +236,29 @@ body {
 	padding: 10px;
 }
 #footer {
-	padding: 10px 0 25px;
+	position: fixed;
+	bottom: 0;
+	text-align: center;
+	align-self: center;
+	background: #252525;
+	margin: 0;
+	width: 100%;
+	padding: 5px 0 5px;
 }
 #footer div {
-	overflow: visible;
+	bottom: 0;
+	text-align: center;
+	align-self: center;
+	margin: 0;
+	overflow: hidden;
 	width: 100%;
 }
 #footer div p {
-	float: none;
 	margin: 0;
 	text-align: center;
 }
 #footer div ul {
-	float: none;
 	margin: 0 auto;
-	width: 256px;
+	width: 90%;
+}
 }

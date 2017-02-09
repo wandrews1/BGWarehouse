@@ -20,7 +20,7 @@
 				<a href="/form">Signup</a>
 			</li>
 			<li class="selected">
-				<a href="/form2">Database</a>
+				<a href="/form3">Database</a>
 			</li>
 			<li>
 				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
@@ -38,13 +38,15 @@
 		<h3>Currently registered FaceBoarders:</h3>
 		<table>
 			<tr>
-				<th>NAME</th>
+				<th>LAST NAME</th>
+				<th>FIRST NAME</th>
 				<th>DOB</th>
 				<th>EMAIL</th>
 			</tr>
 			{% for person in people %}
 			<tr>
-				<td>{{person.name}}</td>
+				<td>{{person.lname}}</td>
+				<td>{{person.fname}}</td>
 				<td>{{person.dob}}</td>
 				<td>{{person.email}}</td>
 			</tr>

@@ -19,7 +19,7 @@
 				<a href="/form">Signup</a>
 			</li>
 			<li>
-				<a href="/form2">Database</a>
+				<a href="/form3">Database</a>
 			</li>
 			<li>
 				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
@@ -34,7 +34,21 @@
  	<center>
  		<h1>FACEBOARD SIGNUP</h1>
   
-		<h2 style="color:red;">PASSWORDS DO NOT MATCH</h2>
+		<h2 style="color:red;">
+			{% if fname == "" %}
+				FIRST NAME REQUIRED<br>
+			{% endif %}
+			{% if lname == "" %}
+				LAST NAME REQUIRED<br>
+			{% endif %}
+			{% if email == "" %}
+				EMAIL REQUIRED<br>
+			{% endif %}
+			{% if pw1 != pw2 %}
+				PASSWORDS DO NOT MATCH<br>
+			{% endif %}
+		</h2>
+		
 		<form method="POST" action="/form2">
 			<table>
 				<tr>
@@ -62,11 +76,10 @@
 					<td><input type="password" name="pw2" placeholder="Retype Password"/></td>
 				</tr>
 				<br>
-				<tr>
-					<td><input type="submit" value="SUBMIT" /></td>
-				</tr>
 			</table>
+			<input type="submit" value="SUBMIT" />
 		</form>
+		<br>
 		* denotes a required field
 	</center>
 <br>	

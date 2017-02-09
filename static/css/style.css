@@ -22,16 +22,18 @@ body {
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 1;
-	margin: 0;
-	min-width: 960px;
-	padding: 120px 0px;
+	margin: 0 auto;
+	width: 100%;
+	justify-content: space-around;
+	text-align: center;
+	padding: 120px 0;
 }
 p {
 	color: #252525;
 	line-height: 24px;
 	margin: 0;
 	padding: 0;
-	width: 700px;
+	width: 98%;
 	text-align: left;
 	text-indent: 50px;
 }
@@ -40,7 +42,7 @@ p2 {
 	line-height: 24px;
 	margin: 0;
 	padding: 0;
-	width: 700px;
+	width: 98%;
 	text-align: center;
 }
 p a {
@@ -64,7 +66,7 @@ p a:hover {
 	display: block;
 	margin: 0 auto;
 	padding: 0;
-	width: 340px;
+	width: 98%;
 }
 #header a.logo img {
 	border: 0;
@@ -96,11 +98,17 @@ p a:hover {
 #header ul li a:hover, #header ul li.selected a {
 	color: #0ba39c;
 }
+#content {
+    width: 40%;
+    margin: 20px auto;
+}
 #body {
+	display: block;
 	top: 50px;
 	margin: 0 auto;
 	padding: 10px 0 10px;
 	text-align: center;
+	width: 50%;
 }
 #body h1 {
 	color: #fff;
@@ -117,34 +125,36 @@ p a:hover {
 	display: inline-block;
 	padding: 15px 28px 12px;
 }
-#body > div {
+#body div {
+	display: block;
 	margin: 0 auto;
 	padding: 0;
-	width: 960px;
+	width: 50%;
 }
-#body > div img {
+#body div img {
 	border: 2px solid #292929;
 	margin: 24px 0 0;
 	padding: 0;
+	width: 50%;
 }
-#body > div .article {
+#body div .article {
 	margin: 0 auto;
 	padding: 30px 30px 0;
 	width: 560px;
 }
-#body > div .article h2 {
+#body div .article h2 {
 	font-family: "Arial Black", Gadget, sans-serif;
 	font-size: 30px;
 	font-weight: normal;
 	margin: 0 0 30px;
 }
-#body > div .article h3 {
+#body div .article h3 {
 	color: #252525;
 	line-height: 24px;
 	margin: 0;
 	padding: 0;
 }
-#body > div .article h4 {
+#body div .article h4 {
 	background: #252525;
 	color: #fff;
 	display: inline-block;
@@ -154,7 +164,7 @@ p a:hover {
 	margin: 0 0 30px;
 	padding: 8px 27px 10px;
 }
-#body > div .article p {
+#body div .article p {
 	margin: 0 0 30px;
 }
 #body div ul {
@@ -283,7 +293,7 @@ p a:hover {
 	margin: 0 auto;
 	overflow: hidden;
 	padding: 24px 0 0;
-	width: 960px;
+	width: 50%;
 }
 #body > ul li {
 	display: block;
@@ -369,14 +379,14 @@ p a:hover {
 }
 #footer div {
 	align-self: center;
-	margin: 0 auto;
-	overflow: hidden;
+	margin: 0;
 	padding: 0;
 	text-align: center;
-	width: 860px;
+	width: 100%;
 }
 #footer div p {
 	color: #fff;
+	align-self: center;
 	text-align: center;
 	margin: 0;
 	padding: 0;
@@ -387,7 +397,7 @@ p a:hover {
 	margin: 0;
 	overflow: hidden;
 	padding: 0;
-	width: 256px;
+	width: 50%;
 }
 #footer div ul li {
 	display: block;
@@ -395,7 +405,7 @@ p a:hover {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	width: 44px;
+	width: 50%;
 }
 #footer div ul li a {
 	display: block;

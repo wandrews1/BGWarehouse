@@ -19,7 +19,7 @@
 				<a href="/form">Signup</a>
 			</li>
 			<li>
-				<a href="/form2">Database</a>
+				<a href="/form3">Database</a>
 			</li>
 			<li>
 				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
@@ -33,35 +33,38 @@
  <center><h1>Welcome to Faceboard!</h1></center>
  
         <center>
-        <span class="center"><img src="/static/faceboard/4.jpg" width='500' /></span>
-
-		<p><br>
+        	<div>
+        		<photo><img src="/static/faceboard/4.jpg" width=100%/></photo>
+        	</div>
+        	
+		<br>
+		<br>
+		
 		The date is: {{dt.date}}<br>
 		The time is: {{dt.time}} ZULU<br>
-		</p>
-		
+		<h2>
 		{% if day == 'Friday' %}
-		<p><br>Thank Goodness Its Friday!</p>
+		Thank Goodness Its Friday!
 		{% endif %}
 		{% if day == 'Thursday' %}
-		<p><br>Tomorrow is Friday!</p>
+		Tomorrow is Friday!
 		{% endif %}
 		{% if day == 'Wednesday' %}
-		<p><br>HUMP DAY!</p>
+		HUMP DAY!
 		{% endif %}
 		{% if day == 'Tuesday' %}
-		<p><br>Three more days until Friday!</p>
+		Three more days until Friday!
 		{% endif %}
 		{% if day == 'Monday' %}
-		<p><br>Somebody's got a case of The Mondays...</p>
+		Somebody's got a case of The Mondays...
 		{% endif %}
 		{% if day == 'Sunday' %}
-		<p><br>SUNDAY FUNDAY!</p>
+		SUNDAY FUNDAY!
 		{% endif %}
 		{% if day == 'Saturday' %}
-		<p><br>ITS THE WEEKEND!</p>
+		ITS THE WEEKEND!
 		{% endif %}
-		
+		</h2>
 		<br>
 		</center>
 {% endblock %}
