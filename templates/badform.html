@@ -44,23 +44,29 @@
 			{% if email == "" %}
 				EMAIL REQUIRED<br>
 			{% endif %}
+			{% if dob == "" %}
+				DATE OF BIRTH REQUIRED<br>
+			{% endif %}
 			{% if pw1 != pw2 %}
 				PASSWORDS DO NOT MATCH<br>
+			{% endif %}
+			{% if pw1 == "" %}
+				PASSWORD REQUIRED<br>
 			{% endif %}
 		</h2>
 		
 		<form method="POST" action="/form2">
 			<table>
 				<tr>
-					<td>First Name:* </td>
+					<td>First Name: </td>
 					<td><input type="text" name="fname" placeholder="First Name" /></td>
 				</tr>
 				<tr>
-					<td>Last Name:* </td>
+					<td>Last Name: </td>
 					<td><input type="text" name="lname" placeholder="Last Name" /></td>
 				</tr>
 				<tr>
-					<td>Email:* </td>
+					<td>Email: </td>
 					<td><input type="email" name="email" placeholder="Email Address" /></td>
 				</tr>
 				<tr>
@@ -68,11 +74,11 @@
 					<td><input type="date" name="dob" /></td>
 				</tr>
 				<tr>
-					<td>Password:* </td>
+					<td>Password: </td>
 					<td><input type="password" name="pw1" placeholder="Password"/></td>
 				</tr>
 				<tr>
-					<td>Retype Password:* </td>
+					<td>Retype Password: </td>
 					<td><input type="password" name="pw2" placeholder="Retype Password"/></td>
 				</tr>
 				<br>
@@ -80,7 +86,7 @@
 			<input type="submit" value="SUBMIT" />
 		</form>
 		<br>
-		* denotes a required field
+		All fields are required for signup.
 	</center>
 <br>	
 {% endblock %}

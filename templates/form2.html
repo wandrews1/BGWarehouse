@@ -37,20 +37,14 @@
   
 		<h2>Congratulations {{fname}}! <br><br>You have successfully registered for FaceBoard.</h2>
 
-		<h3>Currently registered FaceBoarders:</h3>
+		<h3>Currently registered Faceboarders:</h3>
 		<table>
 			<tr>
-				<th>LAST NAME</th>
-				<th>FIRST NAME</th>
-				<th>DOB</th>
-				<th>EMAIL</th>
+				<th>LAST NAME</th><th>FIRST NAME</th><th>DOB</th><th>EMAIL</th>
 			</tr>
-			{% for person in people %}
+			{% for person in results %}
 			<tr>
-				<td>{{person.lname}}</td>
-				<td>{{person.fname}}</td>
-				<td>{{person.dob}}</td>
-				<td>{{person.email}}</td>
+				<td>{{person[1]}}</td><td>{{person[0]}}</td><td>{{person[2]}}</td><td>{{person[3]}}</td>
 			</tr>
 			{% endfor %}
 		</table>

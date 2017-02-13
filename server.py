@@ -1,14 +1,13 @@
 import datetime
 import os
-from flask import Flask, render_template, request
+import psycopg2
+import psycopg2.extras
+from lib.config import *
+from lib import data_postgresql as pg
+from flask import Flask, render_template, request, redirect
 app = Flask(__name__)
 
 
-people = [	{'fname':'Billy', 'lname':'Andrews', 'email':'scripture187@gmail.com','dob':'1984-10-10'},
-			{'fname':'Whitney', 'lname':'Esposito', 'email':'wespo796@gmail.com','dob':'1990-02-12'},
-			{'fname':'Justina', 'lname':'Andrews', 'email':'salsajustini@gmail.com','dob':'1980-02-11'}]
-
-errors = [{'email':'EMAIL REQUIRED','fname':'FIRST NAME REQUIRED','lname':'LAST NAME REQUIRED','password':'PASSWORDS DO NOT MATCH'}]
 
 @app.route('/')
 def mainIndex():
@@ -43,26 +42,32 @@ def showForm2():
 	pw2=request.form['pw2']
 	dob=request.form['dob']
 	if request.method == 'POST':
+		
 		if (fname != "" and lname != "" and email != "" and pw1 == pw2):
-			people.append({
-			'fname': fname,
-			'lname': lname,
-			'email': email,
-			'dob': dob,
-			'pw1': pw1,
-			'pw2': pw2,
-			'signup': datetime.datetime.now().strftime('%Y-%B-%e')
-			})
-			return render_template('form2.html', fname=fname, people=people)
+			try:
+				results = pg.newMember(fname, lname, email, dob, pw1)
+				if results == None:
+					return render_template('badform.html')
+			except:
+				print("ERROR INSERTING INTO login")
+			try:
+				results = pg.currentRoster()
+			except:
+				print("ERROR executing select")
+			return render_template('form2.html', fname=fname, results=results)
 		else:
-			return render_template('badform.html', fname=fname, lname=lname, people=people, email=email, pw1=pw1, pw2=pw2, errors=errors)
+			return render_template('badform.html', fname=fname, lname=lname, email=email, pw1=pw1, pw2=pw2, dob=dob)
 	else:
-		return render_template('form3.html', people=people)
+		return render_template('form3.html', results=results)
 
 
 @app.route('/form3', methods=['GET','POST'])
 def showForm3():
-	return render_template('form3.html', people=people)
+	try:
+		results = pg.currentRoster()
+	except:
+		print("Error executing select")
+	return render_template('form3.html', results=results)
 
 
 @app.route('/gallery')
