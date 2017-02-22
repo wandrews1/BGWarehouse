@@ -6,7 +6,7 @@
 			<img src="static/faceboard/logo1.png" alt="">
 		</a>
 		<ul id="navigation">
-			<li class="selected">
+			<li>
 				<a href="/">Home</a>
 			</li>
 			<li>
@@ -24,7 +24,7 @@
 			<li>
 				<a href="/form3">Database</a>
 			</li>
-			<li>
+			<li class="selected">
 				<a href="/login">Login</a>
 			</li>
 			<li>
@@ -38,13 +38,25 @@
 
 
 {% block content %}
-<br><br>
- <center><h1>Welcome to Faceboard!</h1></center>
- 
-        <center>
-        	<div>
-        		<photo><img src="/static/faceboard/4.jpg" width=100%/></photo>
-        	</div>
-        	
-		</center>
+<br>
+<br>
+ 	<center>
+ 		<h1>FACEBOARD LOGIN</h1>
+		<form method="POST" action="/">
+			<table>
+				<tr>
+					<td>Email: </td>
+					<td><input type="email" name="username" placeholder="Email Address" /></td>
+				</tr>
+				<tr>
+					<td>Password: </td>
+					<td><input type="password" name="password" placeholder="Password"/></td>
+				</tr>
+				<br>
+			</table>
+			<input type="submit" value="Login" />
+		</form>
+		<br>
+	</center>
+<br>	
 {% endblock %}

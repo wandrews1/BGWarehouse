@@ -15,6 +15,9 @@
 			<li>
 				<a href="/gallery">Gallery</a>
 			</li>
+			<li>
+				<a href="/search">Search</a>
+			</li>
 			<li class="selected">
 				<a href="/form">Signup</a>
 			</li>
@@ -22,7 +25,13 @@
 				<a href="/form3">Database</a>
 			</li>
 			<li>
+				<a href="/login">Login</a>
+			</li>
+			<li>
 				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
+			</li>
+			<li>
+				<a href="/logout">{{user[2]}}</a>
 			</li>
 		</ul>
 {% endblock %}
@@ -68,6 +77,10 @@
 				<tr>
 					<td>Email: </td>
 					<td><input type="email" name="email" placeholder="Email Address" /></td>
+				</tr>
+				<tr>
+					<td>Zipcode: </td>
+					<td><input type="number" name="zipcode" placeholder="Zipcode" /></td>
 				</tr>
 				<tr>
 					<td>Date of Birth: </td>

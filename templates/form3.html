@@ -17,13 +17,22 @@
 				<a href="/gallery">Gallery</a>
 			</li>
 			<li>
+				<a href="/search">Search</a>
+			</li>
+			<li>
 				<a href="/form">Signup</a>
 			</li>
 			<li class="selected">
 				<a href="/form3">Database</a>
 			</li>
 			<li>
+				<a href="/login">Login</a>
+			</li>
+			<li>
 				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
+			</li>
+			<li>
+				<a href="/logout">{{user[2]}}</a>
 			</li>
 		</ul>
 {% endblock %}
@@ -38,11 +47,11 @@
 		<h3>Currently registered Faceboarders:</h3>
 		<table>
 			<tr>
-				<th>LAST NAME</th><th>FIRST NAME</th><th>DOB</th><th>EMAIL</th>
+				<th>LAST NAME</th><th>FIRST NAME</th><th>DOB</th><th>ZIP CODE</th><th>EMAIL</th>
 			</tr>
 			{% for person in results %}
 			<tr>
-				<td>{{person[1]}}</td><td>{{person[0]}}</td><td>{{person[2]}}</td><td>{{person[3]}}</td>
+				<td>{{person[1]}}</td><td>{{person[0]}}</td><td>{{person[2]}}</td><td>{{person[4]}}</td><td>{{person[3]}}</td>
 			</tr>
 			{% endfor %}
 		</table>

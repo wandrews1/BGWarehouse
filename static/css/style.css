@@ -52,6 +52,13 @@ p a {
 p a:hover {
 	color: #898989;
 }
+td {
+overflow: hidden;
+max-width: 400px;
+word-wrap: break-word;
+}
+
+
 #header {
 	align-self: center;
 	background-color: white;
@@ -330,10 +337,16 @@ p a:hover {
 	margin: 0;
 	padding: 33px 0 0;
 }
+#body table {
+	width: 100%;
+	padding: 20px 0 0;
+	margin: 0;
+	color: #252525;
+}
 #body form {
 	margin: 0 auto;
 	padding: 24px 0 0;
-	width: 620px;
+	width: 100%;
 }
 #body form input, #body form textarea {
 	border: 2px solid #252525;
@@ -345,12 +358,13 @@ p a:hover {
 	padding: 20px 10px;
 	text-align: center;
 	text-transform: uppercase;
-	width: 596px;
+	width: 100%;
 }
 #body form textarea {
 	height: 175px;
 	overflow: auto;
 	resize: none;
+	width: 100%;
 }
 #body form #send {
 	background: #252525;
