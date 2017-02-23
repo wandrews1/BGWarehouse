@@ -12,7 +12,7 @@ CREATE TABLE login (
   lname text  NOT NULL,
   email varchar(50) NOT NULL,
   dob date,
-  zipcode numeric(5,0) NOT NULL,
+  zipcode varchar(5) NOT NULL,
   pw1 text NOT NULL
   );
 
@@ -34,8 +34,8 @@ CREATE TABLE places (
   city text NOT NULL,
   state varchar(2) NOT NULL,
   country text NOT NULL DEFAULT 'USA',
-  phone numeric(12,0) NOT NULL,
-  zipcode numeric(5,0) NOT NULL
+  phone varchar(12) NOT NULL,
+  zipcode varchar(5) NOT NULL
   );
 
 INSERT INTO places (name, category, subcategory, address, city, state, country, phone, zipcode) VALUES ('McCoy''s BBQ', 'Food', 'BBQ', '5151 Plank Rd', 'Fredericksburg','VA','USA',5407607078,22407);
