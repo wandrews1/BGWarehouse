@@ -11,7 +11,7 @@ from lib.config import *
 
 def connectToPostgres():
   connectionString = 'dbname=%s user=%s password=%s host=%s' % (POSTGRES_DATABASE, POSTGRES_USER, POSTGRES_PASSWORD,POSTGRES_HOST)
-  print connectionString
+  print(connectionString)
   # BP2  Use try-except blocks
   try:
     return psycopg2.connect(connectionString)
@@ -29,28 +29,28 @@ def connectToPostgres():
 #        False if it is an insert
 #
 def execute_query(query, conn, select=True, args=None):
-	print " - in execute_query"
+	print (" - in execute_query")
 	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 	results1 = None
 	quer = cur.mogrify(query, args)   # BP6  never use Python concatenation                  # for database queries
-	print quer
+	print (quer)
 	try: 
-		print " - Trying cur.execute"
+		print (" - Trying cur.execute")
 		cur.execute(quer)
-		print " - cur.execute has executed"
+		print (" - cur.execute has executed")
 		if select:
-			print " - select = True"
+			print (" - select = True")
 			results1 = cur.fetchall()
-			print " - cur.fetchall just happened"
+			print (" - cur.fetchall just happened")
 		conn.commit()   # BP5  commit and rollback frequently
-		print " - conn.commit()"
+		print (" - conn.commit()")
 	except Exception as e:
 		conn.rollback()
-		print " - conn.rollback()!!!!!!!!!!!!!!!!!!"
+		print (" - conn.rollback()!!!!!!!!!!!!!!!!!!")
 		print(type(e))
 		print(e)
 	cur.close()      # BP3 Dispose of old cursors as soon as possible
-	print " - cur.close()"
+	print (" - cur.close()")
 	return results1
 
 #
@@ -60,7 +60,7 @@ def execute_query(query, conn, select=True, args=None):
 
 
 def newMessage(fname, lname, message):
-	print " - in newMessage()"
+	print (" - in newMessage()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None
@@ -71,11 +71,11 @@ def newMessage(fname, lname, message):
 	
 	
 def chatSearch(search):
-	print " - in chatSearch()"
+	print (" - in chatSearch()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None
-	print " - connected to database"
+	print (" - connected to database")
 	if cat in ['name','category','subcategory','address','city','state','country','phone']:
 		query_string = "SELECT * FROM messages WHERE message LIKE '%'%s'%'"
 	print(" - Query String: " + query_string)
@@ -93,7 +93,7 @@ def chatSearch(search):
 
 
 def newMember(fname, lname, email, dob, zipcode, pw1):
-	print " - in newMember()"
+	print (" - in newMember()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None
@@ -104,7 +104,7 @@ def newMember(fname, lname, email, dob, zipcode, pw1):
 
 
 def currentRoster():
-	print " - in currentRoster()"
+	print (" - in currentRoster()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None
@@ -115,11 +115,11 @@ def currentRoster():
 	
 	
 def superSearch(zipcode, cat, search):
-	print " - in superSearch()"
+	print (" - in superSearch()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None
-	print " - connected to database"
+	print (" - connected to database")
 	if cat in ['name','category','subcategory','address','city','state','country','phone']:
 		query_string = "SELECT * FROM places WHERE zipcode = %s AND " + cat + " = %s"
 	print(" - Query String: " + query_string)
@@ -144,7 +144,7 @@ def superSearch(zipcode, cat, search):
 
 
 def login(email, pw1):
-	print " - in login()"
+	print (" - in login()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None
@@ -164,7 +164,7 @@ def login(email, pw1):
 	
 	
 def getFirstName(email, pw1):
-	print " - in getFirstName()"
+	print (" - in getFirstName()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None
@@ -175,7 +175,7 @@ def getFirstName(email, pw1):
 	
 	
 def getZip(email,pw1):
-	print " - in getZip()"
+	print (" - in getZip()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None

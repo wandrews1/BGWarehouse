@@ -70,7 +70,7 @@ def mainIndex():
 	
 @app.route('/chat', methods=['GET','POST'])
 def showAbout():
-	print "in chat."
+	print("in chat.")
 	if request.method == 'POST':
 		session['username'] = request.form['username']
 		session['password'] = request.form['password']
@@ -186,7 +186,7 @@ def showSearchResults():
 	results = pg.superSearch(user[3], cat, search)
 #	except:
 	#	print("Error executing SuperSearch")
-	print "SHOW: ", results
+	print("SHOW: ", results)
 	
 	return render_template('searchresults.html', user=user, results=results, search=search)
 	
