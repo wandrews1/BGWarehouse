@@ -59,6 +59,39 @@ def execute_query(query, conn, select=True, args=None):
 
 
 
+def newMessage(fname, lname, message):
+	print " - in newMessage()"
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "INSERT INTO messages (fname, lname, message) VALUES (%s, %s, %s)" 
+	execute_query(query_string, conn, select=False,  args=(fname, lname, message))
+	conn.close()
+	return 0
+	
+	
+def chatSearch(search):
+	print " - in chatSearch()"
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	print " - connected to database"
+	if cat in ['name','category','subcategory','address','city','state','country','phone']:
+		query_string = "SELECT * FROM messages WHERE message LIKE '%'%s'%'"
+	print(" - Query String: " + query_string)
+	results2 = execute_query(query_string, conn, select=True, args=(search,))
+	print(" - Results: " , results2)
+	if results2:
+		return results2
+	else:
+		return " - No luck finding your search term."
+	conn.close()
+	return results2
+
+	
+	
+
+
 def newMember(fname, lname, email, dob, zipcode, pw1):
 	print " - in newMember()"
 	conn = connectToPostgres()
@@ -69,6 +102,7 @@ def newMember(fname, lname, email, dob, zipcode, pw1):
 	conn.close()
 	return 0
 
+
 def currentRoster():
 	print " - in currentRoster()"
 	conn = connectToPostgres()
@@ -78,6 +112,7 @@ def currentRoster():
 	results = execute_query(query_string, conn, select=True)
 	conn.close()
 	return results
+	
 	
 def superSearch(zipcode, cat, search):
 	print " - in superSearch()"
@@ -107,6 +142,7 @@ def superSearch(zipcode, cat, search):
 	conn.close()
 	return results2
 
+
 def login(email, pw1):
 	print " - in login()"
 	conn = connectToPostgres()
@@ -125,6 +161,7 @@ def login(email, pw1):
 			return "Username does not exist"
 	conn.close()
 	return results
+	
 	
 def getFirstName(email, pw1):
 	print " - in getFirstName()"

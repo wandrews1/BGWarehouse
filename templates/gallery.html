@@ -2,15 +2,13 @@
 
 
 {% block header %}
-<a href="/" class="logo">
-			<img src="static/faceboard/logo1.png" alt="">
+<a href="/form" class="logo">
+			<img src="static/faceboard/gallery.png" alt="">
 		</a>
 		<ul id="navigation">
+
 			<li>
-				<a href="/">Home</a>
-			</li>
-			<li>
-				<a href="/about">About Me</a>
+				<a href="/chat">Chat</a>
 			</li>
 			<li class="selected">
 				<a href="/gallery">Gallery</a>
@@ -19,19 +17,13 @@
 				<a href="/search">Search</a>
 			</li>
 			<li>
-				<a href="/form">Signup</a>
-			</li>
-			<li>
 				<a href="/form3">Database</a>
-			</li>
-			<li>
-				<a href="/login">Login</a>
 			</li>
 			<li>
 				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
 			</li>
 			<li>
-				<a href="/logout">{{user[2]}}</a>
+				<a href="/logout">{{user[2]}}{{user[4]}}</a>
 			</li>
 		</ul>
 {% endblock %}

@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS faceboard;
+-- DROP DATABASE IF EXISTS faceboard;
 CREATE DATABASE  faceboard;
 
 \c faceboard;
@@ -17,8 +17,7 @@ CREATE TABLE login (
   );
 
 INSERT INTO login (fname, lname, email, dob, zipcode, pw1) VALUES ('Billy', 'Andrews', 'scripture187@gmail.com', '1984-10-10',22407,crypt('pass', gen_salt('bf')));
-INSERT INTO login (fname, lname, email, dob, zipcode, pw1) VALUES ('Whitney', 'Esposito', 'wespo796@gmail.com', '1990-02-12',22407,crypt('pass', gen_salt('bf')));
-INSERT INTO login (fname, lname, email, dob, zipcode, pw1) VALUES ('Justina', 'Andrews', 'salsijustini@gmail.com', '1980-02-11',22407,crypt('pass', gen_salt('bf')));
+
 
 
 GRANT SELECT, INSERT ON login TO faceboardtemp;
@@ -56,5 +55,27 @@ INSERT INTO places (name, category, subcategory, address, city, state, country, 
 
 
 GRANT SELECT ON places TO faceboardtemp;
+
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS messages;
+CREATE TABLE messages (
+  fname text NOT NULL,
+  lname text  NOT NULL,
+  message text NOT NULL,
+  time timestamptz NOT NULL DEFAULT now()
+  );
+
+INSERT INTO messages (fname, lname, message) VALUES ('Billy', 'Andrews', 'This is a message');
+
+
+
+GRANT SELECT, INSERT ON messages TO faceboardtemp;
+
 
 

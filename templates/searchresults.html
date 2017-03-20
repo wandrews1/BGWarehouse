@@ -2,15 +2,10 @@
 
 
 {% block header %}
-<a href="/" class="logo">
-			<img src="static/faceboard/logo1.png" alt="">
-		</a>
+<a href="/form" class="logo"><img src="static/faceboard/logo1.png" alt=""></a>
 		<ul id="navigation">
 			<li>
-				<a href="/">Home</a>
-			</li>
-			<li>
-				<a href="/about">About Me</a>
+				<a href="/chat">Chat</a>
 			</li>
 			<li>
 				<a href="/gallery">Gallery</a>
@@ -19,61 +14,59 @@
 				<a href="/search">Search</a>
 			</li>
 			<li>
-				<a href="/form">Signup</a>
-			</li>
-			<li>
 				<a href="/form3">Database</a>
-			</li>
-			<li>
-				<a href="/login">Login</a>
 			</li>
 			<li>
 				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
 			</li>
 			<li>
-				<a href="/logout">{{user[2]}}</a>
+				<a href="/logout">{{user[2]}}{{user[4]}}</a>
 			</li>
 		</ul>
 {% endblock %}
 
 
 {% block content %}
-<br><br>
- <center><h1>SUPER SEARCH</h1></center>
+<br>
+<br>
+<center>
+	<h1>SUPER SEARCH</h1>
+</center>
 
         <center>
 
   		<h3>Results:</h3>
   		
-		<table align="center" style="margin: 0px auto;">
-			<tr>
-				<th style="white-space: nowrap;">Name</th>
-				<th style="white-space: nowrap;">Category</th>
-				<th style="white-space: nowrap;">Subcategory</th>
-				<th style="white-space: nowrap;">Address</th>
-				<th style="white-space: nowrap;">City</th>
-				<th style="white-space: nowrap;">State</th>
-				<th style="white-space: nowrap;">Country</th>
-				<th style="white-space: nowrap;">Phone</th>
-				<th style="white-space: nowrap;">Zipcode</th>
-			</tr>
+  		
+  		<form>
+    		<table>	
+				<tr>
+					<th nowrap>Name</th>
+					<th nowrap>Category</th>
+					<th nowrap>Subcategory</th>
+					<th nowrap>Address</th>
+					<th nowrap>City</th>
+					<th nowrap>State</th>
+					<th nowrap>Country</th>
+					<th nowrap>Phone</th>
+					<th nowrap>Zipcode</th>
+				</tr>
 			
-			{% for place in results %}
-			
-			<tr>
-				<td style="white-space: nowrap;">{{place[0]}}</td>
-				<td style="white-space: nowrap;">{{place[1]}}</td>
-				<td style="white-space: nowrap;">{{place[2]}}</td>
-				<td style="white-space: nowrap;">{{place[3]}}</td>
-				<td style="white-space: nowrap;">{{place[4]}}</td>
-				<td style="white-space: nowrap;">{{place[5]}}</td>
-				<td style="white-space: nowrap;">{{place[6]}}</td>
-				<td style="white-space: nowrap;">{{place[7]}}</td>
-				<td style="white-space: nowrap;">{{place[8]}}</td>
-			</tr>
-			{% endfor %}
-		</table>
-  	
+				{% for place in results %}
+						
+				<tr>
+					<td nowrap>{{place[0]}}</td>
+					<td nowrap>{{place[1]}}</td>
+					<td nowrap>{{place[2]}}</td>
+					<td nowrap>{{place[3]}}</td>
+					<td nowrap>{{place[4]}}</td>
+					<td nowrap>{{place[5]}}</td>
+					<td nowrap>{{place[6]}}</td>
+					<td nowrap>{{place[7]}}</td>
+					<td nowrap>{{place[8]}}</td>	
+				</tr>
+				{% endfor %}
+			</table>
   		</form> 
         <br>
         </center>

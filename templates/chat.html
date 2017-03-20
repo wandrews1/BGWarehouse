@@ -1,0 +1,92 @@
+<!doctype html>
+<html ng-app="chatapp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+	<title>Faceboard</title>
+	
+	<link rel="icon" href="static/faceboard/favicon-32x32.png">
+	<link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<link rel="stylesheet" type="text/css" href="static/css/mobile.css" media="screen and (max-width : 800px)">
+	<script type="text/javascript" src="static/js/mobile.js"></script>
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.4/socket.io.js"></script>
+	<script src="static/js/controller.js"></script>
+	
+	<style>
+	table, th, td {
+	    padding: 5px;
+	}
+	table {
+	    border-spacing: 5px;
+	}
+	</style>
+</head>
+<body>
+	<div id="header">
+	
+		<a href="/form" class="logo">
+			<img src="static/faceboard/logochat.png" alt="">
+		</a>
+		<ul id="navigation">
+			<li class="selected">
+				<a href="/chat">Chat</a>
+			</li>
+			<li>
+				<a href="/gallery">Gallery</a>
+			</li>
+			<li>
+				<a href="/search">Search</a>
+			</li>
+			<li>
+				<a href="/form3">Database</a>
+			</li>
+			<li>
+				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
+			</li>
+			<li>
+				<a href="/logout">{{user[2]}}{{user[4]}}</a>
+			</li>
+		</ul>
+	
+	</div>
+	
+<br><br>
+	
+	<div class="container" ng-controller="ChatController">
+	<div class="wrapper" >
+	
+	<center>
+	<header>
+        <br><br>
+        <input type="text"   ng-model="name" ng-change="setName()" placeholder="Search FaceChat" size="50" />
+        
+        <div class="scroll" id="msgpane">
+          <p ng-repeat="msg in messages"><b ng-bind="msg.name"></b>:&nbsp;<span ng-bind="msg.text"></span></p>
+        </div>
+         
+        <form ng-submit="send()">
+          <input type="text"  size="30" ng-model="text" placeholder="Enter your message here:">
+          <input type="submit"  value="Send" >
+        </form>
+      </header>
+	</center>
+	</div></div>
+	
+	
+	<div id="footer">
+		<div>
+			<center>
+				<p>
+					<br>
+					&copy; 2017 by WSA. All rights reserved.
+					<br>
+					<a href="https://gitlab.com/wandrews1/webserver" id="gitlab"><img src="/static/faceboard/gitc.png" width=44px></a>
+				</p>
+			</center>
+		</div>
+	</div>
+	
+</body>
+</html>

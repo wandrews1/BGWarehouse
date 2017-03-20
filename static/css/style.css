@@ -16,6 +16,16 @@
 		 url('../fonts/leckerlione/leckerlione-regular-webfont.svg#leckerli_oneregular') format('svg');
 }
 
+div.scroll {
+    background-color: #F8F8F8;
+    width: 500px;
+    height: 500px;
+    overflow: scroll;
+}
+.wrapper {
+  width:860px;
+  margin:0 auto;
+}
 body {
 	background: #fff;
 	font-family: Arial, Helvetica, sans-serif;
@@ -35,7 +45,7 @@ p {
 	padding: 0;
 	width: 98%;
 	text-align: left;
-	text-indent: 50px;
+	text-indent: 25px;
 }
 p2 {
 	color: #252525;
@@ -57,7 +67,12 @@ overflow: hidden;
 max-width: 400px;
 word-wrap: break-word;
 }
-
+.offcenter20left {
+  margin: auto;
+}
+/*.wrapper {*/
+ /* margin-left:-30%; /* adjust as desired */
+/*}*/
 
 #header {
 	align-self: center;
@@ -106,7 +121,8 @@ word-wrap: break-word;
 	color: #0ba39c;
 }
 #content {
-    width: 40%;
+	text-align: center;
+    width: 50%;
     margin: 20px auto;
 }
 #body {
@@ -115,7 +131,7 @@ word-wrap: break-word;
 	margin: 0 auto;
 	padding: 10px 0 10px;
 	text-align: center;
-	width: 50%;
+	width: 80%;
 }
 #body h1 {
 	color: #fff;
@@ -338,6 +354,7 @@ word-wrap: break-word;
 	padding: 33px 0 0;
 }
 #body table {
+	text-align: center;
 	width: 100%;
 	padding: 20px 0 0;
 	margin: 0;
