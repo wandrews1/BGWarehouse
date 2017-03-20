@@ -10,16 +10,16 @@ import psycopg2.extras
 from lib.config import *
 
 def connectToPostgres():
-  connectionString = 'dbname=%s user=%s password=%s host=%s' % (POSTGRES_DATABASE, POSTGRES_USER, POSTGRES_PASSWORD,POSTGRES_HOST)
-  print(connectionString)
-  # BP2  Use try-except blocks
-  try:
-    return psycopg2.connect(connectionString)
-  except Exception as e:    # BP2 especially this part where you print the exception
-  	print(type(e))
-	print(e)
-	print("Can't connect to database")
-	return None
+	connectionString = 'dbname=%s user=%s password=%s host=%s' % (POSTGRES_DATABASE, POSTGRES_USER, POSTGRES_PASSWORD,POSTGRES_HOST)
+	print(connectionString)
+	# BP2  Use try-except blocks
+	try:
+		return psycopg2.connect(connectionString)
+	except Exception as e:    # BP2 especially this part where you print the exception
+		print(type(e))
+		print(e)
+		print("Can't connect to database")
+		return None
 	
 
 
