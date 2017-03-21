@@ -3,7 +3,7 @@ import os
 import psycopg2
 import psycopg2.extras
 import uuid
-from flask.ext.socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit
 from lib.config import *
 from lib import data_postgresql as pg
 from flask import Flask, render_template, request, redirect, session
