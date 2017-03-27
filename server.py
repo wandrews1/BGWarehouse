@@ -1,15 +1,16 @@
-import datetime
+#import datetime
 import os
 import psycopg2
 import psycopg2.extras
 import uuid
-from flask_socketio import SocketIO, emit
+import binascii
 from lib.config import *
 from lib import data_postgresql as pg
 from flask import Flask, render_template, request, redirect, session
-app = Flask(__name__)
-app.secret_key = os.urandom(24).hex()
+from flask_socketio import SocketIO, emit
 
+app = Flask(__name__)
+app.secret_key = binascii.hexlify(os.urandom(24))
 
 username = ''
 password = ''
@@ -146,16 +147,16 @@ def showLogin():
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
 	else:
 		user = ['','','','','']
-		
-	email=request.form['username']
-	pw=request.form['password']
-	if (email != "" and pw == pw2):
-		try:
-			# results = pg.newMember(email, password)
-			if results == None:
-				return render_template('badform.html')
-		except:
-			print("ERROR INSERTING INTO login")
+
+	if request.method == 'POST':
+		email=request.form['username']
+		pw=request.form['password']
+		if (email != "" and pw == pw2):
+			try:
+				if results == None:
+					return render_template('badform.html')
+			except:
+				print("ERROR INSERTING INTO login")
 	return render_template('login.html', user=user)
 	
 	
@@ -222,4 +223,4 @@ def showGallery():
 	
 # Start the server
 if __name__ == '__main__':
-	socketio.run(app, host='0.0.0.0', port=80, debug=True)
+	socketio.run(app, host='0.0.0.0', port=8080, debug=True)
