@@ -25,8 +25,9 @@ messages = [{'text': 'Booting system', 'name': 'FaceBot'},
             
 usernames = {}
 
-@socketio.on('connect')
+@socketio.on('connect', namespace = '/chat')
 def makeConnection():
+	print('BEFORE CONNECTED')
 	session['uuid'] = uuid.uuid1()
 	print('*** Connected ***')
 	usernames[session['uuid']] = {'username': 'New User'}
@@ -36,7 +37,7 @@ def makeConnection():
 		emit('message', message)
 		
 		
-@socketio.on('message')
+@socketio.on('message', namespace = '/chat')
 def new_message(message):
 	tmp = {'text': message, 'name': session['firstname']}
 	print(tmp)
@@ -44,7 +45,7 @@ def new_message(message):
 	emit('message',tmp,broadcast=True)
 
 
-@socketio.on('identify')
+@socketio.on('identify', namespace = '/chat')
 def on_identify(message):
 	print('identify ' + message)
 	usernames[session['uuid']] = {'username': message}

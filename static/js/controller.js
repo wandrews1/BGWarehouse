@@ -1,7 +1,9 @@
+"use strict";
 var chatapp = angular.module('chatapp', []);
 
+
 chatapp.controller('ChatController', function($scope){
-    var socket = io.connect('http://' + document.domain + ':8080');    
+    var socket = io.connect('http://' + document.domain + ':8080' + '/chat');    
     $scope.messages = [];
     $scope.name = '';
     $scope.text = '';
@@ -15,13 +17,13 @@ chatapp.controller('ChatController', function($scope){
     });
     
     $scope.send = function send() {
-      console.log('Sending message: ', $scope.text)  
-      socket.emit('message', $scope.text)
+      console.log('Sending message: ', $scope.text); 
+      socket.emit('message', $scope.text);
       $scope.text = '';
     };
     
     $scope.setName = function setName(){
-       socket.emit('identify', $scope.name)  
+       socket.emit('identify', $scope.name); 
     };
     
     socket.on('connect', function(){
