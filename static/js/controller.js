@@ -3,7 +3,7 @@ var chatapp = angular.module('chatapp', []);
 
 
 chatapp.controller('ChatController', function($scope){
-    var socket = io.connect('http://' + document.domain + ':8080' + '/chat');    
+    var socket = io.connect('http://' + document.domain + ':80' + '/chat');    
     $scope.messages = [];
     $scope.name = '';
     $scope.text = '';
