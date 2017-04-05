@@ -57,7 +57,15 @@ def execute_query(query, conn, select=True, args=None):
 #  app specific
 #
 
-
+def printMessages():
+	print (" - in printMessages()")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT * FROM messages" 
+	results = execute_query(query_string, conn, select=True)
+	conn.close()
+	return results
 
 def newMessage(fname, lname, message):
 	print (" - in newMessage()")
@@ -76,8 +84,8 @@ def chatSearch(search):
 	if conn == None:
 		return None
 	print (" - connected to database")
-	if cat in ['name','category','subcategory','address','city','state','country','phone']:
-		query_string = "SELECT * FROM messages WHERE message LIKE '%'%s'%'"
+	#if search in ['name','category','subcategory','address','city','state','country','phone']:
+	query_string = "SELECT * FROM messages WHERE message LIKE '%'%s'%'"
 	print(" - Query String: " + query_string)
 	results2 = execute_query(query_string, conn, select=True, args=(search,))
 	print(" - Results: " , results2)
@@ -112,6 +120,7 @@ def currentRoster():
 	results = execute_query(query_string, conn, select=True)
 	conn.close()
 	return results
+
 	
 	
 def superSearch(zipcode, cat, search):
@@ -169,6 +178,17 @@ def getFirstName(email, pw1):
 	if conn == None:
 		return None
 	query_string = "SELECT fname FROM login WHERE email = %s AND pw1 = crypt(%s,pw1)"
+	results = execute_query(query_string, conn, select=True, args=(email, pw1))
+	conn.close()
+	return results[0][0]
+	
+	
+def getLastName(email, pw1):
+	print (" - in getLastName()")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT lname FROM login WHERE email = %s AND pw1 = crypt(%s,pw1)"
 	results = execute_query(query_string, conn, select=True, args=(email, pw1))
 	conn.close()
 	return results[0][0]

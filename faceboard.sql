@@ -52,30 +52,20 @@ INSERT INTO places (name, category, subcategory, address, city, state, country, 
 INSERT INTO places (name, category, subcategory, address, city, state, country, phone, zipcode) VALUES ('CVS', 'Convenience', 'Pharmacy', '10701 Courthouse Rd', 'Fredericksburg','VA','USA',5408982117,22407);
 INSERT INTO places (name, category, subcategory, address, city, state, country, phone, zipcode) VALUES ('American Family Fitness', 'Fitness', 'Gym', '10020 Southpoint Pkwy', 'Fredericksburg','VA','USA',5408986111,22407);
 
-
-
 GRANT SELECT ON places TO faceboardtemp;
-
-
-
-
-
 
 
 
 DROP TABLE IF EXISTS messages;
 CREATE TABLE messages (
   fname text NOT NULL,
-  lname text  NOT NULL,
+  lname text NOT NULL,
   message text NOT NULL,
   time timestamptz NOT NULL DEFAULT now()
   );
 
-INSERT INTO messages (fname, lname, message) VALUES ('Billy', 'Andrews', 'This is a message');
-
-
+INSERT INTO messages (fname, lname, message) VALUES ('FaceBot','', 'Booting System...');
+INSERT INTO messages (fname, lname, message) VALUES ('FaceBot','', 'FaceChat now LIVE!');
 
 GRANT SELECT, INSERT ON messages TO faceboardtemp;
-
-
 

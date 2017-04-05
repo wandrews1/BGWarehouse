@@ -16,12 +16,13 @@ username = ''
 password = ''
 firstname = ''
 zipcode = ''
+lastname = ''
 
 
 socketio = SocketIO(app)
 
-messages = [{'text': 'Booting system', 'name': 'FaceBot'},
-            {'text': 'FaceChat Now Live!', 'name': 'FaceBot'}]
+#messages = [{'text': 'Booting system', 'name': 'FaceBot'},
+#            {'text': 'FaceChat Now Live!', 'name': 'FaceBot'}]
             
 usernames = {}
 
@@ -32,25 +33,35 @@ def makeConnection():
 	print('*** Connected ***')
 	usernames[session['uuid']] = {'username': 'New User'}
 
-	for message in messages:
+	for message in pg.printMessages():
 		print(message)
-		emit('message', message)
+		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
 		
 		
 @socketio.on('message', namespace = '/chat')
 def new_message(message):
 	tmp = {'text': message, 'name': session['firstname']}
 	print(tmp)
-	messages.append(tmp)
+	#messages.append(tmp)
+	pg.newMessage(session['firstname'],session['lastname'],message)
 	emit('message',tmp,broadcast=True)
 
 
 @socketio.on('identify', namespace = '/chat')
 def on_identify(message):
-	print('identify ' + message)
+	print('Searching FaceChat for: ' + message)
 	usernames[session['uuid']] = {'username': message}
 	
+@socketio.on('search', namespace = '/chat')
+def searchChat(value):
+	print('Searching FaceChat for ' + value)
+	usernames[session['uuid']] = {'username': message}
+	#session['uuid'] = uuid.uuid1()
+	#print(session['uuid'] + ' found ' + value)
 
+	#for message in pg.printMessages():
+	#	print(message)
+	#	emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
 
 
 
@@ -61,6 +72,7 @@ def mainIndex():
 		session['username'] = request.form['username']
 		session['password'] = request.form['password']
 		session['firstname'] = pg.getFirstName(session['username'],session['password'])
+		session['lastname'] = pg.getLastName(session['username'],session['password'])
 		session['zipcode'] = pg.getZip(session['username'],session['password'])
 		
 	if 'username' in session:
@@ -77,6 +89,7 @@ def showAbout():
 		session['username'] = request.form['username']
 		session['password'] = request.form['password']
 		session['firstname'] = pg.getFirstName(session['username'],session['password'])
+		session['lastname'] = pg.getLastName(session['username'],session['password'])
 		session['zipcode'] = pg.getZip(session['username'],session['password'])
 		
 	if 'username' in session:
@@ -84,6 +97,27 @@ def showAbout():
 	else:
 		user = ['','','','','']
 	return render_template('chat.html', user=user)
+	
+	
+@app.route('/chat', methods=['GET','POST'])
+def showChatSearchResults():
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+	else:
+		user = ['','','','','']
+	try:
+		search=request.form['search']
+		print("Search Term: " , search)
+	except:
+		print("Error fetching search term")
+		#//try:
+	results = pg.chatSearch(search)
+#	except:
+	#	print("Error executing SuperSearch")
+	print("SHOW: ", results)
+	
+	return render_template('chat.html', user=user, results=results, search=search)
+	
 
 
 @app.route('/form', methods=['GET','POST'])
@@ -224,4 +258,4 @@ def showGallery():
 	
 # Start the server
 if __name__ == '__main__':
-	socketio.run(app, host='0.0.0.0', port=80, debug=True)
+	socketio.run(app, host='0.0.0.0', port=8080, debug=True)

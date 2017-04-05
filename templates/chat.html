@@ -52,27 +52,40 @@
 	
 	</div>
 	
-<br><br>
+<br>
+<br>
 	
 	<div class="container" ng-controller="ChatController">
-	<div class="wrapper" >
+		<div class="wrapper" >
 	
-	<center>
-	<header>
-        <br><br>
-        <input type="text"   ng-model="name" ng-change="setName()" placeholder="Search FaceChat" size="50" />
-        <br><br>
-        <div class="scroll" id="msgpane">
-          <p ng-repeat="msg in messages"><b ng-bind="msg.name"></b>:&nbsp;<span ng-bind="msg.text"></span></p>
-        </div>
-         
-        <form ng-submit="send()">
-          <input type="text"  size="30" ng-model="text" placeholder="Enter your message here:">
-          <input type="submit"  value="Send" >
-        </form>
-      </header>
-	</center>
-	</div></div>
+			<center>
+				<header>
+					<br>
+					<br>
+					
+					<!-- Search Pane-->
+					<input type="text"   ng-model="searchbar" ng-change="searchChat()" placeholder="Search FaceChat" size="50" />
+					
+					<br>
+					<br>
+
+					<!-- Message Pane-->
+					<div class="scroll" id="msgpane">
+						<p ng-repeat="msg in messages"><b ng-bind="msg.name"></b>:&nbsp;<span ng-bind="msg.text"></span></p>
+					</div>
+
+					<form ng-submit="send()">
+						
+						<!-- New Message Pane-->
+						<input type="text"  size="30" ng-model="text" placeholder="Enter your message here:">
+						
+						<!-- Send Button-->
+						<input type="submit"  value="Send" >
+					</form>
+				</header>
+			</center>
+		</div>
+	</div>
 	
 	
 	<div id="footer">

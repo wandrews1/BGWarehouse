@@ -22,8 +22,8 @@ chatapp.controller('ChatController', function($scope){
       $scope.text = '';
     };
     
-    $scope.setName = function setName(){
-       socket.emit('identify', $scope.name); 
+    $scope.searchChat = function searchChat(){
+       socket.emit('identify', $scope.searchbar); 
     };
     
     socket.on('connect', function(){
