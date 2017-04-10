@@ -9,25 +9,28 @@ chatapp.controller('ChatController', function($scope){
     $scope.text = '';
     
     socket.on('message', function(msg){
-       console.log(msg);
-       $scope.messages.push(msg);
-       $scope.$apply();
-       var elem = document.getElementById('msgpane');
-       elem.scrollTop = elem.scrollHeight;
+        console.log(msg);
+        $scope.messages.push(msg);
+        $scope.$apply();
+        var elem = document.getElementById('msgpane');
+        elem.scrollTop = elem.scrollHeight;
     });
     
     $scope.send = function send() {
-      console.log('Sending message: ', $scope.text); 
-      socket.emit('message', $scope.text);
-      $scope.text = '';
+        console.log('Sending message: ', $scope.text); 
+        socket.emit('message', $scope.text);
+        $scope.text = '';
     };
     
     $scope.searchChat = function searchChat(){
-       socket.emit('identify', $scope.searchbar); 
+        console.log('Searching FaceChat for: ', $scope.searchbar); 
+        $scope.messages = [];
+        socket.emit('search', $scope.searchbar); 
+        
     };
     
     socket.on('connect', function(){
-       console.log('connected'); 
+        console.log('connected'); 
     });
     
 });

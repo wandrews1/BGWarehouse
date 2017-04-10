@@ -32,6 +32,8 @@ def execute_query(query, conn, select=True, args=None):
 	print (" - in execute_query")
 	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 	results1 = None
+	print (query)
+	print (args)
 	quer = cur.mogrify(query, args)   # BP6  never use Python concatenation                  # for database queries
 	print (quer)
 	try: 
@@ -66,6 +68,22 @@ def printMessages():
 	results = execute_query(query_string, conn, select=True)
 	conn.close()
 	return results
+	
+def searchMessages(search):
+	print (" - in searchMessages()")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT * FROM messages WHERE message LIKE '%'%s'%'" 
+	print(" - Query String: " + query_string)
+	results = execute_query(query_string, conn, select=True, args=(search,))
+	print(" - Results: " , results)
+	if results:
+		return results
+	else:
+		return " - No luck finding your search term."
+	conn.close()
+	return results
 
 def newMessage(fname, lname, message):
 	print (" - in newMessage()")
@@ -85,9 +103,9 @@ def chatSearch(search):
 		return None
 	print (" - connected to database")
 	#if search in ['name','category','subcategory','address','city','state','country','phone']:
-	query_string = "SELECT * FROM messages WHERE message LIKE '%'%s'%'"
+	query_string = "SELECT * FROM messages WHERE message LIKE %s"
 	print(" - Query String: " + query_string)
-	results2 = execute_query(query_string, conn, select=True, args=(search,))
+	results2 = execute_query(query_string, conn, select=True, args=('%' + search + '%',))
 	print(" - Results: " , results2)
 	if results2:
 		return results2

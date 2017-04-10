@@ -71,7 +71,9 @@
 
 					<!-- Message Pane-->
 					<div class="scroll" id="msgpane">
-						<p ng-repeat="msg in messages"><b ng-bind="msg.name"></b>:&nbsp;<span ng-bind="msg.text"></span></p>
+						
+						<p ng-repeat="msg in messages">
+							<b ng-bind="msg.name"></b>:&nbsp;<span ng-bind="msg.text"></span></p>
 					</div>
 
 					<form ng-submit="send()">
@@ -81,7 +83,9 @@
 						
 						<!-- Send Button-->
 						<input type="submit"  value="Send" >
+						
 					</form>
+					
 				</header>
 			</center>
 		</div>

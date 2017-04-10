@@ -21,9 +21,6 @@ lastname = ''
 
 socketio = SocketIO(app)
 
-#messages = [{'text': 'Booting system', 'name': 'FaceBot'},
-#            {'text': 'FaceChat Now Live!', 'name': 'FaceBot'}]
-            
 usernames = {}
 
 @socketio.on('connect', namespace = '/chat')
@@ -40,7 +37,8 @@ def makeConnection():
 		
 @socketio.on('message', namespace = '/chat')
 def new_message(message):
-	tmp = {'text': message, 'name': session['firstname']}
+	person = session['firstname'] + " " + session['lastname']
+	tmp = {'text': message, 'name': person}
 	print(tmp)
 	#messages.append(tmp)
 	pg.newMessage(session['firstname'],session['lastname'],message)
@@ -48,20 +46,27 @@ def new_message(message):
 
 
 @socketio.on('identify', namespace = '/chat')
-def on_identify(message):
-	print('Searching FaceChat for: ' + message)
-	usernames[session['uuid']] = {'username': message}
+def on_identify(value):
+	print('Searching FaceChat for: ' + value)
+	usernames[session['uuid']] = {'username': value}
+	print(session['uuid'])
+
+	for message in pg.searchMessages(value):
+		print(message)
+		emit('identify', {'text': message[2], 'name': message[0] + " " + message[1]})
+	
+	
 	
 @socketio.on('search', namespace = '/chat')
-def searchChat(value):
-	print('Searching FaceChat for ' + value)
-	usernames[session['uuid']] = {'username': message}
-	#session['uuid'] = uuid.uuid1()
-	#print(session['uuid'] + ' found ' + value)
-
-	#for message in pg.printMessages():
-	#	print(message)
-	#	emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
+def search_Chat(value):
+	print('Searching for: ' + value)
+	usernames[session['uuid']] = {'username': value}
+	session['uuid'] = uuid.uuid1()
+	#print(' found ' + value)
+	#pg.chatSearch(value)
+	for message in pg.chatSearch(value):
+		print(message)
+		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
 
 
 
@@ -99,24 +104,24 @@ def showAbout():
 	return render_template('chat.html', user=user)
 	
 	
-@app.route('/chat', methods=['GET','POST'])
-def showChatSearchResults():
-	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
-	else:
-		user = ['','','','','']
-	try:
-		search=request.form['search']
-		print("Search Term: " , search)
-	except:
-		print("Error fetching search term")
-		#//try:
-	results = pg.chatSearch(search)
-#	except:
-	#	print("Error executing SuperSearch")
-	print("SHOW: ", results)
+# @app.route('/chat', methods=['GET','POST'])
+# def showChatSearchResults():
+# 	if 'username' in session:
+# 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+# 	else:
+# 		user = ['','','','','']
+# 	try:
+# 		search=request.form['searchbar']
+# 		print("Search Term: " , search)
+# 	except:
+# 		print("Error fetching search term")
+# 		#//try:
+# 	results = pg.searchMessages(search)
+# #	except:
+# 	#	print("Error executing SuperSearch")
+# 	print("SHOW: ", results)
 	
-	return render_template('chat.html', user=user, results=results, search=search)
+# 	return render_template('chat.html', user=user, results=results, search=search)
 	
 
 
