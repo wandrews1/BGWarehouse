@@ -22,7 +22,7 @@ def connectToPostgres():
 		return None
 	
 
-
+#
 
 # generic execute statement
 # select=True if it is a select statement
