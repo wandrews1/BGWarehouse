@@ -7,7 +7,7 @@ chatapp.controller('ChatController', function($scope){
     $scope.messages = [];
     $scope.name = '';
     $scope.text = '';
-    
+
     socket.on('message', function(msg){
         console.log(msg);
         $scope.messages.push(msg);
