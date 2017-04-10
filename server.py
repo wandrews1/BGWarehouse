@@ -68,8 +68,7 @@ def search_Chat(value):
 		print(message)
 		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
 
-
-
+ 
 
 @app.route('/', methods=['GET','POST'])
 def mainIndex():
