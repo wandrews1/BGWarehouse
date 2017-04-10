@@ -74,7 +74,7 @@ def searchMessages(search):
 	conn = connectToPostgres()
 	if conn == None:
 		return None
-	query_string = "SELECT * FROM messages WHERE message LIKE '%'%s'%'" 
+	query_string = "SELECT * FROM messages WHERE message LIKE '%%s'%'" 
 	print(" - Query String: " + query_string)
 	results = execute_query(query_string, conn, select=True, args=(search,))
 	print(" - Results: " , results)
