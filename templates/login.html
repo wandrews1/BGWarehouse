@@ -2,15 +2,15 @@
 
 
 {% block header %}
-<a href="/form" class="logo">
-			<img src="static/faceboard/logo1.png" alt="">
+<a href="/form" class="logo" style="text-decoration:none">
+			<p class="faceboard">FACEBOARD</p>
 		</a>
 		<ul id="navigation">
 			<li>
-				<a href="/form">Signup</a>
+				<a href="/form"><p class="faceboard3">Signup</p></a>
 			</li>
 			<li class="selected">
-				<a href="/login">Login</a>
+				<a href="/login"><p class="faceboard3">Login</p></a>
 			</li>
 		</ul>
 {% endblock %}
@@ -20,8 +20,7 @@
 <br>
 <br>
  	<center>
- 		 <img src="static/faceboard/login.png" alt="signup">
-
+ 		 
 		<form method="POST" action="/chat">
 			<table>
 				<tr>
@@ -34,7 +33,7 @@
 				</tr>
 				<br>
 			</table>
-			<input type="submit" value="Login" />
+			<input type="submit" value="LOGIN" class="faceboardSubmit" />
 		</form>
 		<br>
 	</center>

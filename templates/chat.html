@@ -26,27 +26,27 @@
 <body>
 	<div id="header">
 	
-		<a href="/form" class="logo">
-			<img src="static/faceboard/logochat.png" alt="">
+		<a href="/form" class="logo" style="text-decoration:none">
+			<p class="faceboard">FACECHAT</p>
 		</a>
 		<ul id="navigation">
 			<li class="selected">
-				<a href="/chat">Chat</a>
+				<a href="/chat"><p class="faceboard3">Chat</p></a>
 			</li>
 			<li>
-				<a href="/gallery">Gallery</a>
+				<a href="/gallery"><p class="faceboard3">Gallery</p></a>
 			</li>
 			<li>
-				<a href="/search">Search</a>
+				<a href="/search"><p class="faceboard3">Search</p></a>
 			</li>
 			<li>
-				<a href="/form3">Database</a>
+				<a href="/form3"><p class="faceboard3">User List</p></a>
 			</li>
 			<li>
-				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
+				<a href="https://gitlab.com/wandrews1/webserver"><p class="faceboard3">GitLab</p></a>
 			</li>
 			<li>
-				<a href="/logout">{{user[2]}}{{user[4]}}</a>
+				<a href="/logout"><p class="faceboard3">{{user[2]}}{{user[4]}}</p></a>
 			</li>
 		</ul>
 	
@@ -65,7 +65,7 @@
 					
 					<!-- Search Pane-->
 					<input type="text"   ng-model="searchbar" ng-change="searchChat()" placeholder="Search FaceChat" size="50" />
-					
+
 					<br>
 					<br>
 
@@ -73,7 +73,7 @@
 					<div class="scroll" id="msgpane">
 						
 						<p ng-repeat="msg in messages">
-							<b ng-bind="msg.name"></b>:&nbsp;<span ng-bind="msg.text"></span></p>
+							<b ng-bind="msg.name" class="faceboardchatname"></b>:&nbsp;<span ng-bind="msg.text"></span></p>
 					</div>
 
 					<form ng-submit="send()">
@@ -82,7 +82,7 @@
 						<input type="text"  size="30" ng-model="text" placeholder="Enter your message here:">
 						
 						<!-- Send Button-->
-						<input type="submit"  value="Send" >
+						<input type="submit"  value="SEND" class="faceboardSubmit">
 						
 					</form>
 					

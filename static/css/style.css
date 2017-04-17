@@ -15,8 +15,64 @@
 		 url('../fonts/leckerlione/leckerlione-regular-webfont.ttf') format('truetype'),
 		 url('../fonts/leckerlione/leckerlione-regular-webfont.svg#leckerli_oneregular') format('svg');
 }
+@font-face {
+    font-family: 'fishandchips';
+    src: url('../fonts/fishandchips/fish.ttf') format('truetype');
+}
 
-div.scroll {
+.faceboard{
+    font-family: 'fishandchips',Arial, Helvetica, sans-serif;
+    font-size: 108px;
+	font-weight: normal;
+	line-height: .75;
+	margin: 0 auto;
+	width: 100%;
+	justify-content: space-around;
+	text-align: center;
+	text-decoration: none;
+}
+.faceboard2{
+    font-family: 'fishandchips',Arial, Helvetica, sans-serif;
+    font-size: 40px;
+	font-weight: normal;
+	line-height: .75;
+	margin: 0 auto;
+	width: 100%;
+	justify-content: space-around;
+	text-align: center;
+	text-decoration: none;
+}
+.faceboard3{
+    font-family: 'fishandchips',Arial, Helvetica, sans-serif;
+    font-size: 32px;
+	font-weight: bold;
+	line-height: .50;
+	margin: 0 auto;
+	width: 100%;
+	justify-content: space-around;
+	text-align: center;
+	text-decoration: none;
+}
+.faceboardchatname{
+    font-family: 'fishandchips',Arial, Helvetica, sans-serif;
+    font-size: 22px;
+	font-weight: bold;
+	line-height: .50;
+	margin: 0 auto;
+	width: 100%;
+	justify-content: space-around;
+	text-align: center;
+	text-decoration: none;
+}
+.faceboardSubmit{
+    font-family: 'fishandchips',Arial, Helvetica, sans-serif;
+    font-size: 20px;
+	font-weight: bold;
+	line-height: 1;
+	text-align: center;
+	text-decoration: none;
+}
+.scroll {
     background-color: #F8F8F8;
     width: 500px;
     height: 500px;
@@ -39,6 +95,16 @@ body {
 	padding: 120px 0;
 }
 p {
+	color: #252525;
+	line-height: 24px;
+	margin: 0;
+	padding-left: 30px;
+	
+	width: 98%;
+	text-align: left;
+	text-indent: -25px;
+}
+pchat {
 	color: #252525;
 	line-height: 24px;
 	margin: 0;
@@ -117,7 +183,7 @@ word-wrap: break-word;
 	text-decoration: none;
 	text-transform: uppercase;
 }
-#header ul li a:hover, #header ul li.selected a {
+#header ul li a p:hover, #header ul li.selected a p{
 	color: #0ba39c;
 }
 #content {

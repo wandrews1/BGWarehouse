@@ -2,25 +2,27 @@
 
 
 {% block header %}
-<a href="/form" class="logo"><img src="static/faceboard/logo1.png" alt=""></a>
+		<a href="/form" class="logo" style="text-decoration:none">
+			<p class="faceboard">SEARCH</p>
+		</a>
 		<ul id="navigation">
 			<li>
-				<a href="/chat">Chat</a>
+				<a href="/chat"><p class="faceboard3">Chat</p></a>
 			</li>
 			<li>
-				<a href="/gallery">Gallery</a>
+				<a href="/gallery"><p class="faceboard3">Gallery</p></a>
 			</li>
 			<li class="selected">
-				<a href="/search">Search</a>
+				<a href="/search"><p class="faceboard3">Search</p></a>
 			</li>
 			<li>
-				<a href="/form3">Database</a>
+				<a href="/form3"><p class="faceboard3">User List</p></a>
 			</li>
 			<li>
-				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
+				<a href="https://gitlab.com/wandrews1/webserver"><p class="faceboard3">GitLab</p></a>
 			</li>
 			<li>
-				<a href="/logout">{{user[2]}}{{user[4]}}</a>
+				<a href="/logout"><p class="faceboard3">{{user[2]}}{{user[4]}}</p></a>
 			</li>
 		</ul>
 {% endblock %}
@@ -29,13 +31,10 @@
 {% block content %}
 <br>
 <br>
-<center>
-	<h1>SUPER SEARCH</h1>
-</center>
 
         <center>
 
-  		<h3>Results:</h3>
+			<p class="faceboard3">RESULTS</p>
   		
   		
   		<form>

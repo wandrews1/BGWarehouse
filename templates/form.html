@@ -2,15 +2,15 @@
 
 
 {% block header %}
-<a href="/form" class="logo">
-			<img src="static/faceboard/logo1.png" alt="">
+		<a href="/form" class="logo" style="text-decoration:none">
+			<p class="faceboard">FACEBOARD</p>
 		</a>
 		<ul id="navigation">
 			<li class="selected">
-				<a href="/form">Signup</a>
+				<a href="/form"><p class="faceboard3">Signup</p></a>
 			</li>
 			<li>
-				<a href="/login">Login</a>
+				<a href="/login"><p class="faceboard3">Login</p></a>
 			</li>
 		</ul>
 {% endblock %}
@@ -21,8 +21,8 @@
 <br>
 
  	<center>
- 		<img src="static/faceboard/signup.png" alt="signup">
-		<h2>Please complete this form for submission.</h2>
+ 		
+		<h3 class="faceboard2">Complete this form for submission.</h3>
 		<form method="POST" action="/form2">
 			<table>
 				<tr>
@@ -55,7 +55,7 @@
 				</tr>
 				<br>
 			</table>
-			<input type="submit" value="SUBMIT" />
+			<input type="submit" value="SUBMIT"  class="faceboardSubmit"/>
 		</form>
 		<br>
 		All fields are required for signup.

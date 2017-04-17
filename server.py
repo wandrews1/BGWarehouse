@@ -7,7 +7,7 @@ import binascii
 from lib.config import *
 from lib import data_postgresql as pg
 from flask import Flask, render_template, request, redirect, session
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, send
 
 app = Flask(__name__)
 app.secret_key = binascii.hexlify(os.urandom(24))
@@ -160,7 +160,7 @@ def showForm2():
 				results = pg.currentRoster()
 			except:
 				print("ERROR executing select")
-			return render_template('form2.html', fname=fname, results=results, user=user)
+			return render_template('login.html', fname=fname, results=results, user=user)
 		else:
 			return render_template('badform.html', fname=fname, lname=lname, email=email, pw1=pw1, pw2=pw2, dob=dob, zipcode=zipcode)
 	else:

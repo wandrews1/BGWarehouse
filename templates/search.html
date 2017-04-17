@@ -2,27 +2,27 @@
 
 
 {% block header %}
-<a href="/form" class="logo">
-			<img src="static/faceboard/search.png" alt="">
+		<a href="/form" class="logo" style="text-decoration:none">
+			<p class="faceboard">SEARCH</p>
 		</a>
 		<ul id="navigation">
 			<li>
-				<a href="/chat">Chat</a>
+				<a href="/chat"><p class="faceboard3">Chat</p></a>
 			</li>
 			<li>
-				<a href="/gallery">Gallery</a>
+				<a href="/gallery"><p class="faceboard3">Gallery</p></a>
 			</li>
 			<li class="selected">
-				<a href="/search">Search</a>
+				<a href="/search"><p class="faceboard3">Search</p></a>
 			</li>
 			<li>
-				<a href="/form3">Database</a>
+				<a href="/form3"><p class="faceboard3">User List</p></a>
 			</li>
 			<li>
-				<a href="https://gitlab.com/wandrews1/webserver">GitLab</a>
+				<a href="https://gitlab.com/wandrews1/webserver"><p class="faceboard3">GitLab</p></a>
 			</li>
 			<li>
-				<a href="/logout">{{user[2]}}{{user[4]}}</a>
+				<a href="/logout"><p class="faceboard3">{{user[2]}}{{user[4]}}</p></a>
 			</li>
 		</ul>
 {% endblock %}
@@ -34,45 +34,35 @@
         	<form method="POST" action="/searchresults">
         		<table>
         			<tr>
-        				Search By:
+        				<p class="faceboard2">Search By:</p>
         			</tr>
 					<tr>
 						<td>
 							<input type="radio" name="cat" value="name" checked/> Name<br>
-						</td>
-						<td>
+					
 							<input type="radio" name="cat" value="category" /> Category<br>
-						</td>
-						<td>
+
 							<input type="radio" name="cat" value="subcategory" /> Subcategory<br>
-						</td>
-						<td>
+
 							<input type="radio" name="cat" value="address" /> Address<br>
-						</td>
-						<td>
+
 							<input type="radio" name="cat" value="city" /> City<br>
-						</td>
-						<td>
+
 							<input type="radio" name="cat" value="state" /> State<br>
-						</td>
-						<td>
+
 							<input type="radio" name="cat" value="country" /> Country<br>
-						</td>
-						<td>
+
 							<input type="radio" name="cat" value="phone" /> Phone<br>
 						</td>
 					</tr>
-				<br>
-				</table>
-				<table align="center">
 					<tr>
-						<td><input type="search" name="search" placeholder="Search" /></td>
+						<td><input type="search" name="search" placeholder="Search Term" /></td>
 					</tr>
 					<tr>
-						<td>{{user[3]}}</td>
+						<td>Search limited to {{user[3]}}</td>
 					</tr>
 					<tr>
-						<td><input type="submit" value="Search" /></td>
+						<td><input type="submit" value="SEARCH" class="faceboardSubmit"/></td>
 					</tr>
 				</table>
 				<br>

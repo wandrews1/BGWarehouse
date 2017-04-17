@@ -2,15 +2,15 @@
 
 
 {% block header %}
-<a href="/form" class="logo">
-			<img src="static/faceboard/logo1.png" alt="">
+		<a href="/form" class="logo" style="text-decoration:none">
+			<p class="faceboard">FACEBOARD</p>
 		</a>
 		<ul id="navigation">
 			<li class="selected">
-				<a href="/form">Signup</a>
+				<a href="/form"><p class="faceboard3">Signup</p></a>
 			</li>
 			<li>
-				<a href="/login">Login</a>
+				<a href="/login"><p class="faceboard3">Login</p></a>
 			</li>
 		</ul>
 {% endblock %}
@@ -20,8 +20,6 @@
 <br>
 <br>
  	<center>
- 		<h1>FACEBOARD SIGNUP</h1>
-  
 		<h2 style="color:red;">
 			{% if fname == "" %}
 				FIRST NAME REQUIRED<br>
@@ -75,7 +73,7 @@
 				</tr>
 				<br>
 			</table>
-			<input type="submit" value="SUBMIT" />
+			<input type="submit" value="SUBMIT"  class="faceboardSubmit" />
 		</form>
 		<br>
 		All fields are required for signup.
