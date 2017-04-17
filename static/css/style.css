@@ -18,8 +18,9 @@
 @font-face {
     font-family: 'fishandchips';
     src: url('../fonts/fishandchips/fish.ttf') format('truetype');
+    src: url('../fonts/fishandchips/fish-webfont.woff2') format('woff2'),
+    	 url('../fonts/fishandchips/fish-webfont.woff') format('woff');
 }
-
 .faceboard{
     font-family: 'fishandchips',Arial, Helvetica, sans-serif;
     font-size: 108px;
@@ -99,19 +100,9 @@ p {
 	line-height: 24px;
 	margin: 0;
 	padding-left: 30px;
-	
 	width: 98%;
 	text-align: left;
 	text-indent: -25px;
-}
-pchat {
-	color: #252525;
-	line-height: 24px;
-	margin: 0;
-	padding: 0;
-	width: 98%;
-	text-align: left;
-	text-indent: 25px;
 }
 p2 {
 	color: #252525;
