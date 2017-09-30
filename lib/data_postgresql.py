@@ -1,8 +1,4 @@
-# Ron Mitsugo Zacharski
-#
-#   BP1 (best practices 1): Code that is database specific 
-#   should be in a separate file
-#
+# Billy Andrews
 from datetime import date
 import psycopg2
 import psycopg2.extras
