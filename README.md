@@ -1,20 +1,19 @@
-<center> ![FACEBOARD](/static/faceboard/logo1.png)
+<center> 
+![BG](/static/images/original_bg_products.png "BG Logo")
 
-### Up and running @ [Google Cloud - 35.185.30.255](http://35.185.30.255/)
+### Up and running @ [Amazon AWS - 54.88.150.90/](http://54.88.150.90/)
 </center>
 
-This is the webserver that is being used to host Faceboard, assignment 1 for CS350. This will constantly be updated throughout the semester with various projects being worked on.
+This is the webserver that is being used to host BGWarehouse.
 
 ## Contributing:
 Please see [contributing guidelines](CONTRIBUTING.md) before reporting an issue.
 
-  
-## Grading:
-This section has notes for Dr. Zacharski & Mikaela. 
-See [Grading](GRADING.md).
 
-
-## Developer:
+## Developers:
 Billy Andrews
 - [Github](https://github.com/wandrews1)
-- [Gitlab](https://gitlab.com/wandrews1)
+
+Brendon Kertcher
+
+Jacob Huffman
