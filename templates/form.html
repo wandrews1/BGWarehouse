@@ -2,17 +2,25 @@
 
 
 {% block header %}
-		<a href="/form" class="logo" style="text-decoration:none">
-			<p class="faceboard">FACEBOARD</p>
-		</a>
-		<ul id="navigation">
-			<li class="selected">
-				<a href="/form"><p class="faceboard3">Signup</p></a>
-			</li>
-			<li>
-				<a href="/login"><p class="faceboard3">Login</p></a>
-			</li>
-		</ul>
+	<div class="container-fluid bgyellowbg">
+		<br>
+		<!-- Logo on top -->
+		<img src="/static/images/original_bg_products.png" width=150px>
+		<br>
+		<br>
+	</div>
+	<div class="container-fluid bgblack">
+			<ul id="navigation">
+				<li class="selected">
+					<a href="/form"><p class="faceboard3">Signup</p></a>
+				</li>
+				<li>
+					<a href="/login"><p class="faceboard3">Login</p></a>
+				</li>
+			</ul>
+		<br>
+	</div>
+
 {% endblock %}
 
 
@@ -27,35 +35,41 @@
 			<table>
 				<tr>
 					<td>First Name: </td>
-					<td><input type="text" name="fname" placeholder="First Name" /></td>
+					<td><input type="text" class="form-control" name="fname" placeholder="First Name" /></td>
 				</tr>
 				<tr>
 					<td>Last Name: </td>
-					<td><input type="text" name="lname" placeholder="Last Name" /></td>
+					<td><input type="text" class="form-control" name="lname" placeholder="Last Name" /></td>
 				</tr>
 				<tr>
 					<td>Email: </td>
-					<td><input type="email" name="email" placeholder="Email Address" /></td>
+					<td><input type="email" class="form-control" name="email" placeholder="Email Address" /></td>
 				</tr>
 				<tr>
 					<td>Zipcode: </td>
-					<td><input type="number" name="zipcode" placeholder="Zipcode" /></td>
+					<td><input type="number" class="form-control" name="zipcode" placeholder="Zipcode" /></td>
 				</tr>
 				<tr>
 					<td>Date of Birth: </td>
-					<td><input type="date" name="dob" placeholder="DD-MM-YYYY" /></td>
+					<td><input type="date" class="form-control" name="dob" placeholder="DD-MM-YYYY" /></td>
 				</tr>
 				<tr>
 					<td>Password: </td>
-					<td><input type="password" name="pw1" placeholder="Password"/></td>
+					<td><input type="password" class="form-control" name="pw1" placeholder="Password"/></td>
 				</tr>
 				<tr>
 					<td>Retype Password: </td>
-					<td><input type="password" name="pw2" placeholder="Retype Password"/></td>
+					<td><input type="password" class="form-control" name="pw2" placeholder="Retype Password"/></td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<input type="submit" value="SUBMIT"  class="faceboardSubmit btn btn-outline-dark"/>
+					</td>
 				</tr>
 				<br>
 			</table>
-			<input type="submit" value="SUBMIT"  class="faceboardSubmit"/>
 		</form>
 		<br>
 		All fields are required for signup.

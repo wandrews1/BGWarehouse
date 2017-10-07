@@ -1,28 +1,23 @@
-/* Website Template by freewebsitetemplates.com */
-@font-face {
-	font-family: 'poller_oneregular';
-	src: url('../fonts/pollerone/pollerone-webfont.eot');
-	src: url('../fonts/pollerone/pollerone-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/pollerone/pollerone-webfont.woff') format('woff'),
-		 url('../fonts/pollerone/pollerone-webfont.ttf') format('truetype'),
-		 url('../fonts/pollerone/pollerone-webfont.svg#poller_oneregular') format('svg');
+.bgyellow{
+	color:#FCBE07;
 }
-@font-face {
-	font-family: 'leckerli_oneregular';
-	src: url('../fonts/leckerlione/leckerlione-regular-webfont.eot');
-	src: url('../fonts/leckerlione/leckerlione-regular-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/leckerlione/leckerlione-regular-webfont.woff') format('woff'),
-		 url('../fonts/leckerlione/leckerlione-regular-webfont.ttf') format('truetype'),
-		 url('../fonts/leckerlione/leckerlione-regular-webfont.svg#leckerli_oneregular') format('svg');
+.bgyellowbg{
+	background-color:#FCBE07;
 }
-@font-face {
-    font-family: 'fishandchips';
-    src: url('../fonts/fishandchips/fish.ttf') format('truetype');
-    src: url('../fonts/fishandchips/fish-webfont.woff2') format('woff2'),
-    	 url('../fonts/fishandchips/fish-webfont.woff') format('woff');
+.bggrey{
+	color:#FFFFFF;
+	background-color:#141412;
+}
+.bgblack{
+	color:#FFFFFF;
+	background-color:#000000;
 }
 .faceboard{
-    font-family: 'fishandchips',Arial, Helvetica, sans-serif;
+    font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+	
     font-size: 108px;
 	font-weight: normal;
 	line-height: .75;
@@ -33,7 +28,11 @@
 	text-decoration: none;
 }
 .faceboard2{
-    font-family: 'fishandchips',Arial, Helvetica, sans-serif;
+    font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+	
     font-size: 40px;
 	font-weight: normal;
 	line-height: .75;
@@ -44,8 +43,12 @@
 	text-decoration: none;
 }
 .faceboard3{
-    font-family: 'fishandchips',Arial, Helvetica, sans-serif;
-    font-size: 32px;
+    font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+	
+    font-size: 24px;
 	font-weight: bold;
 	line-height: .50;
 	margin: 0 auto;
@@ -55,7 +58,11 @@
 	text-decoration: none;
 }
 .faceboardchatname{
-    font-family: 'fishandchips',Arial, Helvetica, sans-serif;
+    font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+	
     font-size: 22px;
 	font-weight: bold;
 	line-height: .50;
@@ -66,7 +73,11 @@
 	text-decoration: none;
 }
 .faceboardSubmit{
-    font-family: 'fishandchips',Arial, Helvetica, sans-serif;
+    font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+	
     font-size: 20px;
 	font-weight: bold;
 	line-height: 1;
@@ -96,8 +107,8 @@ body {
 	padding: 120px 0;
 }
 p {
-	color: #252525;
-	line-height: 24px;
+	color: #898989;
+	/*line-height: 24px;*/
 	margin: 0;
 	padding-left: 30px;
 	width: 98%;
@@ -137,7 +148,7 @@ word-wrap: break-word;
 	position: fixed;	
 	top: 0;
 	margin: 0 auto;
-	padding: 20px 0 20px;
+	padding: 0 0 0;
 	text-align: center;
 	width: 100%;
 }
@@ -166,7 +177,11 @@ word-wrap: break-word;
 #header ul li a {
 	color: #252525;
 	display: inline-block;
-	font-family: "Arial Black", Gadget, sans-serif;
+	font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+	
 	font-size: 14px;
 	font-weight: normal;
 	margin: 0;
@@ -174,8 +189,9 @@ word-wrap: break-word;
 	text-decoration: none;
 	text-transform: uppercase;
 }
+/* This is the color that changes when you hover over the menu options*/
 #header ul li a p:hover, #header ul li.selected a p{
-	color: #0ba39c;
+	color: #FFFFFF;
 }
 #content {
 	text-align: center;
@@ -186,14 +202,17 @@ word-wrap: break-word;
 	display: block;
 	top: 50px;
 	margin: 0 auto;
-	padding: 10px 0 10px;
 	text-align: center;
 	width: 80%;
 }
 #body h1 {
 	color: #fff;
 	display: inline;
-	font-family: poller_oneregular;
+	font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+	
 	font-size: 35px;
 	font-weight: normal;
 	margin: 0;
@@ -223,7 +242,11 @@ word-wrap: break-word;
 	width: 560px;
 }
 #body div .article h2 {
-	font-family: "Arial Black", Gadget, sans-serif;
+	font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+	
 	font-size: 30px;
 	font-weight: normal;
 	margin: 0 0 30px;
@@ -238,7 +261,11 @@ word-wrap: break-word;
 	background: #252525;
 	color: #fff;
 	display: inline-block;
-	font-family: "Arial Black", Gadget, sans-serif;
+	font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+	
 	font-size: 30px;
 	font-weight: normal;
 	margin: 0 0 30px;
@@ -340,7 +367,11 @@ word-wrap: break-word;
 	background: #fff;
 	color: #000;
 	display: inline-block;
-	font-family: poller_oneregular;
+	font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+	
 	font-size: 20px;
 	font-weight: normal;
 	margin: 0 0 18px;
@@ -356,7 +387,7 @@ word-wrap: break-word;
 	padding: 12px 27px;
 }
 #body #featured div a {
-	background: #0ba39c;
+	background: #FCBE07;
 	color: #fff;
 	display: inline-block;
 	font-size: 20px;
