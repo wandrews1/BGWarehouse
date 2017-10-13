@@ -27,7 +27,7 @@ GRANT SELECT, INSERT ON login TO bgtemp;
 
 
 DROP TABLE IF EXISTS places;
-CREATE TABLE items (
+CREATE TABLE places (
   productID int NOT NULL,
   name text NOT NULL,
   description text  NOT NULL,

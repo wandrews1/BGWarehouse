@@ -12,6 +12,25 @@
 	color:#FFFFFF;
 	background-color:#000000;
 }
+.headerbanner{
+	color: #141412;
+	display: block;
+	margin: 0 auto;
+	height: 80px;
+	height: 5rem;
+	padding: 0 20px;
+	padding: 0 1.25rem;
+	text-decoration: none;
+	width: 100%;
+	background: #FFCC00 url('//static/images/header-background80.png') center center no-repeat;
+		background-color: rgb(255, 204, 0);
+		background-image: url("/static/images/header-background80.png");
+		background-repeat: no-repeat;
+		background-attachment: scroll;
+		background-clip: border-box;
+		background-origin: padding-box;
+		background-size: auto auto;
+}
 .faceboard{
     font-family:
 	-apple-system, BlinkMacSystemFont,
