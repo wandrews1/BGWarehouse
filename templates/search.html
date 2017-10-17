@@ -2,29 +2,23 @@
 
 
 {% block header %}
-		<a href="/form" class="logo" style="text-decoration:none">
-			<p class="faceboard">SEARCH</p>
-		</a>
-		<ul id="navigation">
-			<li>
-				<a href="/chat"><p class="faceboard3">Chat</p></a>
-			</li>
-			<li>
-				<a href="/gallery"><p class="faceboard3">Gallery</p></a>
-			</li>
-			<li class="selected">
-				<a href="/search"><p class="faceboard3">Search</p></a>
-			</li>
-			<li>
-				<a href="/form3"><p class="faceboard3">User List</p></a>
-			</li>
-			<li>
-				<a href="https://gitlab.com/wandrews1/webserver"><p class="faceboard3">GitLab</p></a>
-			</li>
-			<li>
-				<a href="/logout"><p class="faceboard3">{{user[2]}}{{user[4]}}</p></a>
-			</li>
-		</ul>
+			<div class="container-fluid headerbanner">
+				<br>
+				<br>
+				<br>
+			</div>
+			<div class="container-fluid bgblack">
+					<ul id="navigation">
+						<li class="selected">
+							<a href="/login"><p class="faceboard3">Login</p></a>
+						</li>
+						<li>
+							<a href="/logout"><p class="faceboard3">{{user[2]}}{{user[4]}}</p></a>
+						</li>
+					</ul>
+				<br>
+			</div>
+
 {% endblock %}
 
 
@@ -32,43 +26,72 @@
 <br><br><br>
         <center>
         	<form method="POST" action="/searchresults">
-        		<table>
-        			<tr>
-        				<p class="faceboard2">Search By:</p>
-        			</tr>
-					<tr>
-						<td>
-							<input type="radio" name="cat" value="name" checked/> Name<br>
-					
-							<input type="radio" name="cat" value="category" /> Category<br>
 
-							<input type="radio" name="cat" value="subcategory" /> Subcategory<br>
-
-							<input type="radio" name="cat" value="address" /> Address<br>
-
-							<input type="radio" name="cat" value="city" /> City<br>
-
-							<input type="radio" name="cat" value="state" /> State<br>
-
-							<input type="radio" name="cat" value="country" /> Country<br>
-
-							<input type="radio" name="cat" value="phone" /> Phone<br>
-						</td>
-					</tr>
-					<tr>
-						<td><input type="search" name="search" placeholder="Search Term" /></td>
-					</tr>
-					<tr>
-						<td>Search limited to {{user[3]}}</td>
-					</tr>
-					<tr>
-						<td><input type="submit" value="SEARCH" class="faceboardSubmit"/></td>
-					</tr>
-				</table>
+        		<p class="faceboard2">Search By:</p>
+				
+				<br><br>
+				
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" type="radio" name="cat" value="name">
+						Name
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input type="radio" name="cat" class="form-check-input" value="category" /> 
+						Category
+						</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input type="radio" name="cat" class="form-check-input" value="subcategory" /> 
+						Subcategory
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input type="radio" name="cat" class="form-check-input" value="address" /> 
+						Address
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input type="radio" name="cat" class="form-check-input" value="city" /> 
+						City
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input type="radio" name="cat" class="form-check-input" value="state" /> 
+						State
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input type="radio" name="cat" class="form-check-input" value="country" /> 
+						Country
+					</label>
+				</div>
+				
 				<br>
 				
+				<div>
+					<input type="search" name="search" class="form-control" placeholder="Search Term" />
+				</div>
 				
-      		
+				<br>
+				
+				<div>
+					Search limited to area code: {{user[3]}}
+				</div>
+				
+				<br>
+
+				<div>
+					<input type="submit" value="SEARCH" class="faceboardSubmit btn btn-outline-dark"/>
+					<br>
+				</div>
   			</form> 
         <br>
         </center>

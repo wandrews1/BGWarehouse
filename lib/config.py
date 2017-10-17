@@ -3,10 +3,10 @@
 #   BP1   keep configuration data in separate file
 #
 ## Postgresql configuration
-POSTGRES_USER="faceboardtemp"
+POSTGRES_USER="bgtemp"
 # BP9: use real passwords for postgres users
-POSTGRES_PASSWORD="pass"
-POSTGRES_DATABASE="faceboard"
+POSTGRES_PASSWORD="bgprod"
+POSTGRES_DATABASE="bg"
 POSTGRES_HOST="localhost"
 
 # The secret key is used by Flask to encrypt session cookies.

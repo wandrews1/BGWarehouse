@@ -2,17 +2,25 @@
 
 
 {% block header %}
-<a href="/form" class="logo" style="text-decoration:none">
-			<p class="faceboard">FACEBOARD</p>
-		</a>
-		<ul id="navigation">
-			<li>
-				<a href="/form"><p class="faceboard3">Signup</p></a>
-			</li>
-			<li class="selected">
-				<a href="/login"><p class="faceboard3">Login</p></a>
-			</li>
-		</ul>
+	<div class="container-fluid headerbanner">
+		<br>
+		<!-- Logo on top -->
+		<!--<img src="/static/images/original_bg_products.png" width=150px>-->
+		<br>
+		<br>
+	</div>
+	<div class="container-fluid bgblack">
+			<ul id="navigation">
+				<!--<li class="selected">-->
+				<!--	<a href="/form"><p class="faceboard3">Signup</p></a>-->
+				<!--</li>-->
+				<li>
+					<a href="/login"><p class="faceboard3">Login</p></a>
+				</li>
+			</ul>
+		<br>
+	</div>
+
 {% endblock %}
 
 
@@ -21,21 +29,53 @@
 <br>
  	<center>
  		 
-		<form method="POST" action="/chat">
-			<table>
-				<tr>
-					<td>Email: </td>
-					<td><input type="email" name="username" placeholder="Email Address" /></td>
-				</tr>
-				<tr>
-					<td>Password: </td>
-					<td><input type="password" name="password" placeholder="Password"/></td>
-				</tr>
+		<!--<form method="POST" action="/chat">-->
+		<!--	<table>-->
+		<!--		<tr>-->
+		<!--			<td>Email: </td>-->
+		<!--			<td><input type="email" class="form-control" name="username" placeholder="Email Address" /></td>-->
+		<!--		</tr>-->
+		<!--		<tr>-->
+		<!--			<td>Password: </td>-->
+		<!--			<td><input type="password" class="form-control" name="password" placeholder="Password"/></td>-->
+		<!--		</tr>-->
+		<!--		<br>-->
+		<!--	</table>-->
+		<!--	<input type="submit" value="LOGIN" class="faceboardSubmit btn btn-outline-dark" />-->
+		<!--</form>-->
+		
+		<!--<br>-->
+		
+		<form method="POST" action="/search">
+			<div class="col-lg-6">
+	  			<div class="row">
+	    				<div class="input-group">
+	      					<span class="input-group-btn">
+	        					<button class="btn btn-dark" type="button">Email</button>
+	      					</span>
+	      					<input type="email" class="form-control" name="username" placeholder="username@bg.com" />
+	    				</div>
+				</div>
+				
 				<br>
-			</table>
-			<input type="submit" value="LOGIN" class="faceboardSubmit" />
+				
+				<div class="row">
+	    				<div class="input-group">
+	      					<span class="input-group-btn">
+	        					<button class="btn btn-dark" type="button" >Password</button>
+	      					</span>
+	      					<input type="password" class="form-control" name="password" placeholder="P@55w0Rd!"/>
+	    				</div>
+				</div>
+				
+				<br>
+	  			
+	  			<input type="submit" value="LOGIN" class="faceboardSubmit btn btn-outline-dark" />
+  			</div>
 		</form>
-		<br>
+		
+		
+		
 	</center>
 <br>	
 {% endblock %}

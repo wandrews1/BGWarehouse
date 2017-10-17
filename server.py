@@ -6,10 +6,10 @@ import uuid
 import binascii
 from lib.config import *
 from lib import data_postgresql as pg
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, flash, url_for, g, abort
 from flask_socketio import SocketIO, emit, send
 
-app = Flask(__name__)
+app = Flask(__name__) # create the application instance
 app.secret_key = binascii.hexlify(os.urandom(24))
 
 username = ''
@@ -83,7 +83,9 @@ def mainIndex():
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
 	else:
 		user = ['','','','','']
-	return render_template('form.html', user=user)
+		
+	# changed 'form.html' to 'login.html' below
+	return render_template('login.html', user=user)
 	
 	
 @app.route('/chat', methods=['GET','POST'])
@@ -101,26 +103,6 @@ def showAbout():
 	else:
 		user = ['','','','','']
 	return render_template('chat.html', user=user)
-	
-	
-# @app.route('/chat', methods=['GET','POST'])
-# def showChatSearchResults():
-# 	if 'username' in session:
-# 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
-# 	else:
-# 		user = ['','','','','']
-# 	try:
-# 		search=request.form['searchbar']
-# 		print("Search Term: " , search)
-# 	except:
-# 		print("Error fetching search term")
-# 		#//try:
-# 	results = pg.searchMessages(search)
-# #	except:
-# 	#	print("Error executing SuperSearch")
-# 	print("SHOW: ", results)
-	
-# 	return render_template('chat.html', user=user, results=results, search=search)
 	
 
 
@@ -182,6 +164,14 @@ def showForm3():
 
 @app.route('/login', methods=['GET','POST'])
 def showLogin():
+	if request.method == 'POST':
+		session['username'] = request.form['username']
+		session['password'] = request.form['password']
+		session['firstname'] = pg.getFirstName(session['username'],session['password'])
+		session['lastname'] = pg.getLastName(session['username'],session['password'])
+		session['zipcode'] = pg.getZip(session['username'],session['password'])
+
+	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
 	else:
@@ -235,11 +225,12 @@ def showSearchResults():
 	
 @app.route('/logout', methods=['GET','POST'])
 def logout():
-	session.pop('username')
+	session.pop('username', none)
 	session.pop('firstname')
 	session.pop('zipcode')
 	session.pop('password')
 	user = ['','','','','']
+	flash('You were logged out')
 	return render_template('login.html', user=user)
 	
 
@@ -263,3 +254,9 @@ def showGallery():
 # Start the server
 if __name__ == '__main__':
 	socketio.run(app, host='0.0.0.0', port=8080, debug=True)
+	
+	
+# # start the server - Use this one without Socket IO
+# if __name__ == '__main__':
+# 	app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
+	

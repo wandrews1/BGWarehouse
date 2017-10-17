@@ -144,7 +144,7 @@ def superSearch(zipcode, cat, search):
 		return None
 	print (" - connected to database")
 	if cat in ['name','category','subcategory','address','city','state','country','phone']:
-		query_string = "SELECT * FROM places WHERE zipcode = %s AND " + cat + " = %s"
+		query_string = "SELECT * FROM items WHERE zipcode = %s AND " + cat + " = %s"
 	print(" - Query String: " + query_string)
 	results2 = execute_query(query_string, conn, select=True, args=(zipcode, search))
 	print(" - Results: " , results2)
@@ -153,10 +153,10 @@ def superSearch(zipcode, cat, search):
 	else:
 		if zipcode == '':
 			if cat in ['name','category','subcategory','address','city','state','country','phone']:
-				query_string = "SELECT * FROM places WHERE " + cat + " = %s"
+				query_string = "SELECT * FROM items WHERE " + cat + " = %s"
 				results2 = execute_query(query_string, conn, select=True, args=(search,))
 		else:
-			query_string = "SELECT * FROM places WHERE zipcode = %s"
+			query_string = "SELECT * FROM items WHERE zipcode = %s"
 			results2 = execute_query(query_string, conn, select=True, args=(zipcode,))
 			if results2:
 				return " - Invalid Category"
