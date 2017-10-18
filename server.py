@@ -7,7 +7,7 @@ import binascii
 from lib.config import *
 from lib import data_postgresql as pg
 from flask import Flask, render_template, request, redirect, session, flash, url_for, g, abort
-from flask_socketio import SocketIO, emit, send
+# from flask_socketio import SocketIO, emit, send
 
 app = Flask(__name__) # create the application instance
 app.secret_key = binascii.hexlify(os.urandom(24))
@@ -19,54 +19,54 @@ zipcode = ''
 lastname = ''
 
 
-socketio = SocketIO(app)
+# socketio = SocketIO(app)
 
 usernames = {}
 
-@socketio.on('connect', namespace = '/chat')
-def makeConnection():
-	print('BEFORE CONNECTED')
-	session['uuid'] = uuid.uuid1()
-	print('*** Connected ***')
-	usernames[session['uuid']] = {'username': 'New User'}
+# @socketio.on('connect', namespace = '/chat')
+# def makeConnection():
+# 	print('BEFORE CONNECTED')
+# 	session['uuid'] = uuid.uuid1()
+# 	print('*** Connected ***')
+# 	usernames[session['uuid']] = {'username': 'New User'}
 
-	for message in pg.printMessages():
-		print(message)
-		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
+# 	for message in pg.printMessages():
+# 		print(message)
+# 		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
 		
 		
-@socketio.on('message', namespace = '/chat')
-def new_message(message):
-	person = session['firstname'] + " " + session['lastname']
-	tmp = {'text': message, 'name': person}
-	print(tmp)
-	#messages.append(tmp)
-	pg.newMessage(session['firstname'],session['lastname'],message)
-	emit('message',tmp,broadcast=True)
+# @socketio.on('message', namespace = '/chat')
+# def new_message(message):
+# 	person = session['firstname'] + " " + session['lastname']
+# 	tmp = {'text': message, 'name': person}
+# 	print(tmp)
+# 	#messages.append(tmp)
+# 	pg.newMessage(session['firstname'],session['lastname'],message)
+# 	emit('message',tmp,broadcast=True)
 
 
-@socketio.on('identify', namespace = '/chat')
-def on_identify(value):
-	print('Searching FaceChat for: ' + value)
-	usernames[session['uuid']] = {'username': value}
-	print(session['uuid'])
+# @socketio.on('identify', namespace = '/chat')
+# def on_identify(value):
+# 	print('Searching FaceChat for: ' + value)
+# 	usernames[session['uuid']] = {'username': value}
+# 	print(session['uuid'])
 
-	for message in pg.searchMessages(value):
-		print(message)
-		emit('identify', {'text': message[2], 'name': message[0] + " " + message[1]})
+# 	for message in pg.searchMessages(value):
+# 		print(message)
+# 		emit('identify', {'text': message[2], 'name': message[0] + " " + message[1]})
 	
 	
 	
-@socketio.on('search', namespace = '/chat')
-def search_Chat(value):
-	print('Searching for: ' + value)
-	usernames[session['uuid']] = {'username': value}
-	session['uuid'] = uuid.uuid1()
-	#print(' found ' + value)
-	#pg.chatSearch(value)
-	for message in pg.chatSearch(value):
-		print(message)
-		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
+# @socketio.on('search', namespace = '/chat')
+# def search_Chat(value):
+# 	print('Searching for: ' + value)
+# 	usernames[session['uuid']] = {'username': value}
+# 	session['uuid'] = uuid.uuid1()
+# 	#print(' found ' + value)
+# 	#pg.chatSearch(value)
+# 	for message in pg.chatSearch(value):
+# 		print(message)
+# 		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
 
  
 
@@ -113,6 +113,14 @@ def showForm():
 	else:
 		user = ['','','','','']
 	return render_template('form.html', user=user)
+	
+@app.route('/manager', methods=['GET','POST'])
+def showManager():
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+	else:
+		user = ['','','','','']
+	return render_template('manager.html', user=user)
 	
 	
 @app.route('/form2', methods=['GET','POST'])
@@ -251,12 +259,12 @@ def showGallery():
 	return render_template('gallery.html', photos=photos, user=user)
 
 	
-# Start the server
-if __name__ == '__main__':
-	socketio.run(app, host='0.0.0.0', port=8080, debug=True)
-	
-	
-# # start the server - Use this one without Socket IO
+# # Start the server
 # if __name__ == '__main__':
-# 	app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
+# 	socketio.run(app, host='0.0.0.0', port=8080, debug=True)
+	
+	
+# start the server - Use this one without Socket IO
+if __name__ == '__main__':
+	app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
 	

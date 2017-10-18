@@ -26,8 +26,8 @@ GRANT SELECT, INSERT ON login TO bgtemp;
 
 
 
-DROP TABLE IF EXISTS places;
-CREATE TABLE places (
+DROP TABLE IF EXISTS items;
+CREATE TABLE items (
   productID int NOT NULL,
   name text NOT NULL,
   description text  NOT NULL,
@@ -35,9 +35,9 @@ CREATE TABLE places (
   quantity int NOT NULL
   );
 -- use two " '' " to use an apostrophe, like 'McCoy''s BBQ'
-INSERT INTO places (productID, name, description, cost, quantity) VALUES (010789, 'Brake Cleaner', 'Cleans brake dust off metal parts', 3.99, 150);
+INSERT INTO items (productID, name, description, cost, quantity) VALUES (010789, 'Brake Cleaner', 'Cleans brake dust off metal parts', 3.99, 150);
 
-GRANT SELECT ON places TO bgtemp;
+GRANT SELECT ON items TO bgtemp;
 
 
 
