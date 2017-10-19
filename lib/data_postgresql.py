@@ -10,11 +10,12 @@ def connectToPostgres():
 	print(connectionString)
 	# BP2  Use try-except blocks
 	try:
+		print("*** Connected to database")
 		return psycopg2.connect(connectionString)
 	except Exception as e:    # BP2 especially this part where you print the exception
 		print(type(e))
 		print(e)
-		print("Can't connect to database")
+		print("*** Can't connect to database")
 		return None
 	
 

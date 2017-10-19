@@ -9,6 +9,9 @@ p {
 	width: inherit;
 	text-align: left;
 }
+.card50{
+	width: 100%;
+}
 #header {
 	padding: 0;
 	position: fixed;

@@ -7,7 +7,7 @@ import binascii
 from lib.config import *
 from lib import data_postgresql as pg
 from flask import Flask, render_template, request, redirect, session, flash, url_for, g, abort
-# from flask_socketio import SocketIO, emit, send
+from flask_socketio import SocketIO, emit, send
 
 app = Flask(__name__) # create the application instance
 app.secret_key = binascii.hexlify(os.urandom(24))
@@ -19,20 +19,20 @@ zipcode = ''
 lastname = ''
 
 
-# socketio = SocketIO(app)
+socketio = SocketIO(app)
 
 usernames = {}
 
-# @socketio.on('connect', namespace = '/chat')
-# def makeConnection():
-# 	print('BEFORE CONNECTED')
-# 	session['uuid'] = uuid.uuid1()
-# 	print('*** Connected ***')
-# 	usernames[session['uuid']] = {'username': 'New User'}
+@socketio.on('connect', namespace = '/chat')
+def makeConnection():
+	print('BEFORE CONNECTED')
+	session['uuid'] = uuid.uuid1()
+	print('*** Connected ***')
+	usernames[session['uuid']] = {'username': 'New User'}
 
-# 	for message in pg.printMessages():
-# 		print(message)
-# 		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
+	for message in pg.printMessages():
+		print(message)
+		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
 		
 		
 # @socketio.on('message', namespace = '/chat')
@@ -108,19 +108,39 @@ def showAbout():
 
 @app.route('/form', methods=['GET','POST'])
 def showForm():
+	if request.method == 'POST':
+		session['username'] = request.form['username']
+		session['password'] = request.form['password']
+		session['firstname'] = pg.getFirstName(session['username'],session['password'])
+		session['lastname'] = pg.getLastName(session['username'],session['password'])
+		session['zipcode'] = pg.getZip(session['username'],session['password'])
+		
+	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
 	else:
 		user = ['','','','','']
 	return render_template('form.html', user=user)
 	
+	
+	
 @app.route('/manager', methods=['GET','POST'])
 def showManager():
+
+	if request.method == 'POST':
+		session['username'] = request.form['username']
+		session['password'] = request.form['password']
+		session['firstname'] = pg.getFirstName(session['username'],session['password'])
+		session['lastname'] = pg.getLastName(session['username'],session['password'])
+		session['zipcode'] = pg.getZip(session['username'],session['password'])
+		
+	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
 	else:
 		user = ['','','','','']
 	return render_template('manager.html', user=user)
+	
 	
 	
 @app.route('/form2', methods=['GET','POST'])
@@ -199,6 +219,15 @@ def showLogin():
 	
 @app.route('/search', methods=['GET','POST'])
 def showSearch():
+	
+	if request.method == 'POST':
+		session['username'] = request.form['username']
+		session['password'] = request.form['password']
+		session['firstname'] = pg.getFirstName(session['username'],session['password'])
+		session['lastname'] = pg.getLastName(session['username'],session['password'])
+		session['zipcode'] = pg.getZip(session['username'],session['password'])
+		
+	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
 	else:
@@ -208,6 +237,15 @@ def showSearch():
 	
 @app.route('/searchresults', methods=['GET','POST'])
 def showSearchResults():
+
+	if request.method == 'POST':
+		session['username'] = request.form['username']
+		session['password'] = request.form['password']
+		session['firstname'] = pg.getFirstName(session['username'],session['password'])
+		session['lastname'] = pg.getLastName(session['username'],session['password'])
+		session['zipcode'] = pg.getZip(session['username'],session['password'])
+		
+
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
 	else:
@@ -259,12 +297,12 @@ def showGallery():
 	return render_template('gallery.html', photos=photos, user=user)
 
 	
-# # Start the server
-# if __name__ == '__main__':
-# 	socketio.run(app, host='0.0.0.0', port=8080, debug=True)
-	
-	
-# start the server - Use this one without Socket IO
+# Start the server
 if __name__ == '__main__':
-	app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
+	socketio.run(app, host='0.0.0.0', port=8080, debug=True)
+	
+	
+# # start the server - Use this one without Socket IO
+# if __name__ == '__main__':
+# 	app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
 	

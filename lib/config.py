@@ -1,7 +1,4 @@
-# Ron Mitsugo Zacharski
-#
-#   BP1   keep configuration data in separate file
-#
+# Billy Andrews
 ## Postgresql configuration
 POSTGRES_USER="bgtemp"
 # BP9: use real passwords for postgres users

@@ -5,12 +5,14 @@
 	background-color:#FCBE07;
 }
 .bggrey{
-	color:#FFFFFF;
-	background-color:#141412;
+	background-color:#BDBDBD;
 }
 .bgblack{
 	color:#FFFFFF;
 	background-color:#000000;
+}
+.card50{
+	width: 50%;
 }
 .headerbanner{
 	color: #141412;
@@ -213,8 +215,10 @@ word-wrap: break-word;
 	color: #FFFFFF;
 }
 #content {
+	background-color:#BDBDBD;
 	text-align: center;
-    width: 50%;
+    width: 100%;
+    height: 100%;
     margin: 20px auto;
 }
 #body {
@@ -222,7 +226,7 @@ word-wrap: break-word;
 	top: 50px;
 	margin: 0 auto;
 	text-align: center;
-	width: 80%;
+	width: 100%;
 }
 #body h1 {
 	color: #fff;
@@ -247,7 +251,7 @@ word-wrap: break-word;
 	display: block;
 	margin: 0 auto;
 	padding: 0;
-	width: 50%;
+	width: 100%;
 }
 #body div img {
 	border: 2px solid #292929;

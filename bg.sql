@@ -37,7 +37,7 @@ CREATE TABLE items (
 -- use two " '' " to use an apostrophe, like 'McCoy''s BBQ'
 INSERT INTO items (productID, name, description, cost, quantity) VALUES (010789, 'Brake Cleaner', 'Cleans brake dust off metal parts', 3.99, 150);
 
-GRANT SELECT ON items TO bgtemp;
+GRANT SELECT, INSERT ON items TO bgtemp;
 
 
 

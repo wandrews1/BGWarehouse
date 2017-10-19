@@ -27,55 +27,48 @@
 {% block content %}
 <br>
 <br>
- 	<center>
- 		 
-		<!--<form method="POST" action="/chat">-->
-		<!--	<table>-->
-		<!--		<tr>-->
-		<!--			<td>Email: </td>-->
-		<!--			<td><input type="email" class="form-control" name="username" placeholder="Email Address" /></td>-->
-		<!--		</tr>-->
-		<!--		<tr>-->
-		<!--			<td>Password: </td>-->
-		<!--			<td><input type="password" class="form-control" name="password" placeholder="Password"/></td>-->
-		<!--		</tr>-->
-		<!--		<br>-->
-		<!--	</table>-->
-		<!--	<input type="submit" value="LOGIN" class="faceboardSubmit btn btn-outline-dark" />-->
-		<!--</form>-->
-		
-		<!--<br>-->
-		
-		<form method="POST" action="/search">
-			<div class="col-lg-6">
-	  			<div class="row">
-	    				<div class="input-group">
-	      					<span class="input-group-btn">
-	        					<button class="btn btn-dark" type="button">Email</button>
-	      					</span>
-	      					<input type="email" class="form-control" name="username" placeholder="username@bg.com" />
-	    				</div>
-				</div>
+<center>
+
+ 	<div class="container-fluid card50">
+		<div class="card">
+
+			<h3 class="card-header faceboard2">
+				BG Member Login
+			</h3>
+			
+			<div class="card-body">
 				
-				<br>
+				<form method="POST" action="/search">
+					<div class="col-lg-6">
+			  			<div class="row">
+			    				<div class="input-group">
+			      					<span class="input-group-btn">
+			        					<button class="btn btn-dark" type="button">Email</button>
+			      					</span>
+			      					<input type="email" class="form-control" name="username" placeholder="username@bg.com" />
+			    				</div>
+						</div>
+						
+						<br>
+						
+						<div class="row">
+			    				<div class="input-group">
+			      					<span class="input-group-btn">
+			        					<button class="btn btn-dark" type="button" >Password</button>
+			      					</span>
+			      					<input type="password" class="form-control" name="password" placeholder="P@55w0Rd!"/>
+			    				</div>
+						</div>
+						
+						<br>
+			  			
+			  			<input type="submit" value="LOGIN" class="faceboardSubmit btn btn-outline-dark" />
+		  			</div>
+				</form>
 				
-				<div class="row">
-	    				<div class="input-group">
-	      					<span class="input-group-btn">
-	        					<button class="btn btn-dark" type="button" >Password</button>
-	      					</span>
-	      					<input type="password" class="form-control" name="password" placeholder="P@55w0Rd!"/>
-	    				</div>
-				</div>
-				
-				<br>
-	  			
-	  			<input type="submit" value="LOGIN" class="faceboardSubmit btn btn-outline-dark" />
-  			</div>
-		</form>
-		
-		
-		
-	</center>
+			</div>
+		</div>
+	</div>
+</center>
 <br>	
 {% endblock %}
