@@ -235,6 +235,7 @@ def showSearch():
 	return render_template('search.html', user=user)
 	
 	
+	
 @app.route('/searchresults', methods=['GET','POST'])
 def showSearchResults():
 
