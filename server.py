@@ -223,6 +223,7 @@ def showSearch():
 	if request.method == 'POST':
 		session['username'] = request.form['username']
 		session['password'] = request.form['password']
+		print(session['username'], session['password'])
 		session['firstname'] = pg.getFirstName(session['username'],session['password'])
 		session['lastname'] = pg.getLastName(session['username'],session['password'])
 		session['zipcode'] = pg.getZip(session['username'],session['password'])

@@ -50,6 +50,7 @@ def execute_query(query, conn, select=True, args=None):
 		print(e)
 	cur.close()      # BP3 Dispose of old cursors as soon as possible
 	print (" - cur.close()")
+	print (" - RESULTS1 ",results1)
 	return results1
 
 #
