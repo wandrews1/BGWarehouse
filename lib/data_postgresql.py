@@ -193,7 +193,9 @@ def getFirstName(email, pw1):
 	if conn == None:
 		return None
 	query_string = "SELECT fname FROM login WHERE email = %s AND pw1 = crypt(%s,pw1)"
+	print (" - Query String: ", query_string)
 	results = execute_query(query_string, conn, select=True, args=(email, pw1))
+	print (" - Results: ", results)
 	conn.close()
 	return results[0][0]
 	

@@ -3,8 +3,11 @@ CREATE DATABASE  bg;
 
 \c bg;
 
+GRANT SELECT, INSERT ON DATABASE bg TO bgtemp;
+
 CREATE EXTENSION pgcrypto;
--- CREATE user main with login;
+
+-- CREATE USER bgtemp with login;
 
 DROP TABLE IF EXISTS login;
 CREATE TABLE login (
@@ -21,8 +24,6 @@ CREATE TABLE login (
 INSERT INTO login (email, fname, lname, pw1, address, city, state, zipcode) VALUES ('scripture187@gmail.com','Billy', 'Andrews', crypt('pass', gen_salt('bf')), '78 C L Walker Blvd', 'Fredericksburg', 'VA', '22407');
 INSERT INTO login (email, fname, lname, pw1, address, city, state, zipcode) VALUES ('bkertche@umw.com','Brendon', 'Kertcher', crypt('pass', gen_salt('bf')), 'Somewhere', 'Fredericksburg', 'VA', '22407');
 INSERT INTO login (email, fname, lname, pw1, address, city, state, zipcode) VALUES ('jhuffma3@umw.com','Jacob', 'Huffman', crypt('pass', gen_salt('bf')), 'Somewhere', 'Fredericksburg', 'VA', '22407');
-
-
 
 GRANT SELECT, INSERT ON login TO bgtemp;
 
