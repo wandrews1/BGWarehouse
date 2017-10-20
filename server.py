@@ -272,7 +272,7 @@ def showSearchResults():
 	
 @app.route('/logout', methods=['GET','POST'])
 def logout():
-	session.pop('username', none)
+	session.pop('username', None)
 	session.pop('firstname')
 	session.pop('zipcode')
 	session.pop('password')
