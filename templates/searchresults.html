@@ -2,29 +2,29 @@
 
 
 {% block header %}
-		<a href="/form" class="logo" style="text-decoration:none">
-			<p class="faceboard">SEARCH</p>
-		</a>
-		<ul id="navigation">
-			<li>
-				<a href="/chat"><p class="faceboard3">Chat</p></a>
-			</li>
-			<li>
-				<a href="/gallery"><p class="faceboard3">Gallery</p></a>
-			</li>
-			<li class="selected">
-				<a href="/search"><p class="faceboard3">Search</p></a>
-			</li>
-			<li>
-				<a href="/form3"><p class="faceboard3">User List</p></a>
-			</li>
-			<li>
-				<a href="https://gitlab.com/wandrews1/webserver"><p class="faceboard3">GitLab</p></a>
-			</li>
-			<li>
-				<a href="/logout"><p class="faceboard3">{{user[2]}}{{user[4]}}</p></a>
-			</li>
-		</ul>
+			<div class="container-fluid headerbanner">
+				<br>
+				<br>
+				<br>
+			</div>
+			<div class="container-fluid bgblack">
+					<ul id="navigation">
+						<li>
+							<a href="/manager"><p class="faceboard3">Manager</p></a>
+						</li>
+						<li>
+							<a href="/form"><p class="faceboard3">New Registration</p></a>
+						</li>
+						<li class="selected">
+							<a href="/search"><p class="faceboard3">Search</p></a>
+						</li>
+						<li>
+							<a href="/logout"><p class="faceboard3">{{user[2]}}{{user[4]}}</p></a>
+						</li>
+					</ul>
+				<br>
+			</div>
+
 {% endblock %}
 
 
@@ -40,29 +40,24 @@
   		<form>
     		<table>	
 				<tr>
-					<th nowrap>Name</th>
-					<th nowrap>Category</th>
-					<th nowrap>Subcategory</th>
-					<th nowrap>Address</th>
-					<th nowrap>City</th>
-					<th nowrap>State</th>
-					<th nowrap>Country</th>
-					<th nowrap>Phone</th>
-					<th nowrap>Zipcode</th>
+					<th>ProductID</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Category</th>
+					<th>Name</th>
+					<th>Description</th>
 				</tr>
 			
-				{% for place in results %}
+				{% for item in results %}
 						
 				<tr>
-					<td nowrap>{{place[0]}}</td>
-					<td nowrap>{{place[1]}}</td>
-					<td nowrap>{{place[2]}}</td>
-					<td nowrap>{{place[3]}}</td>
-					<td nowrap>{{place[4]}}</td>
-					<td nowrap>{{place[5]}}</td>
-					<td nowrap>{{place[6]}}</td>
-					<td nowrap>{{place[7]}}</td>
-					<td nowrap>{{place[8]}}</td>	
+					<td>{{item[0]}}</td>
+					<td>{{item[1]}}</td>
+					<td>{{item[2]}}</td>
+					<td>{{item[3]}}</td>
+					<td>{{item[4]}}</td>
+					<td>{{item[5]}}</td>
+
 				</tr>
 				{% endfor %}
 			</table>

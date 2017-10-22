@@ -17,6 +17,7 @@ password = ''
 firstname = ''
 zipcode = ''
 lastname = ''
+level = ''
 
 
 socketio = SocketIO(app)
@@ -35,110 +36,76 @@ def makeConnection():
 		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
 		
 		
-# @socketio.on('message', namespace = '/chat')
-# def new_message(message):
-# 	person = session['firstname'] + " " + session['lastname']
-# 	tmp = {'text': message, 'name': person}
-# 	print(tmp)
-# 	#messages.append(tmp)
-# 	pg.newMessage(session['firstname'],session['lastname'],message)
-# 	emit('message',tmp,broadcast=True)
+@socketio.on('message', namespace = '/chat')
+def new_message(message):
+	person = session['firstname'] + " " + session['lastname']
+	tmp = {'text': message, 'name': person}
+	print(tmp)
+	#messages.append(tmp)
+	pg.newMessage(session['firstname'],session['lastname'],message)
+	emit('message',tmp,broadcast=True)
 
 
-# @socketio.on('identify', namespace = '/chat')
-# def on_identify(value):
-# 	print('Searching FaceChat for: ' + value)
-# 	usernames[session['uuid']] = {'username': value}
-# 	print(session['uuid'])
+@socketio.on('identify', namespace = '/chat')
+def on_identify(value):
+	print('Searching FaceChat for: ' + value)
+	usernames[session['uuid']] = {'username': value}
+	print(session['uuid'])
 
-# 	for message in pg.searchMessages(value):
-# 		print(message)
-# 		emit('identify', {'text': message[2], 'name': message[0] + " " + message[1]})
+	for message in pg.searchMessages(value):
+		print(message)
+		emit('identify', {'text': message[2], 'name': message[0] + " " + message[1]})
 	
 	
 	
-# @socketio.on('search', namespace = '/chat')
-# def search_Chat(value):
-# 	print('Searching for: ' + value)
-# 	usernames[session['uuid']] = {'username': value}
-# 	session['uuid'] = uuid.uuid1()
-# 	#print(' found ' + value)
-# 	#pg.chatSearch(value)
-# 	for message in pg.chatSearch(value):
-# 		print(message)
-# 		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
+@socketio.on('search', namespace = '/chat')
+def search_Chat(value):
+	print('Searching for: ' + value)
+	usernames[session['uuid']] = {'username': value}
+	session['uuid'] = uuid.uuid1()
+	#print(' found ' + value)
+	#pg.chatSearch(value)
+	for message in pg.chatSearch(value):
+		print(message)
+		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
 
  
 
 @app.route('/', methods=['GET','POST'])
 def mainIndex():
-	if request.method == 'POST':
-		session['username'] = request.form['username']
-		session['password'] = request.form['password']
-		session['firstname'] = pg.getFirstName(session['username'],session['password'])
-		session['lastname'] = pg.getLastName(session['username'],session['password'])
-		session['zipcode'] = pg.getZip(session['username'],session['password'])
-		
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
-		user = ['','','','','']
-		
-	# changed 'form.html' to 'login.html' below
+		user = ['','','','','','']
 	return render_template('login.html', user=user)
 	
 	
 @app.route('/chat', methods=['GET','POST'])
-def showAbout():
-	print("in chat.")
-	if request.method == 'POST':
-		session['username'] = request.form['username']
-		session['password'] = request.form['password']
-		session['firstname'] = pg.getFirstName(session['username'],session['password'])
-		session['lastname'] = pg.getLastName(session['username'],session['password'])
-		session['zipcode'] = pg.getZip(session['username'],session['password'])
-		
+def showChat():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
-		user = ['','','','','']
+		user = ['','','','','','']
 	return render_template('chat.html', user=user)
 	
 
 
 @app.route('/form', methods=['GET','POST'])
 def showForm():
-	if request.method == 'POST':
-		session['username'] = request.form['username']
-		session['password'] = request.form['password']
-		session['firstname'] = pg.getFirstName(session['username'],session['password'])
-		session['lastname'] = pg.getLastName(session['username'],session['password'])
-		session['zipcode'] = pg.getZip(session['username'],session['password'])
-		
-	
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
-		user = ['','','','','']
+		user = ['','','','','','']
 	return render_template('form.html', user=user)
 	
 	
 	
 @app.route('/manager', methods=['GET','POST'])
 def showManager():
-
-	if request.method == 'POST':
-		session['username'] = request.form['username']
-		session['password'] = request.form['password']
-		session['firstname'] = pg.getFirstName(session['username'],session['password'])
-		session['lastname'] = pg.getLastName(session['username'],session['password'])
-		session['zipcode'] = pg.getZip(session['username'],session['password'])
-		
-	
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
-		user = ['','','','','']
+		user = ['','','','','','']
 	return render_template('manager.html', user=user)
 	
 	
@@ -146,9 +113,9 @@ def showManager():
 @app.route('/form2', methods=['GET','POST'])
 def showForm2():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
-		user = ['','','','','']
+		user = ['','','','','','']
 	fname=request.form['fname']
 	firstname=fname
 	lname=request.form['lname']
@@ -157,11 +124,12 @@ def showForm2():
 	pw1=request.form['pw1']
 	pw2=request.form['pw2']
 	dob=request.form['dob']
+	level=request.form['level']
 	if request.method == 'POST':
 		
 		if (fname != "" and lname != "" and email != "" and pw1 == pw2):
 			try:
-				results = pg.newMember(fname, lname, email, dob, zipcode, pw1)
+				results = pg.newMember(fname, lname, email, dob, zipcode, pw1, level)
 				if results == None:
 					return render_template('badform.html')
 			except:
@@ -172,17 +140,17 @@ def showForm2():
 				print("ERROR executing select")
 			return render_template('login.html', fname=fname, results=results, user=user)
 		else:
-			return render_template('badform.html', fname=fname, lname=lname, email=email, pw1=pw1, pw2=pw2, dob=dob, zipcode=zipcode)
+			return render_template('badform.html', fname=fname, lname=lname, email=email, pw1=pw1, pw2=pw2, dob=dob, zipcode=zipcode, level=level)
 	else:
 		return render_template('form3.html', results=results, user=user)
 
 
 @app.route('/form3', methods=['GET','POST'])
-def showForm3():
+def showRoster():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
-		user = ['','','','','']
+		user = ['','','','','','']
 	try:
 		results = pg.currentRoster()
 	except:
@@ -192,18 +160,19 @@ def showForm3():
 
 @app.route('/login', methods=['GET','POST'])
 def showLogin():
-	if request.method == 'POST':
-		session['username'] = request.form['username']
-		session['password'] = request.form['password']
-		session['firstname'] = pg.getFirstName(session['username'],session['password'])
-		session['lastname'] = pg.getLastName(session['username'],session['password'])
-		session['zipcode'] = pg.getZip(session['username'],session['password'])
+	
+	# if request.method == 'POST':
+	# 	session['username'] = request.form['username']
+	# 	session['password'] = request.form['password']
+	# 	session['firstname'] = pg.getFirstName(session['username'],session['password'])
+	# 	session['lastname'] = pg.getLastName(session['username'],session['password'])
+	# 	session['zipcode'] = pg.getZip(session['username'],session['password'])
 
 	
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
-		user = ['','','','','']
+		user = ['','','','','','']
 
 	if request.method == 'POST':
 		email=request.form['username']
@@ -223,16 +192,16 @@ def showSearch():
 	if request.method == 'POST':
 		session['username'] = request.form['username']
 		session['password'] = request.form['password']
-		print(session['username'], session['password'])
 		session['firstname'] = pg.getFirstName(session['username'],session['password'])
 		session['lastname'] = pg.getLastName(session['username'],session['password'])
 		session['zipcode'] = pg.getZip(session['username'],session['password'])
+		session['level'] = pg.getLevel(session['username'],session['password'])
 		
 	
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
-		user = ['','','','','']
+		user = ['','','','','','']
 	return render_template('search.html', user=user)
 	
 	
@@ -240,30 +209,29 @@ def showSearch():
 @app.route('/searchresults', methods=['GET','POST'])
 def showSearchResults():
 
-	if request.method == 'POST':
-		session['username'] = request.form['username']
-		session['password'] = request.form['password']
-		session['firstname'] = pg.getFirstName(session['username'],session['password'])
-		session['lastname'] = pg.getLastName(session['username'],session['password'])
-		session['zipcode'] = pg.getZip(session['username'],session['password'])
+	# if request.method == 'POST':
+	# 	session['username'] = request.form['username']
+	# 	session['password'] = request.form['password']
+	# 	session['firstname'] = pg.getFirstName(session['username'],session['password'])
+	# 	session['lastname'] = pg.getLastName(session['username'],session['password'])
+	# 	session['zipcode'] = pg.getZip(session['username'],session['password'])
 		
 
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
-		user = ['','','','','']
+		user = ['','','','','','']
 	try:
 		search=request.form['search']
-		cat=request.form['cat']
-		zipcode=user[3]
-		print("Search Term: " , search)
-		print("Category   : " , cat)
+		# cat=request.form['cat']
+		# zipcode=user[3]
+		print("***Search Term: " , search)
+		# print("Category   : " , cat)
 	except:
 		print("Error fetching search term")
-		#//try:
-	results = pg.superSearch(user[3], cat, search)
-#	except:
-	#	print("Error executing SuperSearch")
+	# results = pg.superSearch(user[3], cat, search)
+	print("***Search Term: " , search)
+	results = pg.superSearch(search)
 	print("SHOW: ", results)
 	
 	return render_template('searchresults.html', user=user, results=results, search=search)
@@ -277,7 +245,8 @@ def logout():
 	session.pop('firstname')
 	session.pop('zipcode')
 	session.pop('password')
-	user = ['','','','','']
+	session.pop('level')
+	user = ['','','','','','']
 	flash('You were logged out')
 	return render_template('login.html', user=user)
 	
@@ -285,9 +254,9 @@ def logout():
 @app.route('/gallery')
 def showGallery():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout']
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
-		user = ['','','','','']
+		user = ['','','','','','']
 	p1 = '/static/faceboard/1.jpg'
 	p2 = '/static/faceboard/2.jpg'
 	p3 = '/static/faceboard/3.jpg'

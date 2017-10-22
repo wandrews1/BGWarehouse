@@ -100,7 +100,7 @@ def chatSearch(search):
 	if conn == None:
 		return None
 	print (" - connected to database")
-	#if search in ['name','category','subcategory','address','city','state','country','phone']:
+
 	query_string = "SELECT * FROM messages WHERE message LIKE %s"
 	print(" - Query String: " + query_string)
 	results2 = execute_query(query_string, conn, select=True, args=('%' + search + '%',))
@@ -116,13 +116,13 @@ def chatSearch(search):
 	
 
 
-def newMember(fname, lname, email, dob, zipcode, pw1):
+def newMember(fname, lname, email, dob, zipcode, pw1, level):
 	print (" - in newMember()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None
-	query_string = "INSERT INTO login (fname, lname, email, dob, zipcode, pw1) VALUES (%s, %s, %s, %s, %s, crypt(%s, gen_salt('bf')))" 
-	execute_query(query_string, conn, select=False,  args=(fname, lname, email, dob, zipcode, pw1))
+	query_string = "INSERT INTO login (fname, lname, email, dob, zipcode, pw1, userLevel) VALUES (%s, %s, %s, %s, %s, crypt(%s, gen_salt('bf')), %s)" 
+	execute_query(query_string, conn, select=False,  args=(fname, lname, email, dob, zipcode, pw1, userLevel))
 	conn.close()
 	return 0
 
@@ -139,33 +139,86 @@ def currentRoster():
 
 	
 	
-def superSearch(zipcode, cat, search):
+# def superSearch(zipcode, cat, search):
+# 	print (" - in superSearch()")
+# 	conn = connectToPostgres()
+# 	if conn == None:
+# 		return None
+# 	print (" - connected to database")
+# 	if cat in ['name','category','subcategory','address','city','state','country','phone']:
+# 		query_string = "SELECT * FROM items WHERE zipcode = %s AND " + cat + " = %s"
+# 	print(" - Query String: " + query_string)
+# 	results2 = execute_query(query_string, conn, select=True, args=(zipcode, search))
+# 	print(" - Results: " , results2)
+# 	if results2:
+# 		return results2
+# 	else:
+# 		if zipcode == '':
+# 			if cat in ['name','category','subcategory','address','city','state','country','phone']:
+# 				query_string = "SELECT * FROM items WHERE " + cat + " = %s"
+# 				results2 = execute_query(query_string, conn, select=True, args=(search,))
+# 		else:
+# 			query_string = "SELECT * FROM items WHERE zipcode = %s"
+# 			results2 = execute_query(query_string, conn, select=True, args=(zipcode,))
+# 			if results2:
+# 				return " - Invalid Category"
+# 			else:
+# 				return " - No data for your zipcode"
+# 	conn.close()
+# 	return results2
+	
+	
+def superSearch(search):
 	print (" - in superSearch()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None
 	print (" - connected to database")
-	if cat in ['name','category','subcategory','address','city','state','country','phone']:
-		query_string = "SELECT * FROM items WHERE zipcode = %s AND " + cat + " = %s"
+
+	query_string = "SELECT * FROM items WHERE item LIKE %s"
 	print(" - Query String: " + query_string)
-	results2 = execute_query(query_string, conn, select=True, args=(zipcode, search))
+	results2 = execute_query(query_string, conn, select=True, args=('%' + search + '%',))
 	print(" - Results: " , results2)
 	if results2:
 		return results2
 	else:
-		if zipcode == '':
-			if cat in ['name','category','subcategory','address','city','state','country','phone']:
-				query_string = "SELECT * FROM items WHERE " + cat + " = %s"
-				results2 = execute_query(query_string, conn, select=True, args=(search,))
-		else:
-			query_string = "SELECT * FROM items WHERE zipcode = %s"
-			results2 = execute_query(query_string, conn, select=True, args=(zipcode,))
-			if results2:
-				return " - Invalid Category"
-			else:
-				return " - No data for your zipcode"
+		return " - No luck finding your search term."
 	conn.close()
 	return results2
+	
+	
+# def superSearch(search):
+# 	print (" - in superSearch()")
+# 	conn = connectToPostgres()
+# 	if conn == None:
+# 		return None
+# 	print (" - connected to database")
+	
+# 	query_string = "SELECT * FROM items WHERE " + cat + " = %s"
+	
+# 	print(" - Query String: " + query_string)
+	
+# 	results2 = execute_query(query_string, conn, select=True, args=(search,))
+	
+# 	print(" - Results: " , results2)
+	
+# 	if results2:
+# 		return results2
+# 	# else:
+# 	# 	if zipcode == '':
+# 	# 		if cat in ['productID','cost','quantity','category','name','description']:
+# 	# 			query_string = "SELECT * FROM items WHERE " + cat + " = %s"
+# 	# 			results2 = execute_query(query_string, conn, select=True, args=(search,))
+# 	# 	else:
+# 	# 		query_string = "SELECT * FROM items WHERE zipcode = %s"
+# 	# 		results2 = execute_query(query_string, conn, select=True, args=(zipcode,))
+# 	# 		if results2:
+# 	# 			return " - Invalid Category"
+# 	# 		else:
+# 	# 			return " - No data for your zipcode"
+# 	conn.close()
+# 	return results2
+
 
 
 def login(email, pw1):
@@ -196,7 +249,6 @@ def getFirstName(email, pw1):
 	query_string = "SELECT fname FROM login WHERE email = %s AND pw1 = crypt(%s,pw1)"
 	print (" - Query String: ", query_string)
 	results = execute_query(query_string, conn, select=True, args=(email, pw1))
-	print (" - Results: ", results)
 	conn.close()
 	return results[0][0]
 	
@@ -218,6 +270,16 @@ def getZip(email,pw1):
 	if conn == None:
 		return None
 	query_string = "SELECT zipcode FROM login WHERE email = %s AND pw1 = crypt(%s,pw1)"
+	results = execute_query(query_string, conn, select=True, args=(email, pw1))
+	conn.close()
+	return results[0][0]
+	
+def getLevel(email,pw1):
+	print (" - in getLevel()")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT userLevel FROM login WHERE email = %s AND pw1 = crypt(%s,pw1)"
 	results = execute_query(query_string, conn, select=True, args=(email, pw1))
 	conn.close()
 	return results[0][0]
