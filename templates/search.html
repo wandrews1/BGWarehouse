@@ -19,7 +19,11 @@
 
 		<div class="collapse navbar-collapse" id="exCollapsingNavbar">
 			<ul class="nav navbar-nav">
+			{% if (level == "Manager") or (level == "Administrator") %}
 				<li class="nav-item"><a href="/manager" class="nav-link"><p class="faceboard3">Manager</p></a></li>
+			{% endif %}
+				
+				
 				<li class="nav-item"><a href="/form" class="nav-link"><p class="faceboard3">New Registration</p></a></li>
 				<li class="nav-item selected"><a href="/search" class="nav-link"><p class="faceboard3">Search</p></a></li>
 			</ul>
