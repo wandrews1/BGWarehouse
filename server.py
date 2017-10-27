@@ -160,15 +160,7 @@ def showRoster():
 
 @app.route('/login', methods=['GET','POST'])
 def showLogin():
-	
-	# if request.method == 'POST':
-	# 	session['username'] = request.form['username']
-	# 	session['password'] = request.form['password']
-	# 	session['firstname'] = pg.getFirstName(session['username'],session['password'])
-	# 	session['lastname'] = pg.getLastName(session['username'],session['password'])
-	# 	session['zipcode'] = pg.getZip(session['username'],session['password'])
 
-	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
 	else:
@@ -180,9 +172,11 @@ def showLogin():
 		if (email != "" and pw == pw2):
 			try:
 				if results == None:
-					return render_template('badform.html')
+					return render_template('login.html')
 			except:
 				print("ERROR INSERTING INTO login")
+				
+		
 	return render_template('login.html', user=user)
 	
 	

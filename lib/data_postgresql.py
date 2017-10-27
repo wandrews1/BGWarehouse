@@ -31,7 +31,7 @@ def execute_query(query, conn, select=True, args=None):
 	results1 = None
 	print (query)
 	print (args)
-	quer = cur.mogrify(query, args)   # BP6  never use Python concatenation                  # for database queries
+	quer = cur.mogrify(query, args)   # BP6  never use Python concatenation for database queries
 	print (quer)
 	try: 
 		print (" - Trying cur.execute")
