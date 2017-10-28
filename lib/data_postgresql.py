@@ -178,16 +178,17 @@ def superSearch(search):
 		return None
 	print (" - connected to database")
 
-	query_string = "SELECT * FROM items WHERE category LIKE %s"
+	query_string = "SELECT * FROM items WHERE (productID LIKE %s) OR (category LIKE %s) OR (name LIKE %s) OR (description LIKE %s)"
 	print(" - Query String: " + query_string)
-	results2 = execute_query(query_string, conn, select=True, args=('%' + search.title() + '%',))
-	print(" - Results: " , results2)
-	if results2:
-		return results2
+	results = execute_query(query_string, conn, select=True, args=('%' + search + '%','%' + search.title() + '%','%' + search.title() + '%','%' + search + '%',))
+	print(" - Results: " , results)
+
+	if results:
+		return results
 	else:
 		return "No Results."
 	conn.close()
-	return results2
+	return results
 	
 	
 # def superSearch(search):
