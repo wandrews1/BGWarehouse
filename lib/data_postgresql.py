@@ -180,7 +180,7 @@ def superSearch(search):
 
 	query_string = "SELECT * FROM items WHERE category LIKE %s"
 	print(" - Query String: " + query_string)
-	results2 = execute_query(query_string, conn, select=True, args=('%' + search + '%',))
+	results2 = execute_query(query_string, conn, select=True, args=('%' + search.title() + '%',))
 	print(" - Results: " , results2)
 	if results2:
 		return results2
