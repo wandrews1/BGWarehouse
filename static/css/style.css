@@ -1,3 +1,15 @@
+#cont {
+  position: relative;
+}
+#navi,
+#infoi {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#infoi {
+  z-index: 10;
+}
 .bgyellow{
 	color:#FCBE07;
 }
@@ -33,7 +45,22 @@
 		background-origin: padding-box;
 		background-size: auto auto;
 }
-.faceboard{
+/*.faceboard{*/
+/*    font-family:*/
+/*	-apple-system, BlinkMacSystemFont,*/
+/*	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",*/
+/*	"Helvetica Neue", sans-serif;*/
+	
+/*    font-size: 108px;*/
+/*	font-weight: normal;*/
+/*	line-height: .75;*/
+/*	margin: 0 auto;*/
+/*	width: 100%;*/
+/*	justify-content: space-around;*/
+/*	text-align: center;*/
+/*	text-decoration: none;*/
+/*}*/
+.bg{
     font-family:
 	-apple-system, BlinkMacSystemFont,
 	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
@@ -48,7 +75,22 @@
 	text-align: center;
 	text-decoration: none;
 }
-.faceboard2{
+/*.faceboard2{*/
+/*    font-family:*/
+/*	-apple-system, BlinkMacSystemFont,*/
+/*	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",*/
+/*	"Helvetica Neue", sans-serif;*/
+	
+/*    font-size: 40px;*/
+/*	font-weight: normal;*/
+/*	line-height: .75;*/
+/*	margin: 0 auto;*/
+/*	width: 100%;*/
+/*	justify-content: space-around;*/
+/*	text-align: center;*/
+/*	text-decoration: none;*/
+/*}*/
+.bg2{
     font-family:
 	-apple-system, BlinkMacSystemFont,
 	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
@@ -63,7 +105,22 @@
 	text-align: center;
 	text-decoration: none;
 }
-.faceboard3{
+/*.faceboard3{*/
+/*    font-family:*/
+/*	-apple-system, BlinkMacSystemFont,*/
+/*	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",*/
+/*	"Helvetica Neue", sans-serif;*/
+	
+/*    font-size: 16px;*/
+/*	font-weight: bold;*/
+	/*line-height: .50;*/
+/*	margin: 0 auto;*/
+/*	width: 100%;*/
+/*	justify-content: space-around;*/
+/*	text-align: center;*/
+/*	text-decoration: none;*/
+/*}*/
+.bg3{
     font-family:
 	-apple-system, BlinkMacSystemFont,
 	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
@@ -78,28 +135,21 @@
 	text-align: center;
 	text-decoration: none;
 }
-.faceboardchatname{
+.bgProfile{
     font-family:
 	-apple-system, BlinkMacSystemFont,
 	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
 	"Helvetica Neue", sans-serif;
-	
-    font-size: 22px;
+    font-size: 16px;
 	font-weight: bold;
-	line-height: .50;
-	margin: 0 auto;
-	width: 100%;
-	justify-content: space-around;
-	text-align: center;
-	text-decoration: none;
+
 }
-.faceboardSubmit{
+.bgSubmit{
     font-family:
 	-apple-system, BlinkMacSystemFont,
 	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
 	"Helvetica Neue", sans-serif;
-	
-    font-size: 20px;
+	font-size: 20px;
 	font-weight: bold;
 	line-height: 1;
 	text-align: center;
@@ -354,66 +404,6 @@ word-wrap: break-word;
 	color: #252525;
 	background: #fff;
 	border: 2px solid #252525;
-}
-#body #featured {
-	margin: 0 0 13px;
-	padding: 0;
-	position: relative;
-	width: 100%;
-}
-#body #featured img {
-	border: 0;
-	display: block;
-	margin: 0 auto;
-	padding: 0;
-	width: 100%;
-}
-#body #featured div {
-	left: 50%;
-	margin-left: -480px;
-	margin-top: -171px;
-	padding: 0 0 0 470px;
-	position: absolute;
-	top: 50%;
-	text-align: left;
-	width: 490px;
-}
-#body #featured div h2 {
-	background: #fff;
-	color: #000;
-	display: inline-block;
-	font-family:
-	-apple-system, BlinkMacSystemFont,
-	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-	"Helvetica Neue", sans-serif;
-	
-	font-size: 20px;
-	font-weight: normal;
-	margin: 0 0 18px;
-	padding: 23px 27px 20px;
-	text-transform: uppercase;
-}
-#body #featured div span {
-	background: #252525;
-	color: #fff;
-	display: inline-block;
-	font-size: 20px;
-	margin: 7px 0;
-	padding: 12px 27px;
-}
-#body #featured div a {
-	background: #FCBE07;
-	color: #fff;
-	display: inline-block;
-	font-size: 20px;
-	margin: 15px 0 0;
-	padding: 26px 27px 22px;
-	text-align: center;
-	text-decoration: none;
-	text-transform: uppercase;
-}
-#body #featured div a:hover {
-	background: #1fc3bc;
 }
 #body > ul {
 	margin: 0 auto;

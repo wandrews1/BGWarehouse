@@ -19,192 +19,35 @@
 
 		<div class="collapse navbar-collapse" id="exCollapsingNavbar">
 			<ul class="nav navbar-nav">
-			{% if (level == "Manager") or (level == "Administrator") %}
-				<li class="nav-item"><a href="/manager" class="nav-link"><p class="faceboard3">Manager</p></a></li>
-			{% endif %}
+			
+				{% if ( ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/admin" class="nav-link"><p class="bg3">Admin</p></a></li>
+				{% endif %}
 				
+				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
+					<li class="nav-item"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
+				{% endif %}
 				
-				<li class="nav-item"><a href="/form" class="nav-link"><p class="faceboard3">New Registration</p></a></li>
-				<li class="nav-item selected"><a href="/search" class="nav-link"><p class="faceboard3">Search</p></a></li>
+				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/sales" class="nav-link"><p class="bg3">Sales Associate</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<!--<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3">Customer</p></a></li>-->
+					<li class="nav-item selected"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
+				{% endif %}
+				
 			</ul>
 	
 			<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-				<li class="nav-item"><a href="#" class="nav-link"><p class="faceboard3">{{user[2]}} - {{user[5]}}</p></a></li>
-				<li class="nav-item"><a href="logout" class="nav-link"><p class="faceboard3">Logout</p></a></li>
+				<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3">{{user[2]}} - {{user[5]}}</p></a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link"><p class="bg3">Logout</p></a></li>
 			</ul>
 
 		</div>
 	</div>
 </nav>
-
-
-
-<!--<nav class="navbar navbar-expand-lg navbar-dark bgblack">-->
-<!--  <a class="navbar-brand" href="#"><img src="/static/images/original_bg_products.png" width=50px></a>-->
-<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--    <span class="navbar-toggler-icon"></span>-->
-<!--  </button>-->
-
-<!--  <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--    <ul class="navbar-nav mr-auto">-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link" href="#">Add New Member</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item dropdown">-->
-<!--        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--          Manager-->
-<!--        </a>-->
-<!--        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--          <a class="dropdown-item" href="#">Action</a>-->
-<!--          <a class="dropdown-item" href="#">Another action</a>-->
-<!--          <div class="dropdown-divider"></div>-->
-<!--          <a class="dropdown-item" href="#">Something else here</a>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link" href="#">Search</a>-->
-<!--      </li>-->
-<!--    </ul>-->
-    <!--<form class="form-inline my-2 my-lg-0">-->
-    
-<!--	<li class="nav-item dropdown">-->
-<!--		<a class="nav-link dropdown-toggle faceboard3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">-->
-<!--          Login-->
-<!--        </a>-->
-<!--        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--          <a class="dropdown-item" href="#">Action</a>-->
-<!--          <a class="dropdown-item" href="#">Another action</a>-->
-<!--          <div class="dropdown-divider"></div>-->
-<!--          <a class="dropdown-item" href="#">Something else here</a>-->
-<!--        </div>-->
-<!--      </li>-->
-    
-    
-<!--    <ul id="login-dp" class="dropdown-menu">-->
-<!--		<li>-->
-<!--			<div class="row">-->
-<!--				<div class="col-md-12">-->
-<!--					<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">-->
-<!--						<div class="form-group">-->
-<!--							<label class="sr-only" for="exampleInputEmail2">Email address</label>-->
-<!--							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>-->
-<!--						</div>-->
-<!--						<div class="form-group">-->
-<!--							<label class="sr-only" for="exampleInputPassword2">Password</label>-->
-<!--							<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>-->
-<!--							<div class="help-block text-right">-->
-<!--								<a href="">Forget the password ?</a>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						<div class="form-group">-->
-<!--							<button type="submit" class="btn btn-primary btn-block">Sign in</button>-->
-<!--						</div>-->
-
-<!--					</form>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</li>-->
-<!--	</ul>-->
-<!--  </div>-->
-<!--</nav>-->
-			
-			
-
-			
-			
-			
-<!--<nav class="navbar sticky-top navbar-expand-lg navbar-dark bgblack" role="navigation">-->
-<!--	<div class="container-fluid">-->
-		<!-- Brand and toggle get grouped for better mobile display -->
-<!--		<div class="navbar-header">-->
-<!--			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">-->
-<!--				<span class="sr-only">Toggle navigation</span>-->
-<!--				<span class="icon-bar"></span>-->
-<!--				<span class="icon-bar"></span>-->
-<!--				<span class="icon-bar"></span>-->
-<!--			</button>-->
-<!--			<a class="navbar-brand" href="#">Login dropdown</a>-->
-<!--		</div>-->
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-<!--		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
-
-<!--			<ul class="nav navbar-nav">-->
-<!--				<li class="active"><a href="#">Link</a></li>-->
-<!--				<li><a href="#">Link</a></li>-->
-<!--				<li class="dropdown">-->
-<!--				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>-->
-
-<!--				<ul class="dropdown-menu" role="menu">-->
-<!--					<li><a href="#">Action</a></li>-->
-<!--					<li><a href="#">Another action</a></li>-->
-<!--					<li><a href="#">Something else here</a></li>-->
-<!--					<li class="divider"></li>-->
-<!--					<li><a href="#">Separated link</a></li>-->
-<!--					<li class="divider"></li>-->
-<!--					<li><a href="#">One more separated link</a></li>-->
-<!--				</ul>-->
-
-<!--			</li>-->
-<!--		</ul>-->
-      
-<!--		<form class="navbar-form navbar-left" role="search">-->
-<!--			<div class="form-group">-->
-<!--				<input type="text" class="form-control" placeholder="Search">-->
-<!--			</div>-->
-<!--			<button type="submit" class="btn btn-default">Submit</button>-->
-<!--		</form>-->
-		
-<!--		<ul class="nav navbar-nav navbar-right">-->
-<!--			<li><p class="navbar-text">Already have an account?</p></li>-->
-<!--			<li class="dropdown">-->
-<!--				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>-->
-<!--				<ul id="login-dp" class="dropdown-menu">-->
-<!--					<li>-->
-<!--						<div class="row">-->
-<!--							<div class="col-md-12">-->
-<!--								Login via-->
-<!--								<div class="social-buttons">-->
-<!--									<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>-->
-<!--									<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>-->
-<!--								</div>-->
-<!--								or-->
-<!--								<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">-->
-<!--										<div class="form-group">-->
-<!--											<label class="sr-only" for="exampleInputEmail2">Email address</label>-->
-<!--											<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>-->
-<!--										</div>-->
-<!--										<div class="form-group">-->
-<!--											<label class="sr-only" for="exampleInputPassword2">Password</label>-->
-<!--											<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>-->
-<!--											<div class="help-block text-right"><a href="">Forget the password ?</a></div>-->
-<!--										</div>-->
-<!--										<div class="form-group">-->
-<!--											<button type="submit" class="btn btn-primary btn-block">Sign in</button>-->
-<!--										</div>-->
-<!--										<div class="checkbox">-->
-<!--											<label>-->
-<!--											<input type="checkbox"> keep me logged-in-->
-<!--											</label>-->
-<!--										</div>-->
-<!--								</form>-->
-<!--							</div>-->
-<!--							<div class="bottom text-center">-->
-<!--								New here ? <a href="#"><b>Join Us</b></a>-->
-<!--							</div>-->
-<!--					 </div>-->
-<!--				</li>-->
-<!--			</ul>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</nav>-->
-
-			
 
 {% endblock %}
 
@@ -217,7 +60,7 @@
 		<div class="container-fluid card50">
 			<div class="card">
 	
-				<h3 class="card-header faceboard2">
+				<h3 class="card-header bg2">
 					Search Inventory
 				</h3>
 				

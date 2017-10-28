@@ -18,6 +18,7 @@ firstname = ''
 zipcode = ''
 lastname = ''
 level = ''
+address = ''
 
 
 socketio = SocketIO(app)
@@ -74,48 +75,70 @@ def search_Chat(value):
 @app.route('/', methods=['GET','POST'])
 def mainIndex():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
-		user = ['','','','','','']
+		user = ['','','','','','','','']
 	return render_template('login.html', user=user)
 	
-	
-@app.route('/chat', methods=['GET','POST'])
-def showChat():
+
+@app.route('/admin')
+def showAdmin():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
-		user = ['','','','','','']
-	return render_template('chat.html', user=user)
+		user = ['','','','','','','','']
+	return render_template('admin.html', user=user)
+
+	
+@app.route('/manager', methods=['GET','POST'])
+def showManager():
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+	else:
+		user = ['','','','','','','','']
+	return render_template('manager.html', user=user)
+	
+@app.route('/sales')
+def showSales():
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+	else:
+		user = ['','','','','','','','']
+	return render_template('sales.html', user=user)
+	
+@app.route('/profile', methods=['GET','POST'])
+def showProfile():
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+	else:
+		user = ['','','','','','','','']
+	return render_template('profile.html', user=user)
+	
+# @app.route('/chat', methods=['GET','POST'])
+# def showChat():
+#	if 'username' in session:
+#		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+#	else:
+#		user = ['','','','','','','','']
+# 	return render_template('chat.html', user=user)
 	
 
 
 @app.route('/form', methods=['GET','POST'])
 def showForm():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
-		user = ['','','','','','']
+		user = ['','','','','','','','']
 	return render_template('form.html', user=user)
 	
-	
-	
-@app.route('/manager', methods=['GET','POST'])
-def showManager():
-	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
-	else:
-		user = ['','','','','','']
-	return render_template('manager.html', user=user)
-	
-	
-	
+
 @app.route('/form2', methods=['GET','POST'])
 def showForm2():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
-		user = ['','','','','','']
+		user = ['','','','','','','','']
 	fname=request.form['fname']
 	firstname=fname
 	lname=request.form['lname']
@@ -138,19 +161,19 @@ def showForm2():
 				results = pg.currentRoster()
 			except:
 				print("ERROR executing select")
-			return render_template('login.html', fname=fname, results=results, user=user)
+			return render_template('login.html', fname=fname, results=results, user=user, level=level)
 		else:
 			return render_template('badform.html', fname=fname, lname=lname, email=email, pw1=pw1, pw2=pw2, dob=dob, zipcode=zipcode, level=level)
 	else:
-		return render_template('form3.html', results=results, user=user)
+		return render_template('form3.html', results=results, user=user, level=level)
 
 
 @app.route('/form3', methods=['GET','POST'])
 def showRoster():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
-		user = ['','','','','','']
+		user = ['','','','','','','','']
 	try:
 		results = pg.currentRoster()
 	except:
@@ -160,11 +183,10 @@ def showRoster():
 
 @app.route('/login', methods=['GET','POST'])
 def showLogin():
-
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
-		user = ['','','','','','']
+		user = ['','','','','','','','']
 
 	if request.method == 'POST':
 		email=request.form['username']
@@ -186,16 +208,20 @@ def showSearch():
 	if request.method == 'POST':
 		session['username'] = request.form['username']
 		session['password'] = request.form['password']
-		session['firstname'] = pg.getFirstName(session['username'],session['password'])
-		session['lastname'] = pg.getLastName(session['username'],session['password'])
-		session['zipcode'] = pg.getZip(session['username'],session['password'])
-		session['level'] = pg.getLevel(session['username'],session['password'])
+		try:
+			session['firstname'] = pg.getFirstName(session['username'],session['password'])
+			session['lastname'] = pg.getLastName(session['username'],session['password'])
+			session['zipcode'] = pg.getZip(session['username'],session['password'])
+			session['level'] = pg.getLevel(session['username'],session['password'])
+			session['address'] = pg.getAddress(session['username'],session['password'])
+		except:
+			return render_template('badlogin.html')
 		
-	
+
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
-		user = ['','','','','','']
+		user = ['','','','','','','','']
 	return render_template('search.html', user=user)
 	
 	
@@ -212,9 +238,9 @@ def showSearchResults():
 		
 
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
-		user = ['','','','','','']
+		user = ['','','','','','','','']
 	try:
 		search=request.form['search']
 		# cat=request.form['cat']
@@ -240,26 +266,13 @@ def logout():
 	session.pop('zipcode')
 	session.pop('password')
 	session.pop('level')
-	user = ['','','','','','']
+	session.pop('address')
+	session.pop('lastname')
+	user = ['','','','','','','','']
 	flash('You were logged out')
 	return render_template('login.html', user=user)
 	
 
-@app.route('/gallery')
-def showGallery():
-	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level']]
-	else:
-		user = ['','','','','','']
-	p1 = '/static/faceboard/1.jpg'
-	p2 = '/static/faceboard/2.jpg'
-	p3 = '/static/faceboard/3.jpg'
-	p4 = '/static/faceboard/4.jpg'
-	p5 = '/static/faceboard/5.jpg'
-	p6 = '/static/faceboard/6.jpg'
-	p7 = '/static/faceboard/Thor.jpg'
-	photos = {p7, p1, p2, p3, p4, p5, p6}
-	return render_template('gallery.html', photos=photos, user=user)
 
 	
 # Start the server

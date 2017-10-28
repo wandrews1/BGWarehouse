@@ -19,19 +19,36 @@
 
 		<div class="collapse navbar-collapse" id="exCollapsingNavbar">
 			<ul class="nav navbar-nav">
-				<li class="nav-item selected"><a href="/manager" class="nav-link"><p class="faceboard3">Manager</p></a></li>
-				<li class="nav-item"><a href="/form" class="nav-link"><p class="faceboard3">New Registration</p></a></li>
-				<li class="nav-item"><a href="/search" class="nav-link"><p class="faceboard3">Search</p></a></li>
+			
+				{% if ( ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/admin" class="nav-link"><p class="bg3">Admin</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item selected"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
+					<li class="nav-item"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/sales" class="nav-link"><p class="bg3">Sales Associate</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<!--<li class="nav-item"><a href="/customer" class="nav-link"><p class="bg3">Customer</p></a></li>-->
+					<li class="nav-item"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
+				{% endif %}
+				
 			</ul>
 	
 			<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-				<li class="nav-item"><a href="#" class="nav-link"><p class="faceboard3">{{user[2]}} - {{user[5]}}</p></a></li>
-				<li class="nav-item"><a href="logout" class="nav-link"><p class="faceboard3">Logout</p></a></li>
+				<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3">{{user[2]}} - {{user[5]}}</p></a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link"><p class="bg3">Logout</p></a></li>
 			</ul>
 
 		</div>
 	</div>
 </nav>
+
 {% endblock %}
 
 
@@ -43,8 +60,8 @@
 	<div class="card">
 		<form method="POST" action="/form2">
 			
-			<h3 class="card-header faceboard2">
-				New Team Member Signup
+			<h3 class="card-header bg2">
+				Manager
 			</h3>
 			
 			<div class="card-body">
@@ -81,7 +98,7 @@
 						<td>
 						</td>
 						<td>
-							<input type="submit" value="SUBMIT"  class="faceboardSubmit btn btn-outline-dark"/>
+							<input type="submit" value="SUBMIT"  class="bgSubmit btn btn-outline-dark"/>
 						</td>
 					</tr>
 					<br>

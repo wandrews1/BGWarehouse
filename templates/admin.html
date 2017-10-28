@@ -21,12 +21,12 @@
 			<ul class="nav navbar-nav">
 			
 				{% if ( ( user[5] == 'Administrator') ):  %}
-					<li class="nav-item"><a href="/admin" class="nav-link"><p class="bg3">Admin</p></a></li>
+					<li class="nav-item selected"><a href="/admin" class="nav-link"><p class="bg3">Admin</p></a></li>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 					<li class="nav-item"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
-					<li class="nav-item selected"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
+					<li class="nav-item"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
@@ -55,62 +55,62 @@
 {% block content %}
 <br>
 <br>
-<center>
- 	<div class="container-fluid card50 max">
-		<div class="card">
-			<form method="POST" action="/form2">
-				
-				<h3 class="card-header bg2">
-					New Team Member Signup
-				</h3>
-				
-				<div class="card-body">
-					<table>
-						<tr>
-							<td>First Name: </td>
-							<td><input type="text" class="form-control" name="fname" placeholder="John" /></td>
-						</tr>
-						<tr>
-							<td>Last Name: </td>
-							<td><input type="text" class="form-control" name="lname" placeholder="Smith" /></td>
-						</tr>
-						<tr>
-							<td>Email: </td>
-							<td><input type="email" class="form-control" name="email" placeholder="john.smith@bg.com" /></td>
-						</tr>
-						<tr>
-							<td>Zipcode: </td>
-							<td><input type="text" class="form-control" name="zipcode" placeholder="Zipcode" /></td>
-						</tr>
-						<tr>
-							<td>Date of Birth: </td>
-							<td><input type="date" class="form-control" name="dob" placeholder="DD-MM-YYYY" /></td>
-						</tr>
-						<tr>
-							<td>Password: </td>
-							<td><input type="password" class="form-control" name="pw1" placeholder="Password"/></td>
-						</tr>
-						<tr>
-							<td>Retype Password: </td>
-							<td><input type="password" class="form-control" name="pw2" placeholder="Retype Password"/></td>
-						</tr>
-						<tr>
-							<td>
-							</td>
-							<td>
-								<input type="submit" value="SUBMIT"  class="bgSubmit btn btn-outline-dark"/>
-							</td>
-						</tr>
-						<br>
-					</table>
-				</div>
-				
-				<div class="card-footer text-muted">
-					All fields required for signup.
-				</div>
-				
-			</form>
-		</div>
+ <center>
+ 	<div class="container-fluid card50">
+	<div class="card">
+		<form method="POST" action="/form2">
+			
+			<h3 class="card-header bg2">
+				Administrator
+			</h3>
+			
+			<div class="card-body">
+				<table>
+					<tr>
+						<td>First Name: </td>
+						<td><input type="text" class="form-control" name="fname" placeholder="John" /></td>
+					</tr>
+					<tr>
+						<td>Last Name: </td>
+						<td><input type="text" class="form-control" name="lname" placeholder="Smith" /></td>
+					</tr>
+					<tr>
+						<td>Email: </td>
+						<td><input type="email" class="form-control" name="email" placeholder="john.smith@bg.com" /></td>
+					</tr>
+					<tr>
+						<td>Zipcode: </td>
+						<td><input type="text" class="form-control" name="zipcode" placeholder="Zipcode" /></td>
+					</tr>
+					<tr>
+						<td>Date of Birth: </td>
+						<td><input type="date" class="form-control" name="dob" placeholder="DD-MM-YYYY" /></td>
+					</tr>
+					<tr>
+						<td>Password: </td>
+						<td><input type="password" class="form-control" name="pw1" placeholder="Password"/></td>
+					</tr>
+					<tr>
+						<td>Retype Password: </td>
+						<td><input type="password" class="form-control" name="pw2" placeholder="Retype Password"/></td>
+					</tr>
+					<tr>
+						<td>
+						</td>
+						<td>
+							<input type="submit" value="SUBMIT"  class="bgSubmit btn btn-outline-dark"/>
+						</td>
+					</tr>
+					<br>
+				</table>
+			</div>
+			
+			<div class="card-footer text-muted">
+				All fields required for signup
+			</div>
+			
+		</form>
+	</div>
 	</div>
 </center>
 <br>	

@@ -283,3 +283,13 @@ def getLevel(email,pw1):
 	results = execute_query(query_string, conn, select=True, args=(email, pw1))
 	conn.close()
 	return results[0][0]
+	
+def getAddress(email,pw1):
+	print (" - in getAddress()")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT address FROM login WHERE email = %s AND pw1 = crypt(%s,pw1)"
+	results = execute_query(query_string, conn, select=True, args=(email, pw1))
+	conn.close()
+	return results[0][0]
