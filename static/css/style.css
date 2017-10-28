@@ -1,15 +1,4 @@
-#cont {
-  position: relative;
-}
-#navi,
-#infoi {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-#infoi {
-  z-index: 10;
-}
+
 .bgyellow{
 	color:#FCBE07;
 }
@@ -17,14 +6,14 @@
 	background-color:#FCBE07;
 }
 .bggrey{
-	background-color:#BDBDBD;
+	background-color:#C9C9C9;
 }
 .bgblack{
 	color:#FFFFFF;
 	background-color:#000000;
 }
 .card50{
-	width: 50%;
+	width: 75%;
 }
 .headerbanner{
 	color: #141412;
@@ -45,21 +34,6 @@
 		background-origin: padding-box;
 		background-size: auto auto;
 }
-/*.faceboard{*/
-/*    font-family:*/
-/*	-apple-system, BlinkMacSystemFont,*/
-/*	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",*/
-/*	"Helvetica Neue", sans-serif;*/
-	
-/*    font-size: 108px;*/
-/*	font-weight: normal;*/
-/*	line-height: .75;*/
-/*	margin: 0 auto;*/
-/*	width: 100%;*/
-/*	justify-content: space-around;*/
-/*	text-align: center;*/
-/*	text-decoration: none;*/
-/*}*/
 .bg{
     font-family:
 	-apple-system, BlinkMacSystemFont,
@@ -75,21 +49,6 @@
 	text-align: center;
 	text-decoration: none;
 }
-/*.faceboard2{*/
-/*    font-family:*/
-/*	-apple-system, BlinkMacSystemFont,*/
-/*	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",*/
-/*	"Helvetica Neue", sans-serif;*/
-	
-/*    font-size: 40px;*/
-/*	font-weight: normal;*/
-/*	line-height: .75;*/
-/*	margin: 0 auto;*/
-/*	width: 100%;*/
-/*	justify-content: space-around;*/
-/*	text-align: center;*/
-/*	text-decoration: none;*/
-/*}*/
 .bg2{
     font-family:
 	-apple-system, BlinkMacSystemFont,
@@ -105,21 +64,6 @@
 	text-align: center;
 	text-decoration: none;
 }
-/*.faceboard3{*/
-/*    font-family:*/
-/*	-apple-system, BlinkMacSystemFont,*/
-/*	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",*/
-/*	"Helvetica Neue", sans-serif;*/
-	
-/*    font-size: 16px;*/
-/*	font-weight: bold;*/
-	/*line-height: .50;*/
-/*	margin: 0 auto;*/
-/*	width: 100%;*/
-/*	justify-content: space-around;*/
-/*	text-align: center;*/
-/*	text-decoration: none;*/
-/*}*/
 .bg3{
     font-family:
 	-apple-system, BlinkMacSystemFont,
@@ -166,7 +110,7 @@
   margin:0 auto;
 }
 body {
-	background: #BDBDBD;
+	background: #C9C9C9;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	font-weight: normal;
@@ -179,7 +123,7 @@ body {
 }
 p {
 	color: #898989;
-	/*line-height: 24px;*/
+	line-height: 24px;
 	margin: 0;
 	padding-left: 30px;
 	width: 98%;
@@ -257,7 +201,7 @@ word-wrap: break-word;
 	color: #FFFFFF;
 }
 #content {
-	background-color:#BDBDBD;
+	background-color:#C9C9C9;
 	text-align: center;
     width: 100%;
     height: 100%;

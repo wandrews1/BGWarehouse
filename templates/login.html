@@ -25,44 +25,41 @@
 <center>
 
  	<div class="container-fluid card50">
-		<div class="card">
-
-			<h3 class="card-header bg2">
-				BG Member Login
-			</h3>
-			
-			<div class="card-body">
+		<h3 class="bg2">
+			BG Member Login
+		</h3>
+		
+		<br>
+		<br>
+		
+		
+		<form method="POST" action="/search">
+			<div class="col-lg-6">
+	  			<div class="row">
+	    				<div class="input-group">
+	      					<span class="input-group-btn">
+	        					<button class="btn btn-dark" type="button">Email</button>
+	      					</span>
+	      					<input type="email" class="form-control" name="username" placeholder="username@bg.com" />
+	    				</div>
+				</div>
 				
-				<form method="POST" action="/search">
-					<div class="col-lg-6">
-			  			<div class="row">
-			    				<div class="input-group">
-			      					<span class="input-group-btn">
-			        					<button class="btn btn-dark" type="button">Email</button>
-			      					</span>
-			      					<input type="email" class="form-control" name="username" placeholder="username@bg.com" />
-			    				</div>
-						</div>
-						
-						<br>
-						
-						<div class="row">
-			    				<div class="input-group">
-			      					<span class="input-group-btn">
-			        					<button class="btn btn-dark" type="button" >Password</button>
-			      					</span>
-			      					<input type="password" class="form-control" name="password" placeholder="P@55w0Rd!"/>
-			    				</div>
-						</div>
-						
-						<br>
-			  			
-			  			<input type="submit" value="LOGIN" class="bgSubmit btn btn-outline-dark" />
-		  			</div>
-				</form>
+				<br>
 				
-			</div>
-		</div>
+				<div class="row">
+	    				<div class="input-group">
+	      					<span class="input-group-btn">
+	        					<button class="btn btn-dark" type="button" >Password</button>
+	      					</span>
+	      					<input type="password" class="form-control" name="password" placeholder="P@55w0Rd!"/>
+	    				</div>
+				</div>
+				
+				<br>
+	  			
+	  			<input type="submit" value="LOGIN" class="bgSubmit btn btn-outline-dark" />
+  			</div>
+		</form>
 	</div>
 </center>
 <br>	
