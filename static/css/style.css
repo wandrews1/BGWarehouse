@@ -12,8 +12,23 @@
 	color:#FFFFFF;
 	background-color:#000000;
 }
-.card50{
+.right{
+    text-align: right;
+}
+.card75{
 	width: 75%;
+}
+.card60{
+	width: 60%;
+}
+.card50{
+	width: 50%;
+}
+.card25{
+	width: 25%;
+}
+.searchbar{
+	width: 50%;
 }
 .headerbanner{
 	color: #141412;

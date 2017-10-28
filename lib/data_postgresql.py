@@ -140,36 +140,7 @@ def currentRoster():
 	conn.close()
 	return results
 
-	
-	
-# def superSearch(zipcode, cat, search):
-# 	print (" - in superSearch()")
-# 	conn = connectToPostgres()
-# 	if conn == None:
-# 		return None
-# 	print (" - connected to database")
-# 	if cat in ['name','category','subcategory','address','city','state','country','phone']:
-# 		query_string = "SELECT * FROM items WHERE zipcode = %s AND " + cat + " = %s"
-# 	print(" - Query String: " + query_string)
-# 	results2 = execute_query(query_string, conn, select=True, args=(zipcode, search))
-# 	print(" - Results: " , results2)
-# 	if results2:
-# 		return results2
-# 	else:
-# 		if zipcode == '':
-# 			if cat in ['name','category','subcategory','address','city','state','country','phone']:
-# 				query_string = "SELECT * FROM items WHERE " + cat + " = %s"
-# 				results2 = execute_query(query_string, conn, select=True, args=(search,))
-# 		else:
-# 			query_string = "SELECT * FROM items WHERE zipcode = %s"
-# 			results2 = execute_query(query_string, conn, select=True, args=(zipcode,))
-# 			if results2:
-# 				return " - Invalid Category"
-# 			else:
-# 				return " - No data for your zipcode"
-# 	conn.close()
-# 	return results2
-	
+
 	
 def superSearch(search):
 	print (" - in superSearch()")
@@ -178,9 +149,9 @@ def superSearch(search):
 		return None
 	print (" - connected to database")
 
-	query_string = "SELECT * FROM items WHERE (productID LIKE %s) OR (category LIKE %s) OR (name LIKE %s) OR (description LIKE %s)"
+	query_string = "SELECT * FROM items WHERE (LOWER(productID) LIKE LOWER(%s)) OR (LOWER(category) LIKE LOWER(%s)) OR (LOWER(name) LIKE LOWER(%s)) OR (LOWER(description) LIKE LOWER(%s))"
 	print(" - Query String: " + query_string)
-	results = execute_query(query_string, conn, select=True, args=('%' + search + '%','%' + search.title() + '%','%' + search.title() + '%','%' + search + '%',))
+	results = execute_query(query_string, conn, select=True, args=('%' + search + '%','%' + search + '%','%' + search + '%','%' + search + '%',))
 	print(" - Results: " , results)
 
 	if results:
@@ -190,39 +161,6 @@ def superSearch(search):
 	conn.close()
 	return results
 	
-	
-# def superSearch(search):
-# 	print (" - in superSearch()")
-# 	conn = connectToPostgres()
-# 	if conn == None:
-# 		return None
-# 	print (" - connected to database")
-	
-# 	query_string = "SELECT * FROM items WHERE " + cat + " = %s"
-	
-# 	print(" - Query String: " + query_string)
-	
-# 	results2 = execute_query(query_string, conn, select=True, args=(search,))
-	
-# 	print(" - Results: " , results2)
-	
-# 	if results2:
-# 		return results2
-# 	# else:
-# 	# 	if zipcode == '':
-# 	# 		if cat in ['productID','cost','quantity','category','name','description']:
-# 	# 			query_string = "SELECT * FROM items WHERE " + cat + " = %s"
-# 	# 			results2 = execute_query(query_string, conn, select=True, args=(search,))
-# 	# 	else:
-# 	# 		query_string = "SELECT * FROM items WHERE zipcode = %s"
-# 	# 		results2 = execute_query(query_string, conn, select=True, args=(zipcode,))
-# 	# 		if results2:
-# 	# 			return " - Invalid Category"
-# 	# 		else:
-# 	# 			return " - No data for your zipcode"
-# 	conn.close()
-# 	return results2
-
 
 
 def login(email, pw1):

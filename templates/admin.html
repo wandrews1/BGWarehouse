@@ -11,7 +11,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bgblack" role="navigation">
 	<div class="container-fluid">
 	
-		<a class="navbar-brand" href="#"><img src="/static/images/original_bg_products.png" width=50px></a>
+		<a class="navbar-brand" href="/search"><img src="/static/images/original_bg_products.png" width=50px></a>
 	
 		<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
 			&#9776;
@@ -55,58 +55,142 @@
 {% block content %}
 <br>
 <br>
-<center>
- 	<div class="container-fluid card50 max">
-		<form method="POST" action="/form2">
+<!--<center>-->
+ 	<div class="container-fluid card25 max">
+ 		<!-- disabled form functionality until back-end is properly setup for this function to work -->
+ 		<!--<form method="POST" action="/form2">-->
+		<form method="POST">
 			
 			<h3 class="bg2">
-				Administrator
+				Add New Warehouse
 			</h3>
 			
-			<table>
-				<tr>
-					<td>First Name: </td>
-					<td><input type="text" class="form-control" name="fname" placeholder="John" /></td>
-				</tr>
-				<tr>
-					<td>Last Name: </td>
-					<td><input type="text" class="form-control" name="lname" placeholder="Smith" /></td>
-				</tr>
-				<tr>
-					<td>Email: </td>
-					<td><input type="email" class="form-control" name="email" placeholder="john.smith@bg.com" /></td>
-				</tr>
-				<tr>
-					<td>Zipcode: </td>
-					<td><input type="text" class="form-control" name="zipcode" placeholder="Zipcode" /></td>
-				</tr>
-				<tr>
-					<td>Date of Birth: </td>
-					<td><input type="date" class="form-control" name="dob" placeholder="DD-MM-YYYY" /></td>
-				</tr>
-				<tr>
-					<td>Password: </td>
-					<td><input type="password" class="form-control" name="pw1" placeholder="Password"/></td>
-				</tr>
-				<tr>
-					<td>Retype Password: </td>
-					<td><input type="password" class="form-control" name="pw2" placeholder="Retype Password"/></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<input type="submit" value="SUBMIT"  class="bgSubmit btn btn-outline-dark"/>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>All fields required for signup.</td>
-					
-				</tr>
-				<br>
-			</table>
+			<br>
+			<br>
+			
+			<div class="form-group row">
+				<label for="warehouseID" class="col-sm-4 col-form-label right">Warehouse ID: </label>
+				<div class="col-sm-8">
+					<input type="text" id="warehouseID" class="form-control" name="warehouseID" placeholder="WH341" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="name" class="col-sm-4 col-form-label right">Warehouse Name: </label>
+				<div class="col-sm-8">
+					<input type="text" id="name" class="form-control" name="name" placeholder="BG of Central Virginia" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="address" class="col-sm-4 col-form-label right">Address: </label>
+				<div class="col-sm-8">
+					<input type="text" id="address" class="form-control" name="address" placeholder="116 Sylvia Rd" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="address2" class="col-sm-4 col-form-label right">Address 2: </label>
+				<div class="col-sm-8">
+					<input type="text" id="address2" class="form-control" name="address2" placeholder="Suite C" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="city" class="col-sm-4 col-form-label right">City: </label>
+				<div class="col-sm-8">
+					<input type="text" id="city" class="form-control" name="city" placeholder="Ashland" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="state" class="col-sm-4 col-form-label right">State: </label>
+				<div class="col-sm-8">
+					<select class="form-control" name="state" id="state"/>
+						<option></option>
+						<option>Alabama</option>
+						<option>Alaska</option>
+						<option>Arizona</option>
+						<option>Arkansas</option>
+						<option>California</option>
+						<option>Colorado</option>
+						<option>Connecticut</option>
+						<option>Disctrict of Columbia</option>
+						<option>Delaware</option>
+						<option>Florida</option>
+						<option>Georgia</option>
+						<option>Hawaii</option>
+						<option>Idaho</option>
+						<option>Illinois</option>
+						<option>Indiana</option>
+						<option>Iowa</option>
+						<option>Kansas</option>
+						<option>Kentucky</option>
+						<option>Louisiana</option>
+						<option>Maine</option>
+						<option>Maryland</option>
+						<option>Massachusetts</option>
+						<option>Michigan</option>
+						<option>Minnesota</option>
+						<option>Mississippi</option>
+						<option>Missouri</option>
+						<option>Montana</option>
+						<option>Nebraska</option>
+						<option>Nevada</option>
+						<option>New Hampshire</option>
+						<option>New Jersey</option>
+						<option>New Mexico</option>
+						<option>New York</option>
+						<option>North Carolina</option>
+						<option>North Dakota</option>
+						<option>Ohio</option>
+						<option>Oklahoma</option>
+						<option>Oregon</option>
+						<option>Pennsylvania</option>
+						<option>Rhode Island</option>
+						<option>South Carolina</option>
+						<option>South Dakota</option>
+						<option>Tennessee</option>
+						<option>Texas</option>
+						<option>Utah</option>
+						<option>Vermont</option>
+						<option>Virginia</option>
+						<option>Washington</option>
+						<option>West Virginia</option>
+						<option>Wisconsin</option>
+						<option>Wyoming</option>
+						<option>Guam</option>
+						<option>Puerto Rico</option>
+						<option>Virgin Islands</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="zipcode" class="col-sm-4 col-form-label right">Zipcode: </label>
+				<div class="col-sm-8">
+					<input type="text" id="zipcode" class="form-control" name="zipcode" placeholder="23005" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="phone" class="col-sm-4 col-form-label right">Phone: </label>
+				<div class="col-sm-8">
+					<input type="tel" id="phone" class="form-control" name="phone" placeholder="804-897-5983" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="fax" class="col-sm-4 col-form-label right">Fax: </label>
+				<div class="col-sm-8">
+					<input type="text" id="fax" class="form-control" name="fax" placeholder="804-897-5987" />
+				</div>
+			</div>
+
+			
+
+			<br>
+			
+			<input type="submit" value="SUBMIT"  class="bgSubmit btn btn-outline-dark"/>
+			
+			<br>
+			<br>
+			
+			<h6>
+				All fields required for signup.
+			</h6>
 		</form>
 	</div>
-</center>
-<br>	
 {% endblock %}
