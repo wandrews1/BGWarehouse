@@ -261,16 +261,20 @@ def showSearchResults():
 	
 @app.route('/logout', methods=['GET','POST'])
 def logout():
-	session.pop('username', None)
-	session.pop('firstname')
-	session.pop('zipcode')
-	session.pop('password')
-	session.pop('level')
-	session.pop('address')
-	session.pop('lastname')
-	user = ['','','','','','','','']
-	flash('You were logged out')
-	return render_template('login.html', user=user)
+	try:
+		session.pop('username', None)
+		session.pop('firstname')
+		session.pop('zipcode')
+		session.pop('password')
+		session.pop('level')
+		session.pop('address')
+		session.pop('lastname')
+		user = ['','','','','','','','']
+		flash('You were logged out')
+		return render_template('login.html', user=user)
+	except:
+		user = ['','','','','','','','']
+		return render_template('login.html', user=user)
 	
 
 
