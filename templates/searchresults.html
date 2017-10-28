@@ -21,7 +21,7 @@
 			<ul class="nav navbar-nav">
 			
 				{% if ( ( user[5] == 'Administrator') ):  %}
-					<li class="nav-item"><a href="/admin" class="nav-link"><p class="bg3">Admin</p></a></li>
+					<li class="nav-item"><a href="/addwarehouse" class="nav-link"><p class="bg3">Add Warehouse</p></a></li>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
@@ -58,25 +58,25 @@
 <center>
 	<form method="POST" action="/searchresults">
 		<div class="container-fluid card50">
-			
-			<h3 class="bg2">
-				Search Inventory
-			</h3>
-			
-			<br>
-			<br>
-						
-			<div class="card25">
-				<input type="search" name="search" class="form-control" placeholder="Search Term" />
-			</div>
-			
-			<br>
-
-			<div>
-				<input type="submit" value="SEARCH" class="bgSubmit btn btn-outline-dark"/>
+			<div class="container-fluid bggrey">
+				<h3 class="bg2">
+					Search Inventory
+				</h3>
+				
 				<br>
+				<br>
+							
+				<div class="card25">
+					<input type="search" name="search" class="form-control" placeholder="Search Term" />
+				</div>
+				
+				<br>
+		
+				<div>
+					<input type="submit" value="SEARCH" class="bgSubmit btn btn-outline-dark"/>
+					<br>
+				</div>
 			</div>
-			
 			<br>
 			<br>
 			<table class="table table-hover table-sm table-dark">

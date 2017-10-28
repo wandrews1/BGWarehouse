@@ -81,13 +81,13 @@ def mainIndex():
 	return render_template('login.html', user=user)
 	
 
-@app.route('/admin')
-def showAdmin():
+@app.route('/addwarehouse')
+def showAddWarehouse():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
 		user = ['','','','','','','','']
-	return render_template('admin.html', user=user)
+	return render_template('addwarehouse.html', user=user)
 
 	
 @app.route('/manager', methods=['GET','POST'])
