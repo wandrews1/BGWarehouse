@@ -2,6 +2,9 @@
 from datetime import date
 import psycopg2
 import psycopg2.extras
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 from lib.config import *
 
@@ -175,14 +178,14 @@ def superSearch(search):
 		return None
 	print (" - connected to database")
 
-	query_string = "SELECT * FROM items WHERE item LIKE %s"
+	query_string = "SELECT * FROM items WHERE category LIKE %s"
 	print(" - Query String: " + query_string)
 	results2 = execute_query(query_string, conn, select=True, args=('%' + search + '%',))
 	print(" - Results: " , results2)
 	if results2:
 		return results2
 	else:
-		return " - No luck finding your search term."
+		return "No Results."
 	conn.close()
 	return results2
 	
