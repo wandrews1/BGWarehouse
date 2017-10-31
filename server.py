@@ -114,7 +114,16 @@ def showSales():
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
 		user = ['','','','','','','','']
-	return render_template('sales.html', user=user)
+		
+	if (user[5] == 'Administrator') or (user[5] == 'Manager') or (user[5] == 'Sales Associate'):
+		print('USER TEST 1', user[5])
+		return render_template('sales.html', user=user)
+	elif user[5] == '':
+		print('USER TEST 2', user[5])
+		return render_template('login.html')
+	else:
+		print('USER TEST 3', user[5])
+		return render_template('search.html', user=user)
 	
 @app.route('/profile', methods=['GET','POST'])
 def showProfile():
