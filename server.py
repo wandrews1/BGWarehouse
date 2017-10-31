@@ -92,11 +92,21 @@ def showAddWarehouse():
 	
 @app.route('/manager', methods=['GET','POST'])
 def showManager():
+	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
 	else:
 		user = ['','','','','','','','']
-	return render_template('manager.html', user=user)
+		
+	if (user[5] == 'Administrator') or (user[5] == 'Manager'):
+		print('USER TEST 1', user[5])
+		return render_template('manager.html', user=user)
+	elif user[5] == '':
+		print('USER TEST 2', user[5])
+		return render_template('login.html')
+	else:
+		print('USER TEST 3', user[5])
+		return render_template('search.html', user=user)
 	
 @app.route('/sales')
 def showSales():
