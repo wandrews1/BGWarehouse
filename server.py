@@ -85,26 +85,44 @@ def mainIndex():
 def showAddWarehouse():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		if (user[5] == 'Administrator'):
+			return render_template('addwarehouse.html', user=user)
+		else:
+			return render_template('forbidden.html', user=user)
 	else:
 		user = ['','','','','','','','']
-	return render_template('addwarehouse.html', user=user)
+		return render_template('search.html', user=user)	
+
+
+
 
 	
 @app.route('/manager', methods=['GET','POST'])
 def showManager():
+	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		if (user[5] == 'Administrator') or (user[5] == 'Manager'):
+			return render_template('manager.html', user=user)
+		else:
+			return render_template('forbidden.html', user=user)
 	else:
 		user = ['','','','','','','','']
-	return render_template('manager.html', user=user)
+		return render_template('search.html', user=user)	
+
 	
 @app.route('/sales')
 def showSales():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		if (user[5] == 'Administrator') or (user[5] == 'Manager') or (user[5] == 'Sales Associate'):
+			return render_template('sales.html', user=user)
+		else:
+			return render_template('forbidden.html', user=user)
 	else:
 		user = ['','','','','','','','']
-	return render_template('sales.html', user=user)
+		return render_template('search.html', user=user)	
+
 	
 @app.route('/profile', methods=['GET','POST'])
 def showProfile():
