@@ -85,18 +85,15 @@ def mainIndex():
 def showAddWarehouse():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		if (user[5] == 'Administrator'):
+			return render_template('addwarehouse.html', user=user)
+		else:
+			return render_template('forbidden.html', user=user)
 	else:
 		user = ['','','','','','','','']
-		
-	if (user[5] == 'Administrator'):
-		print('USER TEST 1', user[5])
-		return render_template('addwarehouse.html', user=user)
-	elif user[5] == '':
-		print('USER TEST 2', user[5])
-		return render_template('login.html')
-	else:
-		print('USER TEST 3', user[5])
-		return render_template('search.html', user=user)
+		return render_template('search.html', user=user)	
+
+
 
 
 	
@@ -105,35 +102,27 @@ def showManager():
 	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		if (user[5] == 'Administrator') or (user[5] == 'Manager'):
+			return render_template('manager.html', user=user)
+		else:
+			return render_template('forbidden.html', user=user)
 	else:
 		user = ['','','','','','','','']
-		
-	if (user[5] == 'Administrator') or (user[5] == 'Manager'):
-		print('USER TEST 1', user[5])
-		return render_template('manager.html', user=user)
-	elif user[5] == '':
-		print('USER TEST 2', user[5])
-		return render_template('login.html')
-	else:
-		print('USER TEST 3', user[5])
-		return render_template('search.html', user=user)
+		return render_template('search.html', user=user)	
+
 	
 @app.route('/sales')
 def showSales():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		if (user[5] == 'Administrator') or (user[5] == 'Manager') or (user[5] == 'Sales Associate'):
+			return render_template('sales.html', user=user)
+		else:
+			return render_template('forbidden.html', user=user)
 	else:
 		user = ['','','','','','','','']
-		
-	if (user[5] == 'Administrator') or (user[5] == 'Manager') or (user[5] == 'Sales Associate'):
-		print('USER TEST 1', user[5])
-		return render_template('sales.html', user=user)
-	elif user[5] == '':
-		print('USER TEST 2', user[5])
-		return render_template('login.html')
-	else:
-		print('USER TEST 3', user[5])
-		return render_template('search.html', user=user)
+		return render_template('search.html', user=user)	
+
 	
 @app.route('/profile', methods=['GET','POST'])
 def showProfile():
