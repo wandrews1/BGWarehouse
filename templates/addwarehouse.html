@@ -36,6 +36,7 @@
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 					<!--<li class="nav-item"><a href="/customer" class="nav-link"><p class="bg3">Customer</p></a></li>-->
 					<li class="nav-item"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
+					<li class="nav-item"><a href="/invoice" class="nav-link"><p class="bg3">Invoice</p></a></li>
 				{% endif %}
 				
 			</ul>
@@ -55,132 +56,108 @@
 {% block content %}
 <br>
 <br>
-<!--<center>-->
- 	<div class="container-fluid card25 max">
- 		<!-- disabled form functionality until back-end is properly setup for this function to work -->
- 		<!--<form method="POST" action="/form2">-->
-		<form method="POST">
+<center>
+ 	<div class="container-fluid card50 max">
+ 		<!-- replace action below with destination html; "/form2" was there before I disabled it -->
+		<form method="POST" action="#"> 
 			
 			<h3 class="bg2">
-				Add New Warehouse
+				New Warehouse
 			</h3>
 			
 			<br>
 			<br>
 			
-			<div class="form-group row">
-				<label for="warehouseID" class="col-sm-4 col-form-label right">Warehouse ID: </label>
-				<div class="col-sm-8">
-					<input type="text" id="warehouseID" class="form-control" name="warehouseID" placeholder="WH341" />
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="name" class="col-sm-4 col-form-label right">Warehouse Name: </label>
-				<div class="col-sm-8">
-					<input type="text" id="name" class="form-control" name="name" placeholder="BG of Central Virginia" />
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="address" class="col-sm-4 col-form-label right">Address: </label>
-				<div class="col-sm-8">
-					<input type="text" id="address" class="form-control" name="address" placeholder="116 Sylvia Rd" />
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="address2" class="col-sm-4 col-form-label right">Address 2: </label>
-				<div class="col-sm-8">
-					<input type="text" id="address2" class="form-control" name="address2" placeholder="Suite C" />
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="city" class="col-sm-4 col-form-label right">City: </label>
-				<div class="col-sm-8">
-					<input type="text" id="city" class="form-control" name="city" placeholder="Ashland" />
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="state" class="col-sm-4 col-form-label right">State: </label>
-				<div class="col-sm-8">
-					<select class="form-control" name="state" id="state"/>
-						<option></option>
-						<option>Alabama</option>
-						<option>Alaska</option>
-						<option>Arizona</option>
-						<option>Arkansas</option>
-						<option>California</option>
-						<option>Colorado</option>
-						<option>Connecticut</option>
-						<option>Disctrict of Columbia</option>
-						<option>Delaware</option>
-						<option>Florida</option>
-						<option>Georgia</option>
-						<option>Hawaii</option>
-						<option>Idaho</option>
-						<option>Illinois</option>
-						<option>Indiana</option>
-						<option>Iowa</option>
-						<option>Kansas</option>
-						<option>Kentucky</option>
-						<option>Louisiana</option>
-						<option>Maine</option>
-						<option>Maryland</option>
-						<option>Massachusetts</option>
-						<option>Michigan</option>
-						<option>Minnesota</option>
-						<option>Mississippi</option>
-						<option>Missouri</option>
-						<option>Montana</option>
-						<option>Nebraska</option>
-						<option>Nevada</option>
-						<option>New Hampshire</option>
-						<option>New Jersey</option>
-						<option>New Mexico</option>
-						<option>New York</option>
-						<option>North Carolina</option>
-						<option>North Dakota</option>
-						<option>Ohio</option>
-						<option>Oklahoma</option>
-						<option>Oregon</option>
-						<option>Pennsylvania</option>
-						<option>Rhode Island</option>
-						<option>South Carolina</option>
-						<option>South Dakota</option>
-						<option>Tennessee</option>
-						<option>Texas</option>
-						<option>Utah</option>
-						<option>Vermont</option>
-						<option>Virginia</option>
-						<option>Washington</option>
-						<option>West Virginia</option>
-						<option>Wisconsin</option>
-						<option>Wyoming</option>
-						<option>Guam</option>
-						<option>Puerto Rico</option>
-						<option>Virgin Islands</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="zipcode" class="col-sm-4 col-form-label right">Zipcode: </label>
-				<div class="col-sm-8">
-					<input type="text" id="zipcode" class="form-control" name="zipcode" placeholder="23005" />
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="phone" class="col-sm-4 col-form-label right">Phone: </label>
-				<div class="col-sm-8">
-					<input type="tel" id="phone" class="form-control" name="phone" placeholder="804-897-5983" />
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="fax" class="col-sm-4 col-form-label right">Fax: </label>
-				<div class="col-sm-8">
-					<input type="text" id="fax" class="form-control" name="fax" placeholder="804-897-5987" />
-				</div>
-			</div>
+			<table>
+				<tr>
+					<td class="right">Warehouse ID: </td>
+					<td><input type="text" class="form-control" id="warehouseID" name="warehouseID" placeholder="WH341" /></td>
+				</tr>
+				<tr>
+					<td class="right">Warehouse Name: </td>
+					<td><input type="text" class="form-control" id="name" name="name" placeholder="BG of Central Virginia"/></td>
+				</tr>
+				<tr>
+					<td class="right">Address: </td>
+					<td><input type="email" class="form-control" id="address" name="address" placeholder="116 Sylvia Rd" /></td>
+				</tr>
+				<tr>
+					<td class="right">City: </td>
+					<td><input type="text" class="form-control" id="city" name="city" placeholder="Ashland"/></td>
+				</tr>
+				<tr>
+					<td class="right">State:</td>
+					<td>
+						<select class="form-control" name="userlevel" id="userlevel"/>
+							<option></option>
+							<option>Alabama</option>
+							<option>Alaska</option>
+							<option>Arizona</option>
+							<option>Arkansas</option>
+							<option>California</option>
+							<option>Colorado</option>
+							<option>Connecticut</option>
+							<option>Disctrict of Columbia</option>
+							<option>Delaware</option>
+							<option>Florida</option>
+							<option>Georgia</option>
+							<option>Hawaii</option>
+							<option>Idaho</option>
+							<option>Illinois</option>
+							<option>Indiana</option>
+							<option>Iowa</option>
+							<option>Kansas</option>
+							<option>Kentucky</option>
+							<option>Louisiana</option>
+							<option>Maine</option>
+							<option>Maryland</option>
+							<option>Massachusetts</option>
+							<option>Michigan</option>
+							<option>Minnesota</option>
+							<option>Mississippi</option>
+							<option>Missouri</option>
+							<option>Montana</option>
+							<option>Nebraska</option>
+							<option>Nevada</option>
+							<option>New Hampshire</option>
+							<option>New Jersey</option>
+							<option>New Mexico</option>
+							<option>New York</option>
+							<option>North Carolina</option>
+							<option>North Dakota</option>
+							<option>Ohio</option>
+							<option>Oklahoma</option>
+							<option>Oregon</option>
+							<option>Pennsylvania</option>
+							<option>Rhode Island</option>
+							<option>South Carolina</option>
+							<option>South Dakota</option>
+							<option>Tennessee</option>
+							<option>Texas</option>
+							<option>Utah</option>
+							<option>Vermont</option>
+							<option>Virginia</option>
+							<option>Washington</option>
+							<option>West Virginia</option>
+							<option>Wisconsin</option>
+							<option>Wyoming</option>
+							<option>Guam</option>
+							<option>Puerto Rico</option>
+							<option>Virgin Islands</option>
+						</select>
+					</td>
+				</tr>
 
+				<tr>
+					<td class="right">Zipcode: </td>
+					<td><input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="23005"/></td>
+				</tr>
+				<tr>
+					<td class="right">Phone: </td>
+					<td><input type="tel" class="form-control" id="phone" name="phone" placeholder="804-897-5983"/></td>
+				</tr>
+			</table>
 			
-
 			<br>
 			
 			<input type="submit" value="SUBMIT"  class="bgSubmit btn btn-outline-dark"/>
@@ -193,4 +170,6 @@
 			</h6>
 		</form>
 	</div>
+</center>
+<br>	
 {% endblock %}

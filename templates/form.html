@@ -36,6 +36,7 @@
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 					<!--<li class="nav-item"><a href="/customer" class="nav-link"><p class="bg3">Customer</p></a></li>-->
 					<li class="nav-item"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
+					<li class="nav-item"><a href="/invoice" class="nav-link"><p class="bg3">Invoice</p></a></li>
 				{% endif %}
 				
 			</ul>
@@ -87,14 +88,6 @@
 				<tr>
 					<td class="right">User Level:</td>
 					<td>
-						<!--<input class="form-control" list="level">-->
-						<!--<datalist id="level">-->
-						<!--	<option value="Customer">-->
-						<!--	<option value="Sales Associate">-->
-						<!--	<option value="Manager">-->
-						<!--	<option value="Admin">-->
-						<!--</datalist>-->
-						
 						<select class="form-control" name="userlevel" id="userlevel"/>
 						
 							{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}

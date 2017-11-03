@@ -1,4 +1,5 @@
-#import datetime
+from datetime import datetime
+from datetime import timedelta
 import os
 import psycopg2
 import psycopg2.extras
@@ -8,10 +9,30 @@ from lib.config import *
 from lib import data_postgresql as pg
 from flask import Flask, render_template, request, redirect, session, flash, url_for, g, abort
 from flask_socketio import SocketIO, emit, send
+from flask_mail import Mail, Message
 
-app = Flask(__name__) # create the application instance
+# create the application instance
+app = Flask(__name__) 
+
+# Flask_mail credentials. 
+#Stored in separate file for obfuscational security.
+app.config.update(dict(
+    DEBUG = confDEBUG,
+    MAIL_SERVER = confMAIL_SERVER,
+    MAIL_PORT = confMAIL_PORT,
+    MAIL_USE_TLS = confMAIL_USE_TLS,
+    MAIL_USE_SSL = confMAIL_USE_SSL,
+    MAIL_USERNAME = confMAIL_USERNAME,
+    MAIL_PASSWORD = confMAIL_PASSWORD,
+))
+
+# initialize the Flask_Mail app
+mail = Mail(app)
+
+# no peaking
 app.secret_key = binascii.hexlify(os.urandom(24))
 
+# user variables, used for Flask_session
 username = ''
 password = ''
 firstname = ''
@@ -20,8 +41,9 @@ lastname = ''
 level = ''
 
 
-
+# Flask_socketIO initialization
 socketio = SocketIO(app)
+
 
 usernames = {}
 
@@ -95,8 +117,6 @@ def showAddWarehouse():
 
 
 
-
-	
 @app.route('/manager', methods=['GET','POST'])
 def showManager():
 	
@@ -130,8 +150,251 @@ def showProfile():
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
 		user = ['','','','','','','']
+		
 	return render_template('profile.html', user=user)
+
+
+@app.route('/invoice', methods=['GET','POST'])
+def showInvoice():
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+	else:
+		user = ['','','','','','','']
+
+	invoicenum = 1
+		
+	msg = Message("Hi %s! Your BG Invoice #%s" % (user[2], invoicenum),
+		sender=("BG Sales Team","bgsalestest@gmail.com"),
+		recipients=[user[0]])
 	
+	assert msg.sender == "BG Sales Team <bgsalestest@gmail.com>"
+	msg.body="testing 1 - This is the test body. The main text of the email shall go here"
+	
+	msg.html=showInvoiceMaker(user,invoicenum)
+
+	invoicenum = invoicenum + 1
+	
+	mail.send(msg)
+
+	return render_template('invoice.html', user=user)
+
+def showInvoiceMaker(user, invoicenum):
+	
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+	else:
+		user = ['','','','','','','']
+	
+	mylist = []
+	today = datetime.today().strftime('%Y-%m-%d')
+	due1 = datetime.today()+ timedelta(days=30) 
+	due = due1.strftime('%Y-%m-%d')
+	mylist.append(today)
+	mylist.append(due)
+	
+	timenow = mylist[0]
+	timedue = mylist[1]
+
+	message = """
+	<!doctype html>
+	<html>
+		<head>
+		    <meta charset="utf-8">
+		    <title>Your Invoice</title>
+		    
+		    <style>
+		    .invoice-box {
+		        max-width: 800px;
+		        margin: auto;
+		        padding: 30px;
+		        border: 1px solid #eee;
+		        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+		        font-size: 16px;
+		        line-height: 24px;
+		        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+		        color: #555;
+		    }
+		    
+		    .invoice-box table {
+		        width: 100%%;
+		        line-height: inherit;
+		        text-align: left;
+		    }
+		    
+		    .invoice-box table td {
+		        padding: 5px;
+		        vertical-align: top;
+		    }
+		    
+		    .invoice-box table tr td:nth-child(2) {
+		        text-align: right;
+		    }
+		    
+		    .invoice-box table tr.top table td {
+		        padding-bottom: 20px;
+		    }
+		    
+		    .invoice-box table tr.top table td.title {
+		        font-size: 45px;
+		        line-height: 45px;
+		        color: #333;
+		    }
+		    
+		    .invoice-box table tr.information table td {
+		        padding-bottom: 40px;
+		    }
+		    
+		    .invoice-box table tr.heading td {
+		        background: #eee;
+		        border-bottom: 1px solid #ddd;
+		        font-weight: bold;
+		    }
+		    
+		    .invoice-box table tr.details td {
+		        padding-bottom: 20px;
+		    }
+		    
+		    .invoice-box table tr.item td{
+		        border-bottom: 1px solid #eee;
+		    }
+		    
+		    .invoice-box table tr.item.last td {
+		        border-bottom: none;
+		    }
+		    
+		    .invoice-box table tr.total td:nth-child(2) {
+		        border-top: 2px solid #eee;
+		        font-weight: bold;
+		    }
+		    
+		    @media only screen and (max-width: 600px) {
+		        .invoice-box table tr.top table td {
+		            width: 100%%;
+		            display: block;
+		            text-align: center;
+		        }
+		        
+		        .invoice-box table tr.information table td {
+		            width: 100%%;
+		            display: block;
+		            text-align: center;
+		        }
+		    }
+		    
+		    /** RTL **/
+		    .rtl {
+		        direction: rtl;
+		        font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+		    }
+		    
+		    .rtl table {
+		        text-align: right;
+		    }
+		    
+		    .rtl table tr td:nth-child(2) {
+		        text-align: left;
+		    }
+		    </style>
+		</head>
+		
+		<body>
+		    <div class="invoice-box">
+		        <table cellpadding="0" cellspacing="0">
+		            <tr class="top">
+		                <td colspan="2">
+		                    <table>
+		                        <tr>
+		                            <td class="title">
+		                                <img src="http://pictures.dealer.com/m/mclartyfordfd/0187/c7ab71a49478cc4ad914a4dd52779aeax.jpg" style="width:100%%; max-width:300px;">
+		                            </td>
+		                            
+		                            <td>
+		                                Invoice #: %s<br>
+		                                Created: %s<br>
+		                                Due: %s
+		                            </td>
+		                        </tr>
+		                    </table>
+		                </td>
+		            </tr>
+		            
+		            <tr class="information">
+		                <td colspan="2">
+		                    <table>
+		                        <tr>
+		                            <td>
+		                                BG of Central Virginia<br>
+		                                116 Sylvia Rd<br>
+		                                Ashland, VA 23005
+		                            </td>
+		                            
+		                            <td>
+		                                %s<br>
+		                                %s<br>
+		                                User Level: %s
+		                            </td>
+		                        </tr>
+		                    </table>
+		                </td>
+		            </tr>
+		            
+		            <tr class="heading">
+		                <td>
+		                    Item
+		                </td>
+		                
+		                <td>
+		                    Price
+		                </td>
+		            </tr>
+		            
+		            <tr class="item">
+		                <td>
+		                    Website design
+		                </td>
+		                
+		                <td>
+		                    $300.00
+		                </td>
+		            </tr>
+		            
+		            <tr class="item">
+		                <td>
+		                    Hosting (3 months)
+		                </td>
+		                
+		                <td>
+		                    $75.00
+		                </td>
+		            </tr>
+		            
+		            <tr class="item last">
+		                <td>
+		                    Domain name (1 year)
+		                </td>
+		                
+		                <td>
+		                    $10.00
+		                </td>
+		            </tr>
+		            
+		            <tr class="total">
+		                <td></td>
+		                
+		                <td>
+		                   Total: $385.00
+		                </td>
+		            </tr>
+		        </table>
+		    </div>
+		</body>
+	</html>
+	"""
+	messagef = message % (invoicenum, timenow, timedue, user[2]+" "+user[6], user[0], user[5])
+
+	return messagef
+	
+
 # @app.route('/chat', methods=['GET','POST'])
 # def showChat():
 #	if 'username' in session:

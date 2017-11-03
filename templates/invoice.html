@@ -35,8 +35,8 @@
 				
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 					<!--<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3">Customer</p></a></li>-->
-					<li class="nav-item selected"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
-					<li class="nav-item"><a href="/invoice" class="nav-link"><p class="bg3">Invoice</p></a></li>
+					<li class="nav-item"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
+					<li class="nav-item selected"><a href="/invoice" class="nav-link"><p class="bg3">Invoice</p></a></li>
 				{% endif %}
 				
 			</ul>
@@ -61,53 +61,45 @@
 		<div class="container-fluid card50">
 			<div class="container-fluid bggrey">
 				<h3 class="bg2">
-					Search Inventory
+					Invoices
 				</h3>
 				
 				<br>
 				<br>
 							
-				<div class="card25">
-					<input type="search" name="search" class="form-control" placeholder="Search Term" />
-				</div>
-				
-				<br>
-		
-				<div>
-					<input type="submit" value="SEARCH" class="bgSubmit btn btn-outline-dark"/>
-					<br>
-				</div>
 			</div>
 			<br>
 			<br>
 			<table class="table table-hover table-sm table-dark">
-				<thead>
-					<tr>
-						<th scope="col">Product ID</th>
-						<th scope="col">Price</th>
-						<th scope="col">Quantity</th>
-						<th scope="col">Category</th>
-						<th scope="col">Name</th>
-						<th scope="col">View</th>
-					</tr>
-				</thead>
+				<!--<thead>-->
+				<!--	<tr>-->
+				<!--		<th scope="col">Product ID</th>-->
+				<!--		<th scope="col">Price</th>-->
+				<!--		<th scope="col">Quantity</th>-->
+				<!--		<th scope="col">Category</th>-->
+				<!--		<th scope="col">Name</th>-->
+				<!--		<th scope="col">View</th>-->
+				<!--	</tr>-->
+				<!--</thead>-->
 				<tbody>
-					
-					{% if ( results != 'No Results.' ):  %}
-						{% for item in results %}
-							<tr>
-								<th scope="row">{{item[0]}}</th>
-								<td>{{item[1]}}</td>
-								<td>{{item[2]}}</td>
-								<td>{{item[3]}}</td>
-								<td>{{item[4]}}</td>
-								<td>
+					This has not yet been implemented.
+					Waiting for database construction of Invoices.
+					<br>
+					It will, however, still email you an invoice. Check your email.
+					<!--{% if ( results != 'No Results.' ):  %}-->
+					<!--	{% for item in results %}-->
+					<!--			<th scope="row">{{item[0]}}</th>-->
+					<!--			<td>{{item[1]}}</td>-->
+					<!--			<td>{{item[2]}}</td>-->
+					<!--			<td>{{item[3]}}</td>-->
+					<!--			<td>{{item[4]}}</td>-->
+					<!--			<td>-->
 									<!-- Button trigger modal -->
-									<button type="button" class="btn btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">
-									  View Details
-									</button>
-								</td>
-							</tr>
+					<!--				<button type="button" class="btn btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">-->
+					<!--				  View-->
+					<!--				</button>-->
+					<!--			</td>-->
+					<!--		</tr>-->
 							
 							
 							<!-- Modal -->
