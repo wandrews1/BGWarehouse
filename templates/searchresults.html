@@ -41,8 +41,8 @@
 			</ul>
 	
 			<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-				<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3">{{user[2]}} - {{user[5]}}</p></a></li>
-				<li class="nav-item"><a href="/logout" class="nav-link"><p class="bg3">Logout</p></a></li>
+				<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3"><i class="fa fa-user" aria-hidden="true"></i>{{user[2]}} - {{user[5]}}</p></a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link"><p class="bg3"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</p></a></li>
 			</ul>
 
 		</div>
@@ -87,21 +87,58 @@
 						<th scope="col">Quantity</th>
 						<th scope="col">Category</th>
 						<th scope="col">Name</th>
-						<th scope="col">Description</th>
+						<th scope="col">View</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for item in results %}
-					<tr>
+					
+					{% if ( results != 'No Results.' ):  %}
+						{% for item in results %}
+								<th scope="row">{{item[0]}}</th>
+								<td>{{item[1]}}</td>
+								<td>{{item[2]}}</td>
+								<td>{{item[3]}}</td>
+								<td>{{item[4]}}</td>
+								<td>
+									<!-- Button trigger modal -->
+									<button type="button" class="btn btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">
+									  View
+									</button>
+								</td>
+							</tr>
+							
+							
+							<!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalLabel"><strong>{{item[0]}}</strong>   {{item[4]}}</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+							        {{item[5]}}
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn btn-outline-warning" data-dismiss="modal">Close</button>
+							        <button type="button" class="btn btn btn-outline-dark"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Add to Cart</button>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+
+						{% endfor %}
+					{% else %}
+						<tr>
+							
+						</tr>
+						No Results!
+					{% endif %}
 						
-						<th scope="row">{{item[0]}}</th>
-						<td>{{item[1]}}</td>
-						<td>{{item[2]}}</td>
-						<td>{{item[3]}}</td>
-						<td>{{item[4]}}</td>
-						<td>{{item[5]}}</td>
-					</tr>
-					{% endfor %}
+					
+					
 				</tbody>
 			</table>
 		</div>
@@ -111,5 +148,5 @@
 
 
 
-        
+
 {% endblock %}

@@ -18,7 +18,7 @@ firstname = ''
 zipcode = ''
 lastname = ''
 level = ''
-address = ''
+
 
 
 socketio = SocketIO(app)
@@ -75,22 +75,22 @@ def search_Chat(value):
 @app.route('/', methods=['GET','POST'])
 def mainIndex():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 	return render_template('login.html', user=user)
 	
 
 @app.route('/addwarehouse')
 def showAddWarehouse():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		if (user[5] == 'Administrator'):
 			return render_template('addwarehouse.html', user=user)
 		else:
 			return render_template('forbidden.html', user=user)
 	else:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 		return render_template('search.html', user=user)	
 
 
@@ -101,97 +101,128 @@ def showAddWarehouse():
 def showManager():
 	
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		if (user[5] == 'Administrator') or (user[5] == 'Manager'):
 			return render_template('manager.html', user=user)
 		else:
 			return render_template('forbidden.html', user=user)
 	else:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 		return render_template('search.html', user=user)	
 
 	
 @app.route('/sales')
 def showSales():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		if (user[5] == 'Administrator') or (user[5] == 'Manager') or (user[5] == 'Sales Associate'):
 			return render_template('sales.html', user=user)
 		else:
 			return render_template('forbidden.html', user=user)
 	else:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 		return render_template('search.html', user=user)	
 
 	
 @app.route('/profile', methods=['GET','POST'])
 def showProfile():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 	return render_template('profile.html', user=user)
 	
 # @app.route('/chat', methods=['GET','POST'])
 # def showChat():
 #	if 'username' in session:
-#		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+#		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 #	else:
-#		user = ['','','','','','','','']
+#		user = ['','','','','','','']
 # 	return render_template('chat.html', user=user)
 	
 
 
 @app.route('/form', methods=['GET','POST'])
 def showForm():
+	print("-- in showForm()")
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
+		
+	
+	if request.method == 'POST':
+		fname=request.form['fname']
+		firstname=fname
+		lname=request.form['lname']
+		email=request.form['email']
+		zipcode=request.form['zipcode']
+		pw1=request.form['pw1']
+		pw2=request.form['pw2']
+		dob=request.form['dob']
+		level=request.form['level']
+		print(fname)
+		print(lname)
+		print(email)
+		print(zipcode)
+		print(pw1)
+		print(pw2)
+		print(dob)
+		print(level)
+	print("end of function")
+	
 	return render_template('form.html', user=user)
 	
 
 @app.route('/form2', methods=['GET','POST'])
 def showForm2():
+	print("-- in showForm2")
+	
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
-		user = ['','','','','','','','']
-	fname=request.form['fname']
-	firstname=fname
-	lname=request.form['lname']
-	email=request.form['email']
-	zipcode=request.form['zipcode']
-	pw1=request.form['pw1']
-	pw2=request.form['pw2']
-	dob=request.form['dob']
-	level=request.form['level']
-	if request.method == 'POST':
+		user = ['','','','','','','']
 		
-		if (fname != "" and lname != "" and email != "" and pw1 == pw2):
+
+	if request.method == 'POST':
+		print("-- METHOD IS POST")
+		try:
+			fname=request.form['fname']
+			lname=request.form['lname']
+			email=request.form['email']
+			zipcode=request.form['zipcode']
+			pw1=request.form['pw1']
+			pw2=request.form['pw2']
+			userlevel=request.form.get('userlevel')
+			print(">>>> *** This worked!" , userlevel)
+		except:
+			print(">>>> *** Error fetching search term")
+
+		if (fname != "" and lname != "" and email != "" and userlevel != "" and pw1 == pw2):
 			try:
-				results = pg.newMember(fname, lname, email, dob, zipcode, pw1, level)
+				print("Trying 1")
+				results = pg.newMember(email, fname, lname, pw1, zipcode, userlevel)
+				print("pg.newMember worked!")
 				if results == None:
-					return render_template('badform.html')
+					print("ERROR 2")
+					return render_template('badform.html', user=user)
 			except:
 				print("ERROR INSERTING INTO login")
-			try:
-				results = pg.currentRoster()
-			except:
-				print("ERROR executing select")
-			return render_template('login.html', fname=fname, results=results, user=user, level=level)
+			return render_template('form2.html', fname=fname, user=user, userlevel=userlevel)
 		else:
-			return render_template('badform.html', fname=fname, lname=lname, email=email, pw1=pw1, pw2=pw2, dob=dob, zipcode=zipcode, level=level)
+			print("ERROR 4")
+			return render_template('badform.html', user=user, fname=fname, lname=lname, email=email, pw1=pw1, pw2=pw2, zipcode=zipcode, userlevel=userlevel)
 	else:
-		return render_template('form3.html', results=results, user=user, level=level)
+		print("ERROR 5")
+		return render_template('form3.html', user=user)
 
 
 @app.route('/form3', methods=['GET','POST'])
 def showRoster():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 	try:
 		results = pg.currentRoster()
 	except:
@@ -202,9 +233,9 @@ def showRoster():
 @app.route('/login', methods=['GET','POST'])
 def showLogin():
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 
 	if request.method == 'POST':
 		email=request.form['username']
@@ -214,7 +245,7 @@ def showLogin():
 				if results == None:
 					return render_template('login.html')
 			except:
-				print("ERROR INSERTING INTO login")
+				print("ERROR logging in")
 				
 		
 	return render_template('login.html', user=user)
@@ -231,15 +262,13 @@ def showSearch():
 			session['lastname'] = pg.getLastName(session['username'],session['password'])
 			session['zipcode'] = pg.getZip(session['username'],session['password'])
 			session['level'] = pg.getLevel(session['username'],session['password'])
-			session['address'] = pg.getAddress(session['username'],session['password'])
 		except:
 			return render_template('badlogin.html')
-		
 
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 	return render_template('search.html', user=user)
 	
 	
@@ -247,27 +276,15 @@ def showSearch():
 @app.route('/searchresults', methods=['GET','POST'])
 def showSearchResults():
 
-	# if request.method == 'POST':
-	# 	session['username'] = request.form['username']
-	# 	session['password'] = request.form['password']
-	# 	session['firstname'] = pg.getFirstName(session['username'],session['password'])
-	# 	session['lastname'] = pg.getLastName(session['username'],session['password'])
-	# 	session['zipcode'] = pg.getZip(session['username'],session['password'])
-		
-
 	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname'],session['address']]
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 	try:
 		search=request.form['search']
-		# cat=request.form['cat']
-		# zipcode=user[3]
 		print("***Search Term: " , search)
-		# print("Category   : " , cat)
 	except:
 		print("Error fetching search term")
-	# results = pg.superSearch(user[3], cat, search)
 	print("***Search Term: " , search)
 	results = pg.superSearch(search)
 	print("SHOW: ", results)
@@ -285,24 +302,15 @@ def logout():
 		session.pop('zipcode')
 		session.pop('password')
 		session.pop('level')
-		session.pop('address')
 		session.pop('lastname')
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 		flash('You were logged out')
 		return render_template('login.html', user=user)
 	except:
-		user = ['','','','','','','','']
+		user = ['','','','','','','']
 		return render_template('login.html', user=user)
 	
 
-
-	
 # Start the server
 if __name__ == '__main__':
 	socketio.run(app, host='0.0.0.0', port=8080, debug=True)
-	
-	
-# # start the server - Use this one without Socket IO
-# if __name__ == '__main__':
-# 	app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
-	

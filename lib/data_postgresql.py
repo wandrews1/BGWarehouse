@@ -117,15 +117,15 @@ def chatSearch(search):
 
 	
 	
-
-
-def newMember(fname, lname, email, dob, zipcode, pw1, level):
+def newMember(email, fname, lname, pw1, zipcode, userLevel):
+# def newMember(fname, lname, email, zipcode, pw1, userlevel):
 	print (" - in newMember()")
 	conn = connectToPostgres()
+	print(conn)
 	if conn == None:
 		return None
-	query_string = "INSERT INTO login (fname, lname, email, dob, zipcode, pw1, userLevel) VALUES (%s, %s, %s, %s, %s, crypt(%s, gen_salt('bf')), %s)" 
-	execute_query(query_string, conn, select=False,  args=(fname, lname, email, dob, zipcode, pw1, userLevel))
+	query_string = "INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES (%s, %s, %s, crypt(%s, gen_salt('bf')), %s, %s)" 
+	execute_query(query_string, conn, select=False,  args=(email, fname, lname, pw1, zipcode, userLevel))
 	conn.close()
 	return 0
 
@@ -135,7 +135,7 @@ def currentRoster():
 	conn = connectToPostgres()
 	if conn == None:
 		return None
-	query_string = "SELECT fname, lname, dob, email, zipcode FROM login"
+	query_string = "SELECT fname, lname, email, zipcode FROM login"
 	results = execute_query(query_string, conn, select=True)
 	conn.close()
 	return results
@@ -143,6 +143,7 @@ def currentRoster():
 
 	
 def superSearch(search):
+	noresults = ("No Results.",)
 	print (" - in superSearch()")
 	conn = connectToPostgres()
 	if conn == None:
@@ -157,7 +158,7 @@ def superSearch(search):
 	if results:
 		return results
 	else:
-		return "No Results."
+		return noresults
 	conn.close()
 	return results
 	
@@ -226,12 +227,3 @@ def getLevel(email,pw1):
 	conn.close()
 	return results[0][0]
 	
-def getAddress(email,pw1):
-	print (" - in getAddress()")
-	conn = connectToPostgres()
-	if conn == None:
-		return None
-	query_string = "SELECT address FROM login WHERE email = %s AND pw1 = crypt(%s,pw1)"
-	results = execute_query(query_string, conn, select=True, args=(email, pw1))
-	conn.close()
-	return results[0][0]

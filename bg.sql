@@ -15,19 +15,16 @@ CREATE TABLE login (
   fname text NOT NULL,
   lname text  NOT NULL,
   pw1 text NOT NULL,
-  address text NOT NULL,
-  city text NOT NULL,
-  state text NOT NULL,
   zipcode varchar(5) NOT NULL,
   userLevel text NOT NULL
   );
 
-INSERT INTO login (email, fname, lname, pw1, address, city, state, zipcode, userLevel) VALUES ('bkertche@umw.edu','Brendon', 'Kertcher', crypt('pass', gen_salt('bf')), 'Somewhere', 'Fredericksburg', 'VA', '22407','Administrator');
-INSERT INTO login (email, fname, lname, pw1, address, city, state, zipcode, userLevel) VALUES ('scripture187@gmail.com','Billy', 'Andrews', crypt('pass', gen_salt('bf')), '78 C L Walker Blvd', 'Fredericksburg', 'VA', '22407','Administrator');
-INSERT INTO login (email, fname, lname, pw1, address, city, state, zipcode, userLevel) VALUES ('jhuffma3@umw.edu','Jacob', 'Huffman', crypt('pass', gen_salt('bf')), 'Somewhere', 'Fredericksburg', 'VA', '22407','Administrator');
-INSERT INTO login (email, fname, lname, pw1, address, city, state, zipcode, userLevel) VALUES ('manager@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), 'test', 'test', 'VA', '22407','Manager');
-INSERT INTO login (email, fname, lname, pw1, address, city, state, zipcode, userLevel) VALUES ('sales@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), 'test', 'test', 'VA', '22407','Sales Associate');
-INSERT INTO login (email, fname, lname, pw1, address, city, state, zipcode, userLevel) VALUES ('customer@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), 'test', 'test', 'VA', '22407','Customer');
+INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('bkertche@umw.edu','Brendon', 'Kertcher', crypt('pass', gen_salt('bf')), '22407','Administrator');
+INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('scripture187@gmail.com','Billy', 'Andrews', crypt('pass', gen_salt('bf')), '22407','Administrator');
+INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('jhuffma3@umw.edu','Jacob', 'Huffman', crypt('pass', gen_salt('bf')), '22407','Administrator');
+INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('manager@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Manager');
+INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('sales@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Sales Associate');
+INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('customer@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Customer');
 GRANT SELECT, INSERT ON login TO bgtemp;
 
 

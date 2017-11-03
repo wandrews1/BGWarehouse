@@ -55,8 +55,19 @@
 {% block content %}
 <br>
 <br>
- 	<center>
-		<h2 style="color:red;">
+<center>
+ 	<div class="container-fluid card50 max">
+ 		<!-- replace action below with destination html; "/form2" was there before I disabled it -->
+		<form method="POST" action="/form2"> 
+			
+			<h3 class="bg2">
+				New Signup
+			</h3>
+			
+			<br>
+			<br>
+			
+			<h6 style="color:red;">
 			{% if fname == "" %}
 				FIRST NAME REQUIRED<br>
 			{% endif %}
@@ -75,44 +86,79 @@
 			{% if pw1 == "" %}
 				PASSWORD REQUIRED<br>
 			{% endif %}
-		</h2>
-		
-		<form method="POST" action="/form2">
+			</h6>
+			
+			
 			<table>
 				<tr>
-					<td>First Name: </td>
-					<td><input type="text" name="fname" placeholder="First Name" /></td>
+					<td class="right">First Name: </td>
+					<td><input type="text" class="form-control" name="fname" placeholder="John" /></td>
 				</tr>
 				<tr>
-					<td>Last Name: </td>
-					<td><input type="text" name="lname" placeholder="Last Name" /></td>
+					<td class="right">Last Name: </td>
+					<td><input type="text" class="form-control" name="lname" placeholder="Smith" /></td>
 				</tr>
 				<tr>
-					<td>Email: </td>
-					<td><input type="email" name="email" placeholder="Email Address" /></td>
+					<td class="right">Email: </td>
+					<td><input type="email" class="form-control" name="email" placeholder="john.smith@bg.com" /></td>
 				</tr>
 				<tr>
-					<td>Zipcode: </td>
-					<td><input type="number" name="zipcode" placeholder="Zipcode" /></td>
+					<td class="right">Zipcode: </td>
+					<td><input type="text" class="form-control" name="zipcode" placeholder="Zipcode" /></td>
 				</tr>
 				<tr>
-					<td>Date of Birth: </td>
-					<td><input type="date" name="dob" /></td>
+					<td class="right">User Level:</td>
+					<td>
+						<!--<input class="form-control" list="level">-->
+						<!--<datalist id="level">-->
+						<!--	<option value="Customer">-->
+						<!--	<option value="Sales Associate">-->
+						<!--	<option value="Manager">-->
+						<!--	<option value="Admin">-->
+						<!--</datalist>-->
+						
+						<select class="form-control" name="userlevel" id="userlevel"/>
+						
+							{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+							<option value="Customer">Customer</option>
+							{% endif %}
+
+							{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+							<option value="Sales Associate">Sales Associate</option>
+							{% endif %}
+							
+							{% if ( ( user[5] == 'Administrator') ):  %}
+							<option value="Manager">Manager</option>
+							<option value="Admin">Administrator</option>
+							{% endif %}
+							
+						</select>
+						
+					</td>
+				</tr>
+
+				<tr>
+					<td class="right">Password: </td>
+					<td><input type="password" class="form-control" name="pw1" placeholder="Password"/></td>
 				</tr>
 				<tr>
-					<td>Password: </td>
-					<td><input type="password" name="pw1" placeholder="Password"/></td>
+					<td class="right">Retype Password: </td>
+					<td><input type="password" class="form-control" name="pw2" placeholder="Retype Password"/></td>
 				</tr>
-				<tr>
-					<td>Retype Password: </td>
-					<td><input type="password" name="pw2" placeholder="Retype Password"/></td>
-				</tr>
-				<br>
 			</table>
-			<input type="submit" value="SUBMIT"  class="bgSubmit" />
+			
+			<br>
+			
+			<input type="submit" value="SUBMIT"  class="bgSubmit btn btn-outline-dark"/>
+			
+			<br>
+			<br>
+			
+			<h6>
+				All fields required for signup.
+			</h6>
 		</form>
-		<br>
-		All fields are required for signup.
-	</center>
+	</div>
+</center>
 <br>	
 {% endblock %}
