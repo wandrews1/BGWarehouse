@@ -1,0 +1,129 @@
+{% extends "layout.html" %}
+
+
+{% block header %}
+<div class="container-fluid headerbanner">
+	<br>
+	<br>
+	<br>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bgblack" role="navigation">
+	<div class="container-fluid">
+	
+		<a class="navbar-brand" href="/search"><img src="/static/images/original_bg_products.png" width=50px></a>
+	
+		<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+			&#9776;
+		</button>
+
+		<div class="collapse navbar-collapse" id="exCollapsingNavbar">
+			<ul class="nav navbar-nav">
+			
+				{% if ( ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/addwarehouse" class="nav-link"><p class="bg3">Add Warehouse</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
+					<li class="nav-item selected"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/sales" class="nav-link"><p class="bg3">Sales Associate</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<!--<li class="nav-item"><a href="/customer" class="nav-link"><p class="bg3">Customer</p></a></li>-->
+					<li class="nav-item"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
+				{% endif %}
+				
+			</ul>
+	
+			<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+				<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3"><i class="fa fa-user" aria-hidden="true"></i>{{user[2]}} - {{user[5]}}</p></a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link"><p class="bg3"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</p></a></li>
+			</ul>
+
+		</div>
+	</div>
+</nav>
+
+{% endblock %}
+
+
+{% block content %}
+<br>
+<br>
+<center>
+ 	<div class="container-fluid card50 max">
+ 		<!-- replace action below with destination html; "/form2" was there before I disabled it -->
+		<form method="POST" action="/removeresults"> 
+			
+			<h3 class="bg2">
+				Remove Employee
+			</h3>
+			
+			<br>
+			<br>
+			
+			<table>
+				<tr>
+					<td class="right">First Name: </td>
+					<td><input type="text" class="form-control" name="fname" placeholder="John" /></td>
+				</tr>
+				<tr>
+					<td class="right">Last Name: </td>
+					<td><input type="text" class="form-control" name="lname" placeholder="Smith" /></td>
+				</tr>
+				<tr>
+					<td class="right">Email: </td>
+					<td><input type="email" class="form-control" name="email" placeholder="john.smith@bg.com" /></td>
+				</tr>
+			
+				<tr>
+					<td class="right">User Level:</td>
+					<td>
+						<!--<input class="form-control" list="level">-->
+						<!--<datalist id="level">-->
+						<!--	<option value="Customer">-->
+						<!--	<option value="Sales Associate">-->
+						<!--	<option value="Manager">-->
+						<!--	<option value="Admin">-->
+						<!--</datalist>-->
+						
+						<select class="form-control" name="userlevel" id="userlevel"/>
+						
+						
+							{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+							<option value="Sales Associate">Sales Associate</option>
+							{% endif %}
+							
+							{% if ( ( user[5] == 'Administrator') ):  %}
+							<option value="Manager">Manager</option>
+							<option value="Admin">Administrator</option>
+							{% endif %}
+							
+						</select>
+						
+					</td>
+				</tr>
+
+				
+			</table>
+			
+			<br>
+			
+			<input type="submit" value="SUBMIT"  class="bgSubmit btn btn-outline-dark"/>
+			
+			<br>
+			<br>
+			
+			<h6>
+				All fields required for removal.
+			</h6>
+		</form>
+	</div>
+</center>
+<br>	
+{% endblock %}

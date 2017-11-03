@@ -25,7 +25,8 @@ INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('jhuffm
 INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('manager@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Manager');
 INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('sales@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Sales Associate');
 INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('customer@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Customer');
-GRANT SELECT, INSERT ON login TO bgtemp;
+INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('test@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Sales Associate');
+GRANT SELECT, INSERT, DELETE ON login TO bgtemp;
 
 
 
