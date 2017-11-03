@@ -170,6 +170,7 @@ def showInvoice():
 	assert msg.sender == "BG Sales Team <bgsalestest@gmail.com>"
 	msg.body="testing 1 - This is the test body. The main text of the email shall go here"
 	
+<<<<<<< HEAD
 	msg.html=showInvoiceMaker(user,invoicenum)
 
 	invoicenum = invoicenum + 1
@@ -180,10 +181,31 @@ def showInvoice():
 
 def showInvoiceMaker(user, invoicenum):
 	
+=======
+
+@app.route('/remove', methods=['GET','POST'])
+def remove():
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		if(user[5] == 'Administrator') or (user[5] == 'Manager'):
+			return render_template('remove.html', user = user)
+		else:
+			return render_template('forbidden.html', user = user)
+	else:
+		user = ['','','','','','','']
+		return render_template('search.html', user = user)
+		
+	return render_template('remove.html', user=user)
+	
+@app.route('/removeresults', methods=['GET','POST'])
+def showRemoveResults():
+
+>>>>>>> thegoodthebadandtheBilly
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
 		user = ['','','','','','','']
+<<<<<<< HEAD
 	
 	mylist = []
 	today = datetime.today().strftime('%Y-%m-%d')
@@ -395,6 +417,22 @@ def showInvoiceMaker(user, invoicenum):
 	return messagef
 	
 
+=======
+	try:
+		fname=request.form['fname']
+		lname=request.form['lname']
+		email=request.form['email']
+		userlevel=request.form['userlevel']
+		print("***FName: , LNAME: , EMAIL , LEVEL: " , fname, lname, email, userlevel)
+	except:
+		print("Error fetching removal characteristics")
+	
+	print("***FName: , LNAME: , EMAIL , LEVEL: " , fname, lname, email, userlevel)
+	results = pg.removeUser(fname, lname, email, userlevel)
+	print("SHOW: ", results)
+	
+	return render_template('removeresults.html', user=user, results=results, fname=fname, lname=lname, userlevel = userlevel)
+>>>>>>> thegoodthebadandtheBilly
 # @app.route('/chat', methods=['GET','POST'])
 # def showChat():
 #	if 'username' in session:

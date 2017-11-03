@@ -140,7 +140,22 @@ def currentRoster():
 	conn.close()
 	return results
 
-
+def removeUser(fname, lname, email, userlevel):
+	print (" - in remove user()")
+	noresults = ("No Results.")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "DELETE from login WHERE fname=%s and lname=%s and email=%s and userlevel=%s"
+	results = execute_query(query_string, conn, select=False, args = (fname, lname, email, userlevel))
+	print("-Results: ", results)
+	
+	if results:
+		return results
+	else:
+		return noresults
+	conn.close()
+	return results
 	
 def superSearch(search):
 	noresults = ("No Results.",)
