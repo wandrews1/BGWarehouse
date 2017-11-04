@@ -1,4 +1,4 @@
--- DROP DATABASE IF EXISTS bg;
+DROP DATABASE IF EXISTS bg;
 CREATE DATABASE  bg;
 
 \c bg;
@@ -11,34 +11,38 @@ CREATE EXTENSION pgcrypto;
 
 DROP TABLE IF EXISTS login;
 CREATE TABLE login (
-  email varchar(50) NOT NULL,
+  loginID SERIAL UNIQUE,
+  email varchar(50) NOT NULL UNIQUE,
   fname text NOT NULL,
   lname text  NOT NULL,
   pw1 text NOT NULL,
   zipcode varchar(5) NOT NULL,
-  userLevel text NOT NULL
+  userLevel text NOT NULL,
+  PRIMARY KEY (loginID)
   );
 
-INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('bkertche@umw.edu','Brendon', 'Kertcher', crypt('pass', gen_salt('bf')), '22407','Administrator');
-INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('scripture187@gmail.com','Billy', 'Andrews', crypt('pass', gen_salt('bf')), '22407','Administrator');
-INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('jhuffma3@umw.edu','Jacob', 'Huffman', crypt('pass', gen_salt('bf')), '22407','Administrator');
-INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('manager@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Manager');
-INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('sales@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Sales Associate');
-INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('customer@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Customer');
-INSERT INTO login (email, fname, lname, pw1, zipcode, userLevel) VALUES ('test@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Sales Associate');
+INSERT INTO login VALUES (DEFAULT,'bkertche@umw.edu','Brendon', 'Kertcher', crypt('pass', gen_salt('bf')), '22407','Administrator');
+INSERT INTO login VALUES (DEFAULT,'scripture187@gmail.com','Billy', 'Andrews', crypt('pass', gen_salt('bf')), '22407','Administrator');
+INSERT INTO login VALUES (DEFAULT,'jhuffma3@umw.edu','Jacob', 'Huffman', crypt('pass', gen_salt('bf')), '22407','Administrator');
+INSERT INTO login VALUES (DEFAULT,'manager@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Manager');
+INSERT INTO login VALUES (DEFAULT,'sales@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Sales Associate');
+INSERT INTO login VALUES (DEFAULT,'customer@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Customer');
+INSERT INTO login VALUES (DEFAULT,'test@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Sales Associate');
 GRANT SELECT, INSERT, DELETE ON login TO bgtemp;
 
 
 
 DROP TABLE IF EXISTS items;
 CREATE TABLE items (
-  productID varchar NOT NULL,
+  productID varchar NOT NULL UNIQUE,
   cost float NOT NULL,
   quantity int NOT NULL,
   category text NOT NULL,
   name varchar NOT NULL,
-  description varchar NOT NULL
+  description varchar NOT NULL,
+  PRIMARY KEY (productID)
   );
+
 -- use two " '' " to use an apostrophe, like 'McCoy''s BBQ'
 INSERT INTO items (productID, cost, quantity, category, name, description) VALUES (485, 3.99, 150, 'Battery', 'Battery Cleaner - Acid Detector', 'BG Battery Cleaner – Acid Detector removes corrosion from battery terminals, cables and carriers. It also turns red to warn of the presence of acid or a crack or leak around terminal.');
 INSERT INTO items (productID, cost, quantity, category, name, description) VALUES (985, 3.99, 150, 'Battery', 'Battery Terminal Protectors', 'BG Battery Terminal Protectors protect battery terminals from corrosive buildup. The chemical formula is harmless to the battery, paint and other parts.  Fits easily onto the battery posts.');
@@ -141,23 +145,64 @@ INSERT INTO items (productID, cost, quantity, category, name, description) VALUE
 INSERT INTO items (productID, cost, quantity, category, name, description) VALUES (412, 3.99, 150, 'Gasoline', 'Hi-Delivery Carb and Choke Cleaner', 'BG Hi-Delivery Carb and Choke Cleaner contain a special blend of solvents that powers through harmful carbon, gum, and varnish deposits, cleans carburetors, automatic chokes, PCV valves and lines, and manifold heat control valves.');
 INSERT INTO items (productID, cost, quantity, category, name, description) VALUES (209, 3.99, 150, 'Gasoline', '209 Fuel Induction System Cleaner', 'BG 209 Fuel Induction System Cleaner quickly and safely powers through stubborn fuel deposits that build up on fuel injectors, intake valves, ports, and combustion chambers.');
 
-
-
-
 GRANT SELECT, INSERT ON items TO bgtemp;
 
 
+DROP TABLE IF EXISTS warehouses;
+CREATE TABLE warehouses (
+  warehouseID SERIAL UNIQUE,
+  warehouseName varchar NOT NULL,
+  address varchar NOT NULL,
+  city varchar NOT NULL,
+  state varchar NOT NULL,
+  zip int NOT NULL,
+  email varchar(50) NOT NULL UNIQUE,
+  warehouseLevel int NOT NULL,
+  PRIMARY KEY (warehouseID),
+  FOREIGN KEY (email) REFERENCES login (email)
+  );
+  
+INSERT INTO warehouses VALUES (DEFAULT,'Big Boy Warehouse','740 S Wichita Street','Wichita','KS',67213,'scripture187@gmail.com',1);
+INSERT INTO warehouses VALUES (DEFAULT,'Not so Big Boy Warehouse','1701 College Ave','Fredericksburg','VA',22401,'bkertche@umw.edu',2);
+INSERT INTO warehouses VALUES (DEFAULT,'Mobile: Jacob','8008 Elm Street','Chicago','IL',43243,'jhuffma3@umw.edu',3);
+INSERT INTO warehouses VALUES (DEFAULT,'BG of Central Virginia','116 Sylvia Road','Ashland','VA',23005,'manager@umw.edu',2);
 
-DROP TABLE IF EXISTS messages;
-CREATE TABLE messages (
-  fname text NOT NULL,
-  lname text NOT NULL,
-  message text NOT NULL,
-  time timestamptz NOT NULL DEFAULT now()
+GRANT SELECT, INSERT, DELETE ON warehouses TO bgtemp;
+
+DROP TABLE IF EXISTS invoices;
+CREATE TABLE invoices (
+  invoiceID SERIAL UNIQUE,
+  emailSales VARCHAR(50) NOT NULL,
+  emailCust VARCHAR(50) NOT NULL,
+  dateCreate DATE NOT NULL,
+  dateDue DATE NOT NULL,
+  amountDue FLOAT NOT NULL,
+  PRIMARY KEY (invoiceID),
+  FOREIGN KEY (emailSales) REFERENCES warehouses(email),
+  FOREIGN KEY (emailCust) REFERENCES login(email)
   );
 
-INSERT INTO messages (fname, lname, message) VALUES ('FaceBot','', 'Booting System...');
-INSERT INTO messages (fname, lname, message) VALUES ('FaceBot','', 'FaceChat now LIVE!');
+GRANT SELECT, INSERT ON invoices TO bgtemp;
 
-GRANT SELECT, INSERT ON messages TO bgtemp;
 
+INSERT INTO invoices VALUES (DEFAULT,'jhuffma3@umw.edu','customer@umw.edu','2017-11-05','2017-12-05',40.5);
+INSERT INTO invoices VALUES (DEFAULT,'bkertche@umw.edu','jhuffma3@umw.edu','2017-11-03','2017-12-03',20.4);
+
+DROP TABLE IF EXISTS invoiceItems;
+CREATE TABLE invoiceItems (
+  invoiceID int NOT NULL,
+  itemID VARCHAR NOT NULL,
+  quantity INT NOT NULL,
+  total FLOAT NOT NULL,
+  FOREIGN KEY (itemID) REFERENCES items(productID),
+  FOREIGN KEY (invoiceID) REFERENCES invoices(invoiceID)
+  );
+  
+INSERT INTO invoiceItems VALUES (1,281,8,32.0);
+INSERT INTO invoiceItems VALUES (1,206,4,84.50);
+INSERT INTO invoiceItems VALUES (1,213,2,30.24);
+INSERT INTO invoiceItems VALUES (2,281,8,32.0);
+INSERT INTO invoiceItems VALUES (2,206,4,84.50);
+INSERT INTO invoiceItems VALUES (2,213,2,30.24);
+
+GRANT SELECT, INSERT ON invoiceItems TO bgtemp;
