@@ -531,6 +531,8 @@ def showSearchResults():
 		print("Error fetching search term")
 	print("***Search Term: " , search)
 	results = pg.superSearch(search)
+	# if (results == ("No Results.",)):
+		
 	print("SHOW: ", results)
 	
 	return render_template('searchresults.html', user=user, results=results, search=search)

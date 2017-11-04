@@ -53,7 +53,6 @@
 
 {% endblock %}
 
-
 {% block content %}
 <br>
 <br>
@@ -81,6 +80,8 @@
 			</div>
 			<br>
 			<br>
+			{% if ( results != ('No Results.',) ):  %}
+			<h3>Searching for '{{search}}'</h3>
 			<table class="table table-hover table-sm table-dark">
 				<thead>
 					<tr>
@@ -94,7 +95,7 @@
 				</thead>
 				<tbody>
 					
-					{% if ( results != 'No Results.' ):  %}
+					
 						{% for item in results %}
 							<tr>
 								<th scope="row">{{item[0]}}</th>
@@ -133,17 +134,11 @@
 							</div>
 
 						{% endfor %}
-					{% else %}
-						<tr>
-							
-						</tr>
-						No Results!
-					{% endif %}
-						
-					
-					
 				</tbody>
 			</table>
+			{% else %}
+				<h3 style="color:#FE5858;">No Results for '{{search}}'</h3>
+			{% endif %}
 		</div>
 	</form> 
 <br>
