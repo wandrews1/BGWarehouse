@@ -348,22 +348,6 @@ def showInvoiceMaker(user, invoicenum):
 	return messagef
 	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @app.route('/remove', methods=['GET','POST'])
 def remove():
 	if 'username' in session:
@@ -380,6 +364,11 @@ def remove():
 	
 @app.route('/removeresults', methods=['GET','POST'])
 def showRemoveResults():
+
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+	else:
+		user = ['','','','','','','']
 
 	try:
 		fname=request.form['fname']
