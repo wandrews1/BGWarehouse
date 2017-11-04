@@ -47,53 +47,6 @@ socketio = SocketIO(app)
 
 usernames = {}
 
-@socketio.on('connect', namespace = '/chat')
-def makeConnection():
-	print('BEFORE CONNECTED')
-	session['uuid'] = uuid.uuid1()
-	print('*** Connected ***')
-	usernames[session['uuid']] = {'username': 'New User'}
-
-	for message in pg.printMessages():
-		print(message)
-		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
-		
-		
-@socketio.on('message', namespace = '/chat')
-def new_message(message):
-	person = session['firstname'] + " " + session['lastname']
-	tmp = {'text': message, 'name': person}
-	print(tmp)
-	#messages.append(tmp)
-	pg.newMessage(session['firstname'],session['lastname'],message)
-	emit('message',tmp,broadcast=True)
-
-
-@socketio.on('identify', namespace = '/chat')
-def on_identify(value):
-	print('Searching FaceChat for: ' + value)
-	usernames[session['uuid']] = {'username': value}
-	print(session['uuid'])
-
-	for message in pg.searchMessages(value):
-		print(message)
-		emit('identify', {'text': message[2], 'name': message[0] + " " + message[1]})
-	
-	
-	
-@socketio.on('search', namespace = '/chat')
-def search_Chat(value):
-	print('Searching for: ' + value)
-	usernames[session['uuid']] = {'username': value}
-	session['uuid'] = uuid.uuid1()
-	#print(' found ' + value)
-	#pg.chatSearch(value)
-	for message in pg.chatSearch(value):
-		print(message)
-		emit('message', {'text': message[2], 'name': message[0] + " " + message[1]})
-
- 
-
 @app.route('/', methods=['GET','POST'])
 def mainIndex():
 	if 'username' in session:
@@ -442,17 +395,6 @@ def showRemoveResults():
 	print("SHOW: ", results)
 	
 	return render_template('removeresults.html', user=user, results=results, fname=fname, lname=lname, userlevel = userlevel)
-
-
-
-# @app.route('/chat', methods=['GET','POST'])
-# def showChat():
-#	if 'username' in session:
-#		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
-#	else:
-#		user = ['','','','','','','']
-# 	return render_template('chat.html', user=user)
-	
 
 
 @app.route('/form', methods=['GET','POST'])

@@ -242,3 +242,4 @@ def getLevel(email,pw1):
 	conn.close()
 	return results[0][0]
 	
+# select description from items where productID like (select itemid from invoiceItems where itemid like '206' AND invoiceid = 1);
