@@ -1,73 +1,52 @@
 {% extends "layout.html" %} {% block header %}
 <div class="container-fluid headerbanner">
-    <br>
-    <br>
-    <br>
+	<br>
+	<br>
+	<br>
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-dark bgblack" role="navigation">
-    <div class="container-fluid">
-
-        <a class="navbar-brand" href="/search"><img src="/static/images/original_bg_products.png" width=50px></a>
-
-        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+	<div class="container-fluid">
+	
+		<a class="navbar-brand" href="/search"><img src="/static/images/original_bg_products.png" width=50px></a>
+	
+		<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
 			&#9776;
 		</button>
 
-        <div class="collapse navbar-collapse" id="exCollapsingNavbar">
-            <ul class="nav navbar-nav">
+		<div class="collapse navbar-collapse" id="exCollapsingNavbar">
+			<ul class="nav navbar-nav">
+			
+				{% if ( ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/addwarehouse" class="nav-link"><p class="bg3">Add Warehouse</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
+					<li class="nav-item"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
+					<li class="nav-item"><a href="/remove" class="nav-link"><p class="bg3">Remove Account</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/sales" class="nav-link"><p class="bg3">Sales Associate</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<!--<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3">Customer</p></a></li>-->
+					<li class="nav-item"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
+					<li class="nav-item"><a href="/invoice" class="nav-link"><p class="bg3">Invoice</p></a></li>
+				{% endif %}
+				
+			</ul>
+	
+			<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+				<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3"><i class="fa fa-user" aria-hidden="true"></i>{{user[2]}} - {{user[5]}}</p></a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link"><p class="bg3"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</p></a></li>
+			</ul>
 
-                {% if ( ( user[5] == 'Administrator') ): %}
-                <li class="nav-item">
-                    <a href="/addwarehouse" class="nav-link">
-                        <p class="bg3">Add Warehouse</p>
-                    </a>
-                </li>
-                {% endif %} {% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ): %}
-                <li class="nav-item">
-                    <a href="/manager" class="nav-link">
-                        <p class="bg3">Manager</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/form" class="nav-link">
-                        <p class="bg3">New Registration</p>
-                    </a>
-                </li>
-                {% endif %} {% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ): %}
-                <li class="nav-item">
-                    <a href="/sales" class="nav-link">
-                        <p class="bg3">Sales Associate</p>
-                    </a>
-                </li>
-                {% endif %} {% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ): %}
-                <!--<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3">Customer</p></a></li>-->
-                <li class="nav-item">
-                    <a href="/search" class="nav-link">
-                        <p class="bg3">Product Search</p>
-                    </a>
-                </li>
-                {% endif %}
-
-            </ul>
-
-            <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-                <li class="nav-item">
-                    <a href="/profile" class="nav-link">
-                        <p class="bg3">{{user[2]}} - {{user[5]}}</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/logout" class="nav-link">
-                        <p class="bg3">Logout</p>
-                    </a>
-                </li>
-            </ul>
-
-        </div>
-    </div>
+		</div>
+	</div>
 </nav>
-
 
 {% endblock %} {% block content %}
 <br>
@@ -82,11 +61,25 @@
 
         <br>
         <br>
-
-        <h5 style="color:#FE5858;">
-            <strong>Your account lacks permissions to see this content. <br><br>
-            Please contact your administrator if you believe this to be an error.</strong>
-        </h5>
+        
+		<div class="container-fluid">
+			<div class="alert alert-danger" role="alert">
+				<h4 class="alert-heading" style="text-align:left;"><strong>Forbidden:</strong></h4>
+				<br>
+				<div style="text-align:left;">Your account lacks permissions to see this content.</div>
+				<hr>
+				<div style="text-align:left;">Please contact your administrator if you believe this to be an error.</div>
+			</div>
+		</div>
+        
+        
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Forbidden:</h4>
+            <p>Your account lacks permissions to see this content.</p>
+            <hr>
+            <p class="mb-0">Please contact your administrator if you believe this to be an error.</p>
+        </div>
+        
     </div>
 </center>
 <br>

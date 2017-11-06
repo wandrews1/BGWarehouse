@@ -36,7 +36,7 @@
 				
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 					<!--<li class="nav-item"><a href="/customer" class="nav-link"><p class="bg3">Customer</p></a></li>-->
-					<li class="nav-item selected"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
+					<li class="nav-item"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
 					<li class="nav-item"><a href="/invoice" class="nav-link"><p class="bg3">Invoice</p></a></li>
 				{% endif %}
 				
@@ -69,23 +69,28 @@
 			<br>
 			<br>
 			
-			<h6 style="color:red;">
-			{% if fname == "" %}
-				FIRST NAME REQUIRED<br>
-			{% endif %}
-			{% if lname == "" %}
-				LAST NAME REQUIRED<br>
-			{% endif %}
-			{% if email == "" %}
-				EMAIL REQUIRED<br>
-			{% endif %}
-			{% if pw1 != pw2 %}
-				PASSWORDS DO NOT MATCH<br>
-			{% endif %}
-			{% if pw1 == "" %}
-				PASSWORD REQUIRED<br>
-			{% endif %}
-			</h6>
+			<div class="alert alert-danger" role="alert">
+	            <h4 class="alert-heading" style="text-align:left;">Requirements Not Met:</h4>
+	            <ul>
+						{% if fname == "" %}
+							<li><div style="text-align:left;">FIRST NAME REQUIRED</div></li>
+						{% endif %}
+						{% if lname == "" %}
+							<li><div style="text-align:left;">LAST NAME REQUIRED</div></li>
+						{% endif %}
+						{% if email == "" %}
+							<li><div style="text-align:left;">EMAIL REQUIRED</div></li>
+						{% endif %}
+						{% if pw1 != pw2 %}
+							<li><div style="text-align:left;">PASSWORDS DO NOT MATCH</div></li>
+						{% endif %}
+						{% if pw1 == "" %}
+							<li><div style="text-align:left;">PASSWORD REQUIRED</div></li>
+						{% endif %}
+				</ul>
+				<hr>
+	            <div style="text-align:left;">Please correct your errors and try again.</div>
+        	</div>
 			
 			
 			<table>

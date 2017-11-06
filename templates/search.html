@@ -21,7 +21,10 @@
 			<ul class="nav navbar-nav">
 			
 				{% if ( ( user[5] == 'Administrator') ):  %}
-					<li class="nav-item"><a href="/addwarehouse" class="nav-link"><p class="bg3">Add Warehouse</p></a></li>
+					<ul class="dropdown-menu">
+						Administrator
+						<li class="nav-item"><a href="/addwarehouse" class="nav-link"><p class="bg3">Add Warehouse</p></a></li>
+					</ul>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
@@ -35,7 +38,6 @@
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
-					<!--<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3">Customer</p></a></li>-->
 					<li class="nav-item selected"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
 					<li class="nav-item"><a href="/invoice" class="nav-link"><p class="bg3">Invoice</p></a></li>
 				{% endif %}
@@ -72,7 +74,7 @@
 				<br>
 				<br>
 							
-				<div class="card25">
+				<div class="card50">
 					<input type="search" name="search" class="form-control" placeholder="Search Term" />
 				</div>
 				
