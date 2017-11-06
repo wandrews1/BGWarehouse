@@ -364,7 +364,7 @@ def remove():
 	
 @app.route('/removeresults', methods=['GET','POST'])
 def showRemoveResults():
-
+	noresults = 0
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
@@ -382,8 +382,10 @@ def showRemoveResults():
 	print("***FName: , LNAME: , EMAIL , LEVEL: " , fname, lname, email, userlevel)
 	results = pg.removeUser(fname, lname, email, userlevel)
 	print("SHOW: ", results)
+	if results == 'No Results.':
+		noresults = 1
 	
-	return render_template('removeresults.html', user=user, results=results, fname=fname, lname=lname, userlevel = userlevel)
+	return render_template('removeresults.html', user=user, results=results, noresults = noresults, fname=fname, lname=lname, userlevel = userlevel)
 
 
 @app.route('/form', methods=['GET','POST'])
@@ -531,8 +533,6 @@ def showSearchResults():
 		print("Error fetching search term")
 	print("***Search Term: " , search)
 	results = pg.superSearch(search)
-	# if (results == ("No Results.",)):
-		
 	print("SHOW: ", results)
 	
 	return render_template('searchresults.html', user=user, results=results, search=search)
