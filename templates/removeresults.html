@@ -54,7 +54,7 @@
 <center>
 
     <div class="container-fluid card50">
-
+    {% if (noresults == 0): %}
         <h3 class="bg2">
             Remove Account
         </h3>
@@ -62,15 +62,21 @@
         <br>
         <br>
 
-		<div class="container-fluid">
-			<div class="alert alert-success" role="alert">
-				<h3 class="alert-heading" style="text-align:left;"><strong>Account Removal:</strong></h3>
-				<br>
-				<div style="text-align:left;"><strong>{{fname}} {{lname}}</strong></div>
-				<hr>
-				<div style="text-align:left;">The {{user[5]}} has successfully been removed.</div>
-			</div>
-		</div>
+        <h5 style="color:#FE5858;">
+            {{userlevel}} {{fname}} {{lname}} has been removed.
+        </h5>
+    {% endif %}{% if (noresults == 1): %}
+         <h3 class="bg2">
+            Not Removed:
+        </h3>
+
+        <br>
+        <br>
+
+        <h5 style="color:#FE5858;">
+            {{userlevel}} {{fname}} {{lname}} does not exist and could not be removed.
+        </h5>
+    {% endif %}
 
     </div>
 </center>
