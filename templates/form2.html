@@ -65,7 +65,21 @@
 		</h3>
 		<br>
 		<br>
-  		<h2>Congratulations! <strong>{{fname}}</strong> was successfully registered as a new BG Team Member.</h2>
+		
+		<div class="container-fluid">
+			<div class="alert alert-success" role="alert">
+				<h3 class="alert-heading" style="text-align:left;"><strong>Congratulations {{fname}}!</strong></h3>
+				<br>
+				<div style="text-align:left;">
+					<strong>Welcome {{fname}} {{lname}} to the BG Team!</strong><br><br>
+					Email: {{email}}<br><br>
+					Area: {{zipcode}}
+				</div>
+				<hr>
+				<div style="text-align:left;" class="text-muted">Notes: {{fname}}'s account has {{userlevel}} privelages.</div>
+			</div>
+		</div>
+	
 	</div>
 </center>
 <br>	

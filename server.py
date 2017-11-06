@@ -458,7 +458,7 @@ def showForm2():
 					return render_template('badform.html', user=user)
 			except:
 				print("ERROR INSERTING INTO login")
-			return render_template('form2.html', fname=fname, user=user, userlevel=userlevel)
+			return render_template('form2.html', fname=fname, lname=lname, user=user, email=email, zipcode=zipcode, userlevel=userlevel)
 		else:
 			print("ERROR 4")
 			return render_template('badform.html', user=user, fname=fname, lname=lname, email=email, pw1=pw1, pw2=pw2, zipcode=zipcode, userlevel=userlevel)
