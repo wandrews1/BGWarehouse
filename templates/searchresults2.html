@@ -84,62 +84,33 @@
 				{% if (search != ''): %}
 				<h3>Searching for '{{search}}'</h3>
 				{% endif %}
-			<table class="table table-hover table-sm table-dark">
-				<thead>
-					<tr>
-						<th scope="col">Product ID</th>
-						<th scope="col">Price</th>
-						<th scope="col">Quantity</th>
-						<th scope="col">Category</th>
-						<th scope="col">Name</th>
-						<th scope="col">View</th>
-					</tr>
-				</thead>
-				<tbody>
-					
-					
-						{% for item in results %}
-							<tr>
-								<th scope="row">{{item[0]}}</th>
-								<td>{{item[1]}}</td>
-								<td>{{item[2]}}</td>
-								<td>{{item[3]}}</td>
-								<td>{{item[4]}}</td>
-								<td>
-									<!-- Button trigger modal -->
-									<button type="button" class="btn btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal">
-									  View Details
-									</button>
-									
-									<!-- Modal -->
-									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-									  <div class="modal-dialog" role="document">
-									    <div class="modal-content">
-									      <div class="modal-header">
-									        <h5 class="modal-title" id="exampleModalLabel"><strong>{{item[0]}}</strong>   {{item[4]}}</h5>
-									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									          <span aria-hidden="true">&times;</span>
-									        </button>
-									      </div>
-									      <div class="modal-body">
-									        {{item[5]}}
-									      </div>
-									      <div class="modal-footer">
-									        <button type="button" class="btn btn btn-outline-warning" data-dismiss="modal">Close</button>
-									        <button type="button" class="btn btn btn-outline-dark"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Add to Cart</button>
-									      </div>
-									    </div>
-									  </div>
+					{% for item in results %}
+						
+						<div class="panel-group" id="accordion">
+							
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+											{{item[4]}}
+											<button type="button" class="btn btn btn-outline-dark"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Add to Cart</button>
+										</a>
+									</h4>
+								</div>
+								<div id="collapse1" class="panel-collapse collapse in">
+									<div class="panel-body">
+										<div class="col-md-3">{{item[0]}}</div>
+										<div class="col-md-3">{{item[3]}}</div>
+										<div class="col-md-3">{{item[2]}}</div>
+										<div class="col-md-3">{{item[1]}}</div>
+										<hr>
+										<p>{{item[5]}}</p>
 									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
 
-								</td>
-							</tr>
-							
-							
-							
-						{% endfor %}
-				</tbody>
-			</table>
 			{% else %}
 				<h3 style="color:#FE5858;">No Results for '{{search}}'</h3>
 			{% endif %}

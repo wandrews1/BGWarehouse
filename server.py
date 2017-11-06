@@ -101,10 +101,12 @@ def showSales():
 def showProfile():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		return render_template('profile.html', user=user)
 	else:
 		user = ['','','','','','','']
-		
-	return render_template('profile.html', user=user)
+		return render_template('login.html', user=user)
+
+
 
 
 @app.route('/invoice', methods=['GET','POST'])
@@ -130,6 +132,8 @@ def showInvoice():
 	mail.send(msg)
 
 	return render_template('invoice.html', user=user)
+
+
 
 def showInvoiceMaker(user, invoicenum):
 
@@ -531,8 +535,7 @@ def showSearchResults():
 		print("Error fetching search term")
 	print("***Search Term: " , search)
 	results = pg.superSearch(search)
-	# if (results == ("No Results.",)):
-		
+
 	print("SHOW: ", results)
 	
 	return render_template('searchresults.html', user=user, results=results, search=search)
