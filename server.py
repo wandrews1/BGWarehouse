@@ -40,10 +40,8 @@ zipcode = ''
 lastname = ''
 level = ''
 
-
 # Flask_socketIO initialization
 socketio = SocketIO(app)
-
 
 usernames = {}
 
@@ -69,7 +67,6 @@ def showAddWarehouse():
 		return render_template('search.html', user=user)	
 
 
-
 @app.route('/manager', methods=['GET','POST'])
 def showManager():
 	
@@ -83,7 +80,7 @@ def showManager():
 		user = ['','','','','','','']
 		return render_template('search.html', user=user)	
 
-	
+
 @app.route('/sales')
 def showSales():
 	if 'username' in session:
@@ -96,7 +93,7 @@ def showSales():
 		user = ['','','','','','','']
 		return render_template('search.html', user=user)	
 
-	
+
 @app.route('/profile', methods=['GET','POST'])
 def showProfile():
 	if 'username' in session:
@@ -105,8 +102,6 @@ def showProfile():
 	else:
 		user = ['','','','','','','']
 		return render_template('login.html', user=user)
-
-
 
 
 @app.route('/invoice', methods=['GET','POST'])
@@ -132,7 +127,6 @@ def showInvoice():
 	mail.send(msg)
 
 	return render_template('invoice.html', user=user)
-
 
 
 def showInvoiceMaker(user, invoicenum):
@@ -350,7 +344,7 @@ def showInvoiceMaker(user, invoicenum):
 	messagef = message % (invoicenum, timenow, timedue, user[2]+" "+user[6], user[0], user[5])
 
 	return messagef
-	
+
 
 @app.route('/remove', methods=['GET','POST'])
 def remove():
@@ -365,7 +359,8 @@ def remove():
 		return render_template('search.html', user = user)
 		
 	return render_template('remove.html', user=user)
-	
+
+
 @app.route('/removeresults', methods=['GET','POST'])
 def showRemoveResults():
 	noresults = 0
@@ -422,7 +417,7 @@ def showForm():
 	print("end of function")
 	
 	return render_template('form.html', user=user)
-	
+
 
 @app.route('/form2', methods=['GET','POST'])
 def showForm2():
@@ -499,8 +494,8 @@ def showLogin():
 				
 		
 	return render_template('login.html', user=user)
-	
-	
+
+
 @app.route('/search', methods=['GET','POST'])
 def showSearch():
 	
@@ -522,7 +517,6 @@ def showSearch():
 	return render_template('search.html', user=user)
 	
 	
-	
 @app.route('/searchresults', methods=['GET','POST'])
 def showSearchResults():
 
@@ -539,8 +533,6 @@ def showSearchResults():
 	print("SHOW: ", results)
 	
 	return render_template('searchresults.html', user=user, results=results, search=search)
-	
-	
 	
 	
 @app.route('/logout', methods=['GET','POST'])
