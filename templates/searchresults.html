@@ -141,7 +141,9 @@
 				</tbody>
 			</table>
 			{% else %}
-				<h3 style="color:#FE5858;">No Results for '{{search}}'</h3>
+				<div class="alert alert-danger" role="alert">
+  					No Results for <strong>{{search}}</strong>
+				</div>
 			{% endif %}
 		</div>
 	</form> 
