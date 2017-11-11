@@ -24,12 +24,13 @@
 				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 					<li class="nav-item"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
 					<li class="nav-item"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
-					<li class="nav-item selected"><a href="/remove" class="nav-link"><p class="bg3">Remove Account</p></a></li>
+					<li class="nav-item"><a href="/remove" class="nav-link"><p class="bg3">Remove Account</p></a></li>
+					<li class="nav-item"><a href="/manageitems" class="nav-link"><p class="bg3">Manage Items</p></a></li>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 					<li class="nav-item"><a href="/sales" class="nav-link"><p class="bg3">Sales Associate</p></a></li>
-					<li class="nav-item"><a href="/altercustomer" class="nav-link"><p class="bg3">Alter Customer</p></a></li>
+					<li class="nav-item selected"><a href="/altercustomer" class="nav-link"><p class="bg3">Alter Customer</p></a></li>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}

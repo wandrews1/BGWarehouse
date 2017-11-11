@@ -1,4 +1,7 @@
-{% extends "layout.html" %} {% block header %}
+{% extends "layout.html" %}
+
+
+{% block header %}
 <div class="container-fluid headerbanner">
 	<br>
 	<br>
@@ -25,16 +28,18 @@
 					<li class="nav-item"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
 					<li class="nav-item"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
 					<li class="nav-item"><a href="/remove" class="nav-link"><p class="bg3">Remove Account</p></a></li>
-					<li class="nav-item"><a href="/manageitems" class="nav-link"><p class="bg3">Manage Items</p></a></li>
+					<li class="nav-item selected"><a href="/manageitems" class="nav-link"><p class="bg3">Manage Items</p></a></li>
+
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 					<li class="nav-item"><a href="/sales" class="nav-link"><p class="bg3">Sales Associate</p></a></li>
 					<li class="nav-item"><a href="/altercustomer" class="nav-link"><p class="bg3">Alter Customer</p></a></li>
+
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
-					<!--<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3">Customer</p></a></li>-->
+					<!--<li class="nav-item"><a href="/customer" class="nav-link"><p class="bg3">Customer</p></a></li>-->
 					<li class="nav-item"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
 					<li class="nav-item"><a href="/invoice" class="nav-link"><p class="bg3">Invoice</p></a></li>
 				{% endif %}
@@ -50,41 +55,25 @@
 	</div>
 </nav>
 
-{% endblock %} {% block content %}
-<br>
-<br>
-<center>
-
-    <div class="container-fluid card50">
-
-        <h3 class="bg2">
-            Forbidden:
-        </h3>
-
-        <br>
-        <br>
-        
-		<div class="container-fluid">
-			<div class="alert alert-danger" role="alert">
-				<h4 class="alert-heading" style="text-align:left;"><strong>Forbidden:</strong></h4>
-				<br>
-				<div style="text-align:left;">Your account lacks permissions to see this content.</div>
-				<hr>
-				<div style="text-align:left;">Please contact your administrator if you believe this to be an error.</div>
-			</div>
-		</div>
-        
-        
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">Forbidden:</h4>
-            <p>Your account lacks permissions to see this content.</p>
-            <hr>
-            <p class="mb-0">Please contact your administrator if you believe this to be an error.</p>
-        </div>
-        
-    </div>
-</center>
-<br>
+{% endblock %}
 
 
+{% block content %}
+<br><br>
+<ul class="nav nav-tabs bg3 card50" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="transfer-tab" data-toggle="tab" href="#transfer" role="tab" aria-controls="transfer" aria-selected="true">Transfer Item</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="edit-tab" data-toggle="tab" href="#edit" role="tab" aria-controls="edit" aria-selected="false">Edit Item</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="remove-tab" data-toggle="tab" href="#remove" role="tab" aria-controls="remove" aria-selected="false">Remove Item</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="transfer" role="tabpanel" aria-labelledby="transfer-tab">...</div>
+  <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">...</div>
+  <div class="tab-pane fade" id="remove" role="tabpanel" aria-labelledby="remove-tab">...</div>
+</div>
 {% endblock %}
