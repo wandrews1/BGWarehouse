@@ -157,6 +157,68 @@ def removeUser(fname, lname, email, userlevel):
 	conn.close()
 	return results
 	
+def alterCustomer(custemail, fname, lname, zipcode, password):
+	noresults = ("No Results.")
+	updateCust = ''
+	updateCustvars = []
+	updateCustnum = 0
+	print("- in alter customer()")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	if(fname != ""):
+		updateCust = "fname = '" + fname + "'"
+		updateCustvars.append(fname)
+		updateCustnum+=1
+	if(lname != ""):
+		if(fname != ""):
+			updateCust+= ", lname = '" + lname + "'"
+			updateCustvars.append(lname)
+			updateCustnum+=1
+		else:
+			updateCust = "lname = '" + lname + "'"
+			updateCustvars.append(lname)
+			updateCustnum+=1
+	if(password != ""):
+		if(fname != "") or (lname != ""):
+			updateCust+= ", pw1 = crypt('" + password + "' , gen_salt('bf'))"
+			updateCustvars.append(password)
+			updateCustnum+=1
+		else:
+			updateCust = "pw1 = crypt('" + password + "', gen_salt('bf'))"
+			updateCustvars.append(password)
+			updateCustnum+=1
+	if(zipcode != ""):
+		if(fname != "") or (lname != "") or (password != ""):
+			updateCust+= ", zipcode = '" + zipcode + "'"
+			updateCustvars.append(zipcode)
+			updateCustnum+=1
+		else:
+			updateCust = "zipcode = '" + zipcode + "'"
+			updateCustvars.append(zipcode)
+			updateCustnum+=1
+
+	if(updateCustnum == 1):
+		query_string = "UPDATE login SET " + updateCust + " WHERE email = '" + custemail + "'"
+		results = execute_query(query_string, conn, select=False)
+		return results
+	elif(updateCustnum == 2):
+		query_string = "UPDATE login SET " + updateCust + " WHERE email = '" + custemail + "'"
+		results = execute_query(query_string, conn, select=False)
+		return results
+	elif(updateCustnum == 3):
+		query_string = "UPDATE login SET " + updateCust + " WHERE email = '" + custemail + "'"
+		results = execute_query(query_string, conn, select=False)
+		return results
+	elif(updateCustnum == 4):	
+		query_string = "UPDATE login SET " + updateCust + " WHERE email = '" + custemail + "'"
+		results = execute_query(query_string, conn, select=False)
+		return results
+	else:
+		return noresults
+	conn.close()
+		
+		
 def superSearch(search):
 	noresults = ("No Results.",)
 	print (" - in superSearch()")
