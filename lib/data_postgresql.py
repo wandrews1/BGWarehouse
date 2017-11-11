@@ -264,7 +264,7 @@ class Item(object):
 		self._cat = cat
 
 	def __str__(self):
-		return ("Item: " + self._name + "\nDescription: " + self._description + "\nProductID: " + str(self._productID) + "\nPrice: £" + int(self._price) + "\nQuantity: " + str(self._quantity) + "\nCategory: " + str(self._cat))
+		return ("Item: " + self._name + "\nDescription: " + self._description + "\nProductID: " + str(self._productID) + "\nPrice: $" + int(self._price) + "\nQuantity: " + str(self._quantity) + "\nCategory: " + str(self._cat))
 		
 	def __repr__(self):
 		return ("Item(" + self._name + ", " + self._description + ", " + self._productID + ", " + self._price + ", " + self._quantity + ", " + self._cat + ")")
@@ -366,65 +366,7 @@ class Basket(object):
 		return(currentBasket)
 
 
+# book = Item('Pride and Prejudice', 'Jane Austen', '4394839', 10, '1', '0.1')
 
-
-
-
-
-
-
-
-
-# EVERYTHING BELOW HERE CAN PROBABLY GO AWAY
-
-# A list of the items currently in stock which the user can choose from
-print("Items currently in stock: \nBook \nCup \nKettle \nCoat \n")		
-book = Item('Pride and Prejudice', 'Jane Austen', '4394839', 10, '1', '0.1')
-cup = Item('Red cup', 'a cup that is red', '432432', 3, '2', '0.2')
-kettle = Item('Blue kettle', 'a kettle that is blue', '323232', 12, '2', '0.3')
-coat = Item('Children\'s coat', 'a coat for children', '43232', 20, '1', '0.2')
-list = ['book','cup','kettle','coat']
-
-currentBasket = Basket() 
-# Initialise cont variable to True to ensure while loop runs at least once
-cont = True
-while cont:
-	add_to_basket = input("Select an item to add to your basket: ").lower() # Give user option to add something to the basket
-# If the user the item selects is in the list above, add it to the basket
-	for x in list:
-		if add_to_basket == x:
-			currentBasket.add_item(eval(add_to_basket))
-# If the item is not in list, return an erorr.		
-	if add_to_basket not in list:
-		print("Sorry! We do not have this item in stock.")
-# If the length of the string is 0 then the user has not added any items to the basket and it is empty.		
-	if len(currentBasket.get_items()) == 0:
-		print("Your basket is empty.")
-	else:
-		print(currentBasket) # If the length of the string is not 0 then there is something in the basket. Print this to allow the user to see it.
-# After adding something to the basket or realising it is out of stock, ask the user if they want to add anything else.
-	choice = input("Would you like to add something else? ")
-	if choice.lower() == "no":
-		cont = False # If the answer is no, set cont to False and end while loop. Else, cont will remain as true and loop will restart.
-		print(currentBasket)
-		print("Total price: $" + str(currentBasket.get_price())) # Finally, return the overall price of the basket by adding up price of all items.
-		
-# Remove item from basket
-remove = input("Would you like to remove an item? ").lower()
-remove_item = True
-while remove_item:
-	if remove == "yes":
-		item = input("Select an item to remove: ")
-		if eval(item) in currentBasket.get_items():
-			currentBasket.remove_item(eval(item))
-			choice = input("Remove something else? ").lower()
-	print(currentBasket)
-	print("Total price: $" + str(currentBasket.get_price()))
-	if choice == "no":
-		remove_item = False
-		print(currentBasket)
-		print("Total price: $" + str(currentBasket.get_price()))
-
-# Price is 0, therefore no items left in basket		
-if currentBasket.get_price() == 0:
-    print("Your basket is empty!")
+# currentBasket = Basket() 
+# currentBasket.add_item(book)
