@@ -39,18 +39,22 @@ firstname = ''
 zipcode = ''
 lastname = ''
 level = ''
+cart = []
 
 # Flask_socketIO initialization
 socketio = SocketIO(app)
 
 usernames = {}
 
+
 @app.route('/', methods=['GET','POST'])
 def mainIndex():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		cart = [session['cart']]
 	else:
 		user = ['','','','','','','']
+		cart = []
 	return render_template('login.html', user=user)
 	
 
@@ -534,6 +538,125 @@ def showSearchResults():
 	
 	return render_template('searchresults.html', user=user, results=results, search=search)
 	
+
+
+
+# SHOPPING CART
+
+# Each item will have all of these parameters in bg.sql
+class Item(object): 
+	def __init__(self, name, description, productID, price, quantity, cat):
+		self._name = name
+		self._description = description
+		self._productID = productID
+		self._price = price
+		self._quantity = quantity
+		self._cat = cat
+
+	def __str__(self):
+		return ("Item: " + self._name + "\nDescription: " + self._description + "\nProductID: " + str(self._productID) + "\nPrice: $" + int(self._price) + "\nQuantity: " + str(self._quantity) + "\nCategory: " + str(self._cat))
+		
+	def __repr__(self):
+		return ("Item(" + self._name + ", " + self._description + ", " + self._productID + ", " + self._price + ", " + self._quantity + ", " + self._cat + ")")
+
+	# Mutator methods for Item class
+	def set_description(self, description):
+		self._description = description
+		
+	def set_price(self, price):
+		self._price = price
+		
+	def set_units(self, quantity):
+		self._quantity = quantity
+		
+	def set_vat(self, cat):
+		self._cat = cat
+		
+	# Accessor methods for Item class
+	def get_name(self):
+		return self._name
+				
+	def get_description(self):
+		return self._description
+				
+	def get_productID(self):
+		return self._productID
+		
+	def get_price(self):
+		return self._price
+		
+	def get_quantity(self):
+		return self._quantity 
+				
+	def get_cat(self):
+		return self._cat
+		
+	def get_total_item_price(self): 
+		return self._price * self._quantity
+	
+
+		
+class Basket(object):
+	def __init__(self):
+		self._items = []
+		self._price = 0 
+		
+	def __str__(self):
+		output = ("Items currently in your basket: ")
+		for x in self._items:
+			output += x.get_name() + ", " # Add each item to the string, followed by a comma
+		return output[0:-2] + "." # When the final item in the string is reached, remove the comma and add a full stop
+
+			
+	def __repr__(self):
+		for x in self._items:
+			return str(x)
+		
+	def get_price(self):
+		return self._price
+		
+	def get_items(self):
+		return self._items
+		
+	def add_item(self, item): 
+		self._items.append(item) # Add item to the current list of items 
+		self._price += item.get_price() # Add price of current item to the price of items already added 
+		
+	def remove_item(self, item):
+		for x in self._items:
+			if item == x:
+				self._items.remove(item)
+				self._price -= item.get_price()
+		return(currentBasket)
+
+
+# item = pg.getItemInfo(841)
+
+item = pg.getItemQuantity(841,4)
+print(item)
+# book = Item('Pride and Prejudice', 'Jane Austen', '4394839', 10, '1', '0.1')
+
+# currentBasket = Basket() 
+# currentBasket.add_item(book)
+
+
+	
+
+def addToCart(item):
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		cart = [session['cart']]
+	else:
+		user = ['','','','','','','']
+		cart = []
+	return render_template('login.html', user=user)
+	
+	# book = Item('Pride and Prejudice', 'Jane Austen', '4394839', 10, '1', '0.1')
+	
+	# currentBasket = Basket() 
+	# currentBasket.add_item(book)
+
+
 	
 @app.route('/logout', methods=['GET','POST'])
 def logout():

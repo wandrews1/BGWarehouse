@@ -244,8 +244,61 @@ def getLevel(email,pw1):
 	
 # select description from items where productID like (select itemid from invoiceItems where itemid like '206' AND invoiceid = 1);
 
+def getItemQuantity(prodID,warehouseID):
+	noresults = ("- no results.",)
+	print (" - in getItemQuantity()")
+	newProdID = "bg" + str(prodID)
+	print("newProdID: ",newProdID)
+	print("warehouseID: ",warehouseID)
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	print (" - connected to database")
+	# try:
+	query_string = "SELECT itemQuantities(%s,%s)"
+	print(" - Query String: " + query_string)
+	results = execute_query(query_string, conn, select=True, args=(newProdID,warehouseID))
+	print(" - ResultsQuantity: " , results)
+
+	if results:
+		quantity = results[0][0]
+		print('quantity: ', quantity)
+		return quantity
+	# except:
+	else:
+		print(" - No results for ProductID : ", newProdID )
+		return noresults
+	conn.close()
 
 
+
+# Import item info from bg.sql method
+def getItemInfo(prodID):
+	noresults = ("- no results.",)
+	print (" - in getItemInfo()")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	print (" - connected to database")
+	try:
+		query_string = "SELECT * FROM items WHERE (LOWER(productID) LIKE LOWER(%s)) )"
+		print(" - Query String: " + query_string)
+		results = execute_query(query_string, conn, select=True, args=(prodID,))
+		print(" - Results: " , results)
+
+		if results:
+			# sql order is: productID, cost, category, name, description
+			productID = prodID
+			price = results[1]
+			cat = results[2]
+			name = results[3]
+			description = results[4]
+			iteminfo = [productID,price,cat,name,description]
+			return iteminfo
+	except:
+		print(" - No results for ProductID : ", prodID )
+		return noresults
+	conn.close()
 
 
 
@@ -270,30 +323,30 @@ class Item(object):
 		return ("Item(" + self._name + ", " + self._description + ", " + self._productID + ", " + self._price + ", " + self._quantity + ", " + self._cat + ")")
 	
 	
-	# Import item info from bg.sql method
-	def getItemInfo(self, prodID):
-		noresults = ("No Results.",)
-		print (" - in getItemInfo()")
-		conn = connectToPostgres()
-		if conn == None:
-			return None
-		print (" - connected to database")
-		query_string = "SELECT * FROM items WHERE (LOWER(productID) LIKE LOWER(%s)) )"
-		print(" - Query String: " + query_string)
-		results = execute_query(query_string, conn, select=True, args=(prodID,))
-		print(" - Results: " , results)
+	# # Import item info from bg.sql method
+	# def getItemInfo(self, prodID):
+	# 	noresults = ("No Results.",)
+	# 	print (" - in getItemInfo()")
+	# 	conn = connectToPostgres()
+	# 	if conn == None:
+	# 		return None
+	# 	print (" - connected to database")
+	# 	query_string = "SELECT * FROM items WHERE (LOWER(productID) LIKE LOWER(%s)) )"
+	# 	print(" - Query String: " + query_string)
+	# 	results = execute_query(query_string, conn, select=True, args=(prodID,))
+	# 	print(" - Results: " , results)
 	
-		if results:
-			# sql order is: productID, cost, quantity, category, name, description
-			self._productID = results[0]
-			self._price = results[1]
-			self._quantity = results[2]
-			self._cat = results[3]
-			self._name = results[4]
-			self._description = results[5]
-		else:
-			print(" - No results for ProductID : ", prodID )
-		conn.close()
+	# 	if results:
+	# 		# sql order is: productID, cost, quantity, category, name, description
+	# 		self._productID = results[0]
+	# 		self._price = results[1]
+	# 		self._quantity = results[2]
+	# 		self._cat = results[3]
+	# 		self._name = results[4]
+	# 		self._description = results[5]
+	# 	else:
+	# 		print(" - No results for ProductID : ", prodID )
+	# 	conn.close()
 
 	# Mutator methods for Item class
 	def set_description(self, description):
