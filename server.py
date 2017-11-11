@@ -592,10 +592,10 @@ class Item(object):
 		self._cat = cat
 
 	def __str__(self):
-		return ("Item: " + self._name + "\nDescription: " + self._description + "\nProductID: " + str(self._productID) + "\nPrice: $" + int(self._price) + "\nQuantity: " + str(self._quantity) + "\nCategory: " + str(self._cat))
+		return ("Item: " + self._name + "\nDescription: " + self._description + "\nProductID: " + str(self._productID) + "\nPrice: $" + str(self._price) + "\nQuantity: " + str(self._quantity) + "\nCategory: " + str(self._cat))
 		
 	def __repr__(self):
-		return ("Item(" + self._name + ", " + self._description + ", " + self._productID + ", " + self._price + ", " + self._quantity + ", " + self._cat + ")")
+		return ("Item(" + self._name + ", " + self._description + ", " + str(self._productID) + ", " + str(self._price) + ", " + str(self._quantity) + ", " + self._cat + ")")
 
 	# Mutator methods for Item class
 	def set_description(self, description):
@@ -668,15 +668,24 @@ class Basket(object):
 		return(currentBasket)
 
 
-# item = pg.getItemInfo(841)
+# itemQuantity = pg.getItemInfo(productID,warehouseID)
 
-item = pg.getItemQuantity(841,4)
-print(item)
-# book = Item('Pride and Prejudice', 'Jane Austen', '4394839', 10, '1', '0.1')
+itemQuantity = pg.getItemQuantity(841,4)
+print("itemQuantity: ",itemQuantity)
 
-# currentBasket = Basket() 
-# currentBasket.add_item(book)
+itemInfo = pg.getItemInfo(841)
+print("itemInfo: ",itemInfo)
 
+# def __init__(self, name, description, productID, price, quantity, cat):
+newItem = Item("Name","Description",841,3.99,150,"Brakes")
+print("newItem:", newItem)
+# productID,price,cat,name,description
+
+currentBasket = Basket()
+print("New Basket Created")
+currentBasket.add_item(newItem)
+print("added item to basket")
+print("currentBasket: ",currentBasket)
 
 	
 
@@ -689,13 +698,7 @@ def addToCart(item):
 		cart = []
 	return render_template('login.html', user=user)
 	
-	# book = Item('Pride and Prejudice', 'Jane Austen', '4394839', 10, '1', '0.1')
-	
-	# currentBasket = Basket() 
-	# currentBasket.add_item(book)
 
-
-	
 @app.route('/logout', methods=['GET','POST'])
 def logout():
 	try:
