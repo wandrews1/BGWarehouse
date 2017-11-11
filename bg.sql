@@ -157,16 +157,34 @@ CREATE TABLE warehouses (
   zip int NOT NULL,
   email varchar(50) NOT NULL UNIQUE,
   warehouseLevel int NOT NULL,
+  bg841 int NOT NULL,
   PRIMARY KEY (warehouseID),
   FOREIGN KEY (email) REFERENCES login (email)
   );
   
-INSERT INTO warehouses VALUES (DEFAULT,'BG Main Warehouse','740 S Wichita Street','Wichita','KS',67213,'scripture187@gmail.com',1);
-INSERT INTO warehouses VALUES (DEFAULT,'BG of UMW','1701 College Ave','Fredericksburg','VA',22401,'bkertche@umw.edu',2);
-INSERT INTO warehouses VALUES (DEFAULT,'Mobile: Jacob','8008 Elm Street','Chicago','IL',43243,'jhuffma3@umw.edu',3);
-INSERT INTO warehouses VALUES (DEFAULT,'BG of Central Virginia','116 Sylvia Road','Ashland','VA',23005,'sales@umw.edu',2);
+INSERT INTO warehouses VALUES (DEFAULT,'BG Main Warehouse','740 S Wichita Street','Wichita','KS',67213,'scripture187@gmail.com',1,150);
+INSERT INTO warehouses VALUES (DEFAULT,'BG of UMW','1701 College Ave','Fredericksburg','VA',22401,'bkertche@umw.edu',2,170);
+INSERT INTO warehouses VALUES (DEFAULT,'Mobile: Jacob','8008 Elm Street','Chicago','IL',43243,'jhuffma3@umw.edu',3,137);
+INSERT INTO warehouses VALUES (DEFAULT,'BG of Central Virginia','116 Sylvia Road','Ashland','VA',23005,'sales@umw.edu',2,210);
 
-GRANT SELECT, INSERT, DELETE ON warehouses TO bgtemp;
+GRANT SELECT, INSERT, UPDATE, DELETE ON warehouses TO bgtemp;
+
+
+CREATE OR REPLACE FUNCTION itemQuantities(productID varchar, warehouseID int) 
+RETURNS int AS $$
+DECLARE 
+  quantity int;
+BEGIN
+  EXECUTE format('SELECT %I FROM warehouses WHERE warehouseID = %s', productID, warehouseID)
+    INTO quantity
+    USING warehouseID;
+  RETURN quantity;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
 
 DROP TABLE IF EXISTS invoices;
 CREATE TABLE invoices (
