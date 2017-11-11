@@ -343,7 +343,7 @@ def getItemInfo(prodID):
 		return None
 	print (" - connected to database")
 	try:
-		query_string = "SELECT * FROM items WHERE (LOWER(productID) LIKE LOWER(%s)) )"
+		query_string = "SELECT * FROM items WHERE productID LIKE CAST(%s AS VARCHAR)"
 		print(" - Query String: " + query_string)
 		results = execute_query(query_string, conn, select=True, args=(prodID,))
 		print(" - Results: " , results)
