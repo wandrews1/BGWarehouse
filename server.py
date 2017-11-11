@@ -351,7 +351,7 @@ def showInvoiceMaker(user, invoicenum):
 
 
 @app.route('/remove', methods=['GET','POST'])
-def remove():
+def showRemove():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		if(user[5] == 'Administrator') or (user[5] == 'Manager'):
@@ -390,6 +390,44 @@ def showRemoveResults():
 	
 	return render_template('removeresults.html', user=user, results=results, noresults = noresults, fname=fname, lname=lname, userlevel = userlevel)
 
+@app.route('/altercustomer', methods=['GET', 'POST'])
+def showAlterCust():
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		if(user[5] == 'Administrator') or (user[5] == 'Manager') or (user[5] == 'Sales Associate'):
+			return render_template('altercustomer.html', user = user)
+		else:
+			return render_template('forbidden.html', user = user)
+	else:
+		user = ['','','','','','','']
+		return render_template('search.html', user = user)
+	
+	return render_template('altercustomer.html', user = user)
+	
+@app.route('/alterresults', methods=['GET', 'POST'])
+def showAlterResults():
+	noresults = 0
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+	else:
+		user = ['','','','','','','']
+	
+	try:
+		custemail=request.form['custemail']
+		fname=request.form['fname']
+		lname=request.form['lname']
+		zipcode=request.form['zipcode']
+		password=request.form['password']
+		print("***FName: , LNAME: , EMAIL , ZIPCODE, PASS: " , fname, lname, zipcode, password)
+	except:
+		print("Error fetching removal characteristics")
+		
+	print("***FName: , LNAME: , EMAIL , ZIPCODE, PASS: " , fname, lname, zipcode, password)
+	results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
+	print("SHOW: ", results)
+	if results == 'No Results.':
+		noresults = 1
+	return render_template('alterresults.html', user = user, noresults = noresults, custemail = custemail)
 
 @app.route('/form', methods=['GET','POST'])
 def showForm():

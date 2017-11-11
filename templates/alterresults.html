@@ -1,7 +1,4 @@
-{% extends "layout.html" %}
-
-
-{% block header %}
+{% extends "layout.html" %} {% block header %}
 <div class="container-fluid headerbanner">
 	<br>
 	<br>
@@ -25,15 +22,14 @@
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
-					<li class="nav-item selected"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
+					<li class="nav-item"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
 					<li class="nav-item"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
-					<li class="nav-item"><a href="/remove" class="nav-link"><p class="bg3">Remove Account</p></a></li>
-
+					<li class="nav-item selected"><a href="/remove" class="nav-link"><p class="bg3">Remove Account</p></a></li>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 					<li class="nav-item"><a href="/sales" class="nav-link"><p class="bg3">Sales Associate</p></a></li>
-					<li class="nav-item"><a href="/altercustomer" class="nav-link"><p class="bg3">Alter Customer</p></a></li>	
+					<li class="nav-item"><a href="/altercustomer" class="nav-link"><p class="bg3">Alter Customer</p></a></li>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
@@ -53,65 +49,47 @@
 	</div>
 </nav>
 
-{% endblock %}
-
-
-{% block content %}
+{% endblock %} {% block content %}
 <br>
 <br>
 <center>
- 	<div class="container-fluid card50 max">
-		<form method="POST" action="/form2">
-			
-			<h3 class="bg2">
-				Manager
-			</h3>
-			
-			<br>
-			<br>
-			
-			<table>
-				<tr>
-					<td>First Name: </td>
-					<td><input type="text" class="form-control" name="fname" placeholder="John" /></td>
-				</tr>
-				<tr>
-					<td>Last Name: </td>
-					<td><input type="text" class="form-control" name="lname" placeholder="Smith" /></td>
-				</tr>
-				<tr>
-					<td>Email: </td>
-					<td><input type="email" class="form-control" name="email" placeholder="john.smith@bg.com" /></td>
-				</tr>
-				<tr>
-					<td>Zipcode: </td>
-					<td><input type="text" class="form-control" name="zipcode" placeholder="Zipcode" /></td>
-				</tr>
-				<tr>
-					<td>Date of Birth: </td>
-					<td><input type="date" class="form-control" name="dob" placeholder="DD-MM-YYYY" /></td>
-				</tr>
-				<tr>
-					<td>Password: </td>
-					<td><input type="password" class="form-control" name="pw1" placeholder="Password"/></td>
-				</tr>
-				<tr>
-					<td>Retype Password: </td>
-					<td><input type="password" class="form-control" name="pw2" placeholder="Retype Password"/></td>
-				</tr>
-			</table>
-			
-			<br>
-			
-			<input type="submit" value="SUBMIT"  class="bgSubmit btn btn-outline-dark"/>
-			
-			<br>
-			<br>
-			
-			<h6>
-				All fields required for signup.
-			</h6>
-		</form>
-	</div>
+    
+<div class="container-fluid card50">
+        
+        <h3 class="bg2">
+            Customer Altered
+        </h3>           
+
+        <br>
+        <br>
+
+    {% if (noresults == 0): %}
+    	<div class="container-fluid">
+			<div class="alert alert-success" role="alert">
+				<h3 class="alert-heading" style="text-align:left;"><strong>Account Altered:</strong></h3>
+				<br>
+				<hr>
+				<div style="text-align:left;">The account at {{custemail}} has successfully been altered.</div>
+			</div>
+		</div>
+		
+    {% endif %}
+    
+    {% if (noresults == 1): %}
+        <div class="container-fluid">
+			<div class="alert alert-danger" role="alert">
+				<h3 class="alert-heading" style="text-align:left;"><strong>Error:</strong></h3>
+				<br>
+				<div style="text-align:left;"><strong>{{custemail}} could not be altered</strong></div>
+				<hr>
+				<div style="text-align:left;">Please check that the email was entered properly and try again.</div>
+			</div>
+		</div>
+    {% endif %}
+
+    </div>
 </center>
+<br>
+
+
 {% endblock %}

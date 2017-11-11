@@ -25,15 +25,14 @@
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
-					<li class="nav-item selected"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
+					<li class="nav-item"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
 					<li class="nav-item"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
-					<li class="nav-item"><a href="/remove" class="nav-link"><p class="bg3">Remove Account</p></a></li>
-
+					<li class="nav-item selected"><a href="/remove" class="nav-link"><p class="bg3">Remove Account</p></a></li>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 					<li class="nav-item"><a href="/sales" class="nav-link"><p class="bg3">Sales Associate</p></a></li>
-					<li class="nav-item"><a href="/altercustomer" class="nav-link"><p class="bg3">Alter Customer</p></a></li>	
+					<li class="nav-item"><a href="/altercustomer" class="nav-link"><p class="bg3">Alter Customer</p></a></li>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
@@ -61,10 +60,11 @@
 <br>
 <center>
  	<div class="container-fluid card50 max">
-		<form method="POST" action="/form2">
+ 		<!-- replace action below with destination html; "/form2" was there before I disabled it -->
+		<form method="POST" action="/alterresults"> 
 			
 			<h3 class="bg2">
-				Manager
+				Alter Customer Information
 			</h3>
 			
 			<br>
@@ -72,33 +72,31 @@
 			
 			<table>
 				<tr>
-					<td>First Name: </td>
+					<td class="right">Email of Account to change: </td>
+					<td><input type="text" class="form-control" name="custemail" placeholder="John" /></td>
+				</tr>
+			</table>
+			<table>
+				<h3><strong>Information to alter</strong></h3>
+				
+				<tr>
+					<td class="right">First Name: </td>
 					<td><input type="text" class="form-control" name="fname" placeholder="John" /></td>
 				</tr>
 				<tr>
-					<td>Last Name: </td>
+					<td class="right">Last Name: </td>
 					<td><input type="text" class="form-control" name="lname" placeholder="Smith" /></td>
 				</tr>
 				<tr>
-					<td>Email: </td>
-					<td><input type="email" class="form-control" name="email" placeholder="john.smith@bg.com" /></td>
+					<td class="right">Password: </td>
+					<td><input type="text" class="form-control" name="password" placeholder="P@s$w0rd" /></td>
 				</tr>
 				<tr>
-					<td>Zipcode: </td>
-					<td><input type="text" class="form-control" name="zipcode" placeholder="Zipcode" /></td>
+					<td class="right">Zip Code: </td>
+					<td><input type="text" class="form-control" name="zipcode" placeholder="12345" /></td>
 				</tr>
-				<tr>
-					<td>Date of Birth: </td>
-					<td><input type="date" class="form-control" name="dob" placeholder="DD-MM-YYYY" /></td>
-				</tr>
-				<tr>
-					<td>Password: </td>
-					<td><input type="password" class="form-control" name="pw1" placeholder="Password"/></td>
-				</tr>
-				<tr>
-					<td>Retype Password: </td>
-					<td><input type="password" class="form-control" name="pw2" placeholder="Retype Password"/></td>
-				</tr>
+
+				
 			</table>
 			
 			<br>
@@ -107,11 +105,9 @@
 			
 			<br>
 			<br>
-			
-			<h6>
-				All fields required for signup.
-			</h6>
+
 		</form>
 	</div>
 </center>
+<br>	
 {% endblock %}
