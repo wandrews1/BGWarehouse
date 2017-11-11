@@ -27,7 +27,7 @@ INSERT INTO login VALUES (DEFAULT,'jhuffma3@umw.edu','Jacob', 'Huffman', crypt('
 INSERT INTO login VALUES (DEFAULT,'manager@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Manager');
 INSERT INTO login VALUES (DEFAULT,'sales@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Sales Associate');
 INSERT INTO login VALUES (DEFAULT,'customer@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Customer');
-INSERT INTO login VALUES (DEFAULT,'test@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Sales Associate');
+INSERT INTO login VALUES (DEFAULT,'administrator@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Administrator');
 GRANT SELECT, INSERT, DELETE ON login TO bgtemp;
 
 
@@ -162,10 +162,10 @@ CREATE TABLE warehouses (
   FOREIGN KEY (email) REFERENCES login (email)
   );
   
-INSERT INTO warehouses VALUES (DEFAULT,'Big Boy Warehouse','740 S Wichita Street','Wichita','KS',67213,'scripture187@gmail.com',1);
-INSERT INTO warehouses VALUES (DEFAULT,'Not so Big Boy Warehouse','1701 College Ave','Fredericksburg','VA',22401,'bkertche@umw.edu',2);
+INSERT INTO warehouses VALUES (DEFAULT,'BG Main Warehouse','740 S Wichita Street','Wichita','KS',67213,'scripture187@gmail.com',1);
+INSERT INTO warehouses VALUES (DEFAULT,'BG of UMW','1701 College Ave','Fredericksburg','VA',22401,'bkertche@umw.edu',2);
 INSERT INTO warehouses VALUES (DEFAULT,'Mobile: Jacob','8008 Elm Street','Chicago','IL',43243,'jhuffma3@umw.edu',3);
-INSERT INTO warehouses VALUES (DEFAULT,'BG of Central Virginia','116 Sylvia Road','Ashland','VA',23005,'manager@umw.edu',2);
+INSERT INTO warehouses VALUES (DEFAULT,'BG of Central Virginia','116 Sylvia Road','Ashland','VA',23005,'sales@umw.edu',2);
 
 GRANT SELECT, INSERT, DELETE ON warehouses TO bgtemp;
 
@@ -206,3 +206,4 @@ INSERT INTO invoiceItems VALUES (2,206,4,84.50);
 INSERT INTO invoiceItems VALUES (2,213,2,30.24);
 
 GRANT SELECT, INSERT ON invoiceItems TO bgtemp;
+
