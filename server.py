@@ -557,6 +557,19 @@ def showSearch():
 	else:
 		user = ['','','','','','','']
 	return render_template('search.html', user=user)
+
+@app.route('/manageitems', methods=['GET','POST'])
+def showManageItems():
+	
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		if (user[5] == 'Administrator') or (user[5] == 'Manager'):
+			return render_template('manageitems.html', user=user)
+		else:
+			return render_template('forbidden.html', user=user)
+	else:
+		user = ['','','','','','','']
+		return render_template('search.html', user=user)
 	
 	
 @app.route('/searchresults', methods=['GET','POST'])
