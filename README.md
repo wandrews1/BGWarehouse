@@ -1,6 +1,7 @@
 <center>
 
-![BG](https://openbay.s3.amazonaws.com/uploads/production/image_upload/image/583/original_bg_products.png =250x150)
+![BG](https://openbay.s3.amazonaws.com/uploads/production/image_upload/image/583/original_bg_products.png )
+<img src="https://openbay.s3.amazonaws.com/uploads/production/image_upload/image/583/original_bg_products.png" alt="BG" style="width: 200px;"/>
 
 ### Up and running @ [Amazon AWS - 54.88.150.90/](http://54.88.150.90/)
 
