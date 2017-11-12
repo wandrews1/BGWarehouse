@@ -605,10 +605,10 @@ class Item(object):
 		self._cat = cat
 
 	def __str__(self):
-		return ("Item: " + self._name + "\nDescription: " + self._description + "\nProductID: " + str(self._productID) + "\nPrice: $" + str(self._price) + "\nQuantity: " + str(self._quantity) + "\nCategory: " + str(self._cat))
+		return (self._name)
 		
 	def __repr__(self):
-		return ("Item(" + self._name + ", " + self._description + ", " + str(self._productID) + ", " + str(self._price) + ", " + str(self._quantity) + ", " + self._cat + ")")
+		return (str(self._productID))
 
 	# Mutator methods for Item class
 	def set_description(self, description):
@@ -617,7 +617,7 @@ class Item(object):
 	def set_price(self, price):
 		self._price = price
 		
-	def set_units(self, quantity):
+	def set_quantity(self, quantity):
 		self._quantity = quantity
 		
 	def set_vat(self, cat):
@@ -651,6 +651,7 @@ class Basket(object):
 	def __init__(self):
 		self._items = []
 		self._price = 0 
+		self._count = 0
 		
 	def __str__(self):
 		output = ("Items currently in your basket: ")
@@ -670,36 +671,60 @@ class Basket(object):
 		return self._items
 		
 	def add_item(self, item): 
-		self._items.append(item) # Add item to the current list of items 
-		self._price += item.get_price() # Add price of current item to the price of items already added 
+		if item in self._items:
+			item.set_quantity(item.get_quantity()+1)
+			self._price += item.get_price()
+			self._count += 1
+		else:
+			self._items.append(item) # Add item to the current list of items 
+			self._price += item.get_price() # Add price of current item to the price of items already added 
+			self._count += 1 # Add to the total number of items held within the cart
 		
 	def remove_item(self, item):
 		for x in self._items:
-			if item == x:
+			if item == x.get_productID:
 				self._items.remove(item)
 				self._price -= item.get_price()
+				self._count -= 1
 		return(currentBasket)
 
 
-# itemQuantity = pg.getItemInfo(productID,warehouseID)
-
-itemQuantity = pg.getItemQuantity(841,4)
-print("itemQuantity: ",itemQuantity)
-
-itemInfo = pg.getItemInfo(841)
-print("itemInfo: ",itemInfo)
-
-# def __init__(self, name, description, productID, price, quantity, cat):
-newItem = Item("Name","Description",841,3.99,150,"Brakes")
-print("newItem:", newItem)
-# productID,price,cat,name,description
 
 currentBasket = Basket()
 print("New Basket Created")
-currentBasket.add_item(newItem)
-print("added item to basket")
-print("currentBasket: ",currentBasket)
 
+# itemQuantity = pg.getItemInfo(productID,warehouseID)
+PID = "485"
+WID = 4
+itemInfo = pg.getItemInfo(PID)
+itemQuantity = pg.getItemQuantity(PID,WID)
+newItem = Item(itemInfo[3],itemInfo[4],itemInfo[0],float(itemInfo[1]),1,itemInfo[2])
+currentBasket.add_item(newItem)
+
+PID = "841"
+WID = 4
+itemQuantity2 = pg.getItemQuantity(PID,WID)
+itemInfo = pg.getItemInfo(PID)
+newItem2 = Item(itemInfo[3],itemInfo[4],itemInfo[0],float(itemInfo[1]),1,itemInfo[2])
+
+currentBasket.add_item(newItem2)
+currentBasket.add_item(newItem2)
+currentBasket.add_item(newItem2)
+currentBasket.add_item(newItem2)
+currentBasket.add_item(newItem2)
+
+PID = "985"
+WID = 4
+itemQuantity3 = pg.getItemQuantity(PID,WID)
+itemInfo = pg.getItemInfo(PID)
+newItem3 = Item(itemInfo[3],itemInfo[4],itemInfo[0],float(itemInfo[1]),1,itemInfo[2])
+currentBasket.add_item(newItem3)
+
+i = 1
+for item in currentBasket.get_items():
+	print(i,item.get_productID(),item.get_quantity(),item.get_price(),round(item.get_total_item_price(),2))
+	i+=1
+print("Total: $$$", round(currentBasket.get_price(),2))
 	
 
 def addToCart(item):
