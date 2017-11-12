@@ -440,9 +440,13 @@ def showForm():
 	print("-- in showForm()")
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		if(user[5] == 'Administrator') or (user[5] == 'Manager') or (user[5] == 'Sales Associate'):
+			return render_template('form.html', user = user)
+		else:
+			return render_template('forbidden.html', user = user)
 	else:
 		user = ['','','','','','','']
-		
+		return render_template('search.html', user = user)
 	
 	if request.method == 'POST':
 		fname=request.form['fname']
