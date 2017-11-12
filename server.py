@@ -407,6 +407,7 @@ def showAlterCust():
 @app.route('/alterresults', methods=['GET', 'POST'])
 def showAlterResults():
 	noresults = 0
+	noemail = 0
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 	else:
@@ -423,11 +424,16 @@ def showAlterResults():
 		print("Error fetching removal characteristics")
 		
 	print("***FName: , LNAME: , EMAIL , ZIPCODE, PASS: " , fname, lname, zipcode, password)
-	results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
-	print("SHOW: ", results)
-	if results == 'No Results.':
-		noresults = 1
-	return render_template('alterresults.html', user = user, noresults = noresults, custemail = custemail)
+	emailcheck = pg.checkAlterEmail(custemail)
+	if emailcheck == 'No Email Match.':
+		noemail = 1
+		return render_template('alterresults.html', user = user, noresults = noresults, custemail = custemail, noemail = noemail)
+	else:
+		results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
+		print("SHOW: ", results)
+		if results == 'No Results.':
+			noresults = 1
+		return render_template('alterresults.html', user = user, noresults = noresults, custemail = custemail, noemail = noemail)
 
 @app.route('/form', methods=['GET','POST'])
 def showForm():

@@ -63,8 +63,7 @@
 
         <br>
         <br>
-
-    {% if (noresults == 0): %}
+    {% if (noresults == 0) and (noemail == 0): %}
     	<div class="container-fluid">
 			<div class="alert alert-success" role="alert">
 				<h3 class="alert-heading" style="text-align:left;"><strong>Account Altered:</strong></h3>
@@ -76,18 +75,19 @@
 		
     {% endif %}
     
-    {% if (noresults == 1): %}
+    {% if (noresults == 1) or (noemail == 1): %}
         <div class="container-fluid">
 			<div class="alert alert-danger" role="alert">
 				<h3 class="alert-heading" style="text-align:left;"><strong>Error:</strong></h3>
 				<br>
 				<div style="text-align:left;"><strong>{{custemail}} could not be altered</strong></div>
 				<hr>
+				<div style="text-align:left;">Please check that the email is associated with a customer account.</div>
+				<div style="text-align:left;">OR</div>
 				<div style="text-align:left;">Please check that the email was entered properly and try again.</div>
 			</div>
 		</div>
-    {% endif %}
-
+	{% endif %}
     </div>
 </center>
 <br>
