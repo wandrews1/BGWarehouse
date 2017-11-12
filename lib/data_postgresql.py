@@ -325,16 +325,22 @@ def getItemInfo(prodID):
 		query_string = "SELECT * FROM items WHERE productID LIKE CAST(%s AS VARCHAR)"
 		print(" - Query String: " + query_string)
 		results = execute_query(query_string, conn, select=True, args=(prodID,))
-		print(" - Results: " , results)
+		print(" - Results: " , results[0])
 
-		if results:
+		if results != noresults:
 			# sql order is: productID, cost, category, name, description
-			productID = prodID
-			price = results[1]
-			cat = results[2]
-			name = results[3]
-			description = results[4]
+			productID = results[0][0]
+			# print(productID)
+			price = results[0][1]
+			# print(price)
+			cat = results[0][2]
+			# print(cat)
+			name = results[0][3]
+			# print(name)
+			description = results[0][4]
+			# print(description)
 			iteminfo = [productID,price,cat,name,description]
+			# print("itemInfo: ",iteminfo)
 			return iteminfo
 	except:
 		print(" - No results for ProductID : ", prodID )
