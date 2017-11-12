@@ -169,50 +169,29 @@ def alterCustomer(custemail, fname, lname, zipcode, password):
 	if(fname != ""):
 		updateCust = "fname = '" + fname + "'"
 		updateCustvars.append(fname)
+		query_string = "UPDATE login SET fname = %s WHERE email = %s"
+		results = execute_query(query_string, conn, select=False, args = (fname, custemail))
 		updateCustnum+=1
 	if(lname != ""):
-		if(fname != ""):
-			updateCust+= ", lname = '" + lname + "'"
-			updateCustvars.append(lname)
-			updateCustnum+=1
-		else:
-			updateCust = "lname = '" + lname + "'"
+			updateCust = "lname = %s"
+			query_string = "UPDATE login SET lname = %s WHERE email = %s"
+			results = execute_query(query_string, conn, select=False, args = (lname, custemail))
 			updateCustvars.append(lname)
 			updateCustnum+=1
 	if(password != ""):
-		if(fname != "") or (lname != ""):
-			updateCust+= ", pw1 = crypt('" + password + "' , gen_salt('bf'))"
-			updateCustvars.append(password)
-			updateCustnum+=1
-		else:
-			updateCust = "pw1 = crypt('" + password + "', gen_salt('bf'))"
+			updateCust = "pw1 = crypt('%s, gen_salt('bf'))"
+			query_string = "UPDATE login SET pw1 = crypt(%s, gen_salr('bf')) WHERE email = %s"
+			results = execute_query(query_string, conn, select=False, args = (password, custemail))
 			updateCustvars.append(password)
 			updateCustnum+=1
 	if(zipcode != ""):
-		if(fname != "") or (lname != "") or (password != ""):
-			updateCust+= ", zipcode = '" + zipcode + "'"
+			updateCust = "zipcode = %s"
 			updateCustvars.append(zipcode)
-			updateCustnum+=1
-		else:
-			updateCust = "zipcode = '" + zipcode + "'"
-			updateCustvars.append(zipcode)
+			query_string = "UPDATE login SET zipcode = %s WHERE email = %s"
+			results = execute_query(query_string, conn, select=False, args = (zipcode, custemail))
 			updateCustnum+=1
 
-	if(updateCustnum == 1):
-		query_string = "UPDATE login SET " + updateCust + " WHERE email = '" + custemail + "'"
-		results = execute_query(query_string, conn, select=False)
-		return results
-	elif(updateCustnum == 2):
-		query_string = "UPDATE login SET " + updateCust + " WHERE email = '" + custemail + "'"
-		results = execute_query(query_string, conn, select=False)
-		return results
-	elif(updateCustnum == 3):
-		query_string = "UPDATE login SET " + updateCust + " WHERE email = '" + custemail + "'"
-		results = execute_query(query_string, conn, select=False)
-		return results
-	elif(updateCustnum == 4):	
-		query_string = "UPDATE login SET " + updateCust + " WHERE email = '" + custemail + "'"
-		results = execute_query(query_string, conn, select=False)
+	if(updateCustnum >= 1):
 		return results
 	else:
 		return noresults
