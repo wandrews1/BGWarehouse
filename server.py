@@ -628,13 +628,13 @@ def showAlterResults():
 	emailcheck = pg.checkAlterEmail(custemail)
 	if emailcheck == 'No Email Match.':
 		noemail = 1
-		return render_template('alterresults.html', user = user, noresults = noresults, custemail = custemail, noemail = noemail)
+		return render_template('alterresults.html', user=user, noresults=noresults, custemail=custemail, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount)
 	else:
 		results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
 		print("SHOW: ", results)
 		if results == 'No Results.':
 			noresults = 1
-		return render_template('alterresults.html', user = user, noresults = noresults, custemail = custemail, noemail = noemail)
+		return render_template('alterresults.html', user=user, noresults=noresults, custemail=custemail, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount)
 
 	results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
 	print("SHOW: ", results)
@@ -643,24 +643,9 @@ def showAlterResults():
 	return render_template('alterresults.html', user=user, noresults=noresults, custemail=custemail, currentBasket=currentBasket, cartCount=cartCount)
 
 
-
 @app.route('/form', methods=['GET','POST'])
 def showForm():
-	print("-- in showForm()")
-	if 'username' in session:
-		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
-
-		if(user[5] == 'Administrator') or (user[5] == 'Manager') or (user[5] == 'Sales Associate'):
-			return render_template('form.html', user = user)
-		else:
-			return render_template('forbidden.html', user = user)
-
-		# cart = session['currentBasket']
-
-	else:
-		user = ['','','','','','','']
-		return render_template('search.html', user = user)
-
+	
 	try:
 		cartCount = 0
 		for item in currentBasket.get_items():
@@ -668,6 +653,23 @@ def showForm():
 			cartCount += item.get_quantity()
 	except:
 		cartCount = 0
+
+	
+	print("-- in showForm()")
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+
+		if(user[5] == 'Administrator') or (user[5] == 'Manager') or (user[5] == 'Sales Associate'):
+			return render_template('form.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
+		else:
+			return render_template('forbidden.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
+
+		# cart = session['currentBasket']
+
+	else:
+		user = ['','','','','','','']
+		return render_template('search.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
+
 
 	if request.method == 'POST':
 		fname=request.form['fname']
@@ -844,9 +846,9 @@ def showManageItems():
 			cartCount = 0
 		
 		if (user[5] == 'Administrator') or (user[5] == 'Manager'):
-			return render_template('manageitems.html', user=user, currentBasket=currentBasket)
+			return render_template('manageitems.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 		else:
-			return render_template('forbidden.html', user=user, currentBasket=currentBasket)
+			return render_template('forbidden.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 	else:
 		user = ['','','','','','','']
 		return render_template('login.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
