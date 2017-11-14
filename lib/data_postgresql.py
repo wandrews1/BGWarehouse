@@ -159,34 +159,24 @@ def removeUser(fname, lname, email, userlevel):
 	
 def alterCustomer(custemail, fname, lname, zipcode, password):
 	noresults = ("No Results.")
-	updateCust = ''
-	updateCustvars = []
 	updateCustnum = 0
 	print("- in alter customer()")
 	conn = connectToPostgres()
 	if conn == None:
 		return None
 	if(fname != ""):
-		updateCust = "fname = '" + fname + "'"
-		updateCustvars.append(fname)
 		query_string = "UPDATE login SET fname = %s WHERE email = %s"
 		results = execute_query(query_string, conn, select=False, args = (fname, custemail))
 		updateCustnum+=1
 	if(lname != ""):
-			updateCust = "lname = %s"
 			query_string = "UPDATE login SET lname = %s WHERE email = %s"
 			results = execute_query(query_string, conn, select=False, args = (lname, custemail))
-			updateCustvars.append(lname)
 			updateCustnum+=1
 	if(password != ""):
-			updateCust = "pw1 = crypt('%s, gen_salt('bf'))"
 			query_string = "UPDATE login SET pw1 = crypt(%s, gen_salr('bf')) WHERE email = %s"
 			results = execute_query(query_string, conn, select=False, args = (password, custemail))
-			updateCustvars.append(password)
 			updateCustnum+=1
 	if(zipcode != ""):
-			updateCust = "zipcode = %s"
-			updateCustvars.append(zipcode)
 			query_string = "UPDATE login SET zipcode = %s WHERE email = %s"
 			results = execute_query(query_string, conn, select=False, args = (zipcode, custemail))
 			updateCustnum+=1
@@ -197,6 +187,22 @@ def alterCustomer(custemail, fname, lname, zipcode, password):
 		return noresults
 	conn.close()
 		
+def checkAlterEmail(email):
+	noEmail = ('No Email Match.')
+	customer = 'Customer'
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT * FROM login WHERE email = %s and userlevel = %s"
+	checkemail = execute_query(query_string, conn, select = True, args=(email, customer))
+	print ("Results ", checkemail)
+	if checkemail:
+		return checkemail
+	else:
+		return noEmail
+	conn.close()
+	return checkemail
+	
 		
 def superSearch(search):
 	noresults = ("No Results.",)

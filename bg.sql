@@ -29,6 +29,7 @@ INSERT INTO login VALUES (DEFAULT,'sales@umw.edu','Test', 'test', crypt('pass', 
 INSERT INTO login VALUES (DEFAULT,'customer@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Customer');
 INSERT INTO login VALUES (DEFAULT,'administrator@umw.edu','Test', 'test', crypt('pass', gen_salt('bf')), '22407','Administrator');
 GRANT SELECT, INSERT, DELETE, UPDATE ON login TO bgtemp;
+GRANT USAGE, INSERT, SELECT ON login_loginid_seq TO bgtemp;
 
 
 
