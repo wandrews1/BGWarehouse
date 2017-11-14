@@ -72,9 +72,9 @@
 			</ul>
 	
 			<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-				<li class="nav-item"><a href="/profile" class="nav-link"><span class="bg3 selected"><i class="fa fa-user" aria-hidden="true"></i>{{user[2]}} - {{user[5]}}</span></a></li>
+				<li class="nav-item"><a href="/profile" class="nav-link"><span class="bg3"><i class="fa fa-user" aria-hidden="true"></i>{{user[2]}} - {{user[5]}}</span></a></li>
 				<li class="nav-item"><a href="/logout" class="nav-link"><span class="bg3"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</span></a></li>
-				<li class="nav-item"><a href="/cart" class="nav-link"><span class="bg3"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart </span><spanNotification class="badge badge-pill badge-danger">{{cartCount}}</span></a></li>
+				<li class="nav-item"><a href="/cart" class="nav-link"><span class="bg3 selected"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart </span><spanNotification class="badge badge-pill badge-danger">{{cartCount}}</span></a></li>
 			</ul>
 
 		</div>
@@ -87,34 +87,71 @@
 {% block content %}
 <br>
 <br>
- <center>
- 	<div class="container-fluid card50">
-			<h3 class="bg2">
-				{{user[2]}} {{user[6]}}
-			</h3>
-			
-			<br>
-			
-			
-			<div class="bgProfile card50">
-				<table class="table table-hover table-sm table-dark">
+<center>
+	<form method="POST" action="/searchresults">
+		<div class="container-fluid card50">
+			<div class="container-fluid bggrey">
+				<h3 class="bg2">
+					Cart
+				</h3>
+				
+				<br>
+				<br>
+							
+
+			{% if ( cartCount != 0 ):  %}
+				
+			<table class="table table-hover table-sm table-dark">
+				<thead>
 					<tr>
-						<td>User Level:</td>
-						<td>{{user[5]}}</td>
+						<th scope="col"><center>Product ID</center></th>
+						<th scope="col"><center>Price</center></th>
+						<th scope="col"><center>Quantity</center></th>
+						<th scope="col"><center>Category</center></th>
+						<th scope="col"><center>Name</center></th>
+						<th scope="col"><center>Remove</center></th>
 					</tr>
-					<tr>
-						<td>Email: </td>
-						<td>{{user[0]}}</td>
-					</tr>
-					<tr>
-						<td>Zipcode: </td>
-						<td>{{user[3]}}</td>
-					</tr>
-					<br>
-				</table>
-			</div>
+				</thead>
+				<tbody>
+					
+						{% set total = 0.00 %}
+
+						{% for item in cart %}
+							{% set price = item.get_price() %}
+							{% set quantity = item.get_quantity() %}
+							{% set total = total + ( price * quantity ) %}
+							<tr>
+								<td><center>{{item.get_productID()}}</center></td>
+								<td><center>${{item.get_price()}}</center></td>
+								<td><center>{{item.get_quantity()}}</center></td>
+								<td><center>{{item.get_cat()}}</center></td>
+								<td><center>{{item.get_name()}}</center></td>
+								<td><center><button type="button" class="btn btn-sm btn-outline-dark"><i class="fa fa-trash-o" aria-hidden="true"></i></button></center></td>
+							</tr>
+
+						{% endfor %}
+						
+							<tr>
+								<td>
+									<strong><center>Total: </center></strong>
+								</td>
+								<td>
+									<strong><center>${{total}} - ${{currentBasket.get_price()}}</center></strong>
+								</td>
+							</tr>
+				</tbody>
+			</table>
+			{% else %}
+				<div class="alert alert-danger" role="alert">
+  					Your cart is empty.
+				</div>
+			{% endif %}
 		</div>
-	</div>
+	</form> 
+<br>
 </center>
-<br>	
+
+
+
+
 {% endblock %}

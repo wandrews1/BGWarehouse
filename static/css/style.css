@@ -1,3 +1,36 @@
+*::-moz-selection {
+    background: #ffcc00;
+    color: #000000;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #000000;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
+dropdown-item:focus, .dropdown-item:hover {
+    text-decoration: none;
+    background-color: #000000;
+}
+
+ul.dropdown-menu {
+    background-color: #000;
+}
+
+
 .alert {
    width:50%;
 }
@@ -153,7 +186,53 @@ p a {
 	text-decoration: underline;
 }
 p a:hover {
+	color: #FF0000;
+	/*color: #898989;*/
+}
+span {
 	color: #898989;
+	line-height: 24px;
+	margin: 0;
+	padding-left: 10px;
+	width: 98%;
+	text-align: left;
+	text-indent: -25px;
+}
+span a {
+	color: #252525;
+	text-decoration: underline;
+}
+span a:hover {
+	color: #FF0000;
+	/*color: #000000;*/
+}
+spanNotification {
+	color: #898989;
+	line-height: 24px;
+	margin: 0;
+	padding-left: 10px;
+	/*width: 98%;*/
+	text-align: left;
+	/*text-indent: -25px;*/
+}
+.bg4{
+    font-family:
+	-apple-system, BlinkMacSystemFont,
+	"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+	"Helvetica Neue", sans-serif;
+    font-size: 16px;
+	font-weight: bold;
+	/*line-height: .50;*/
+	/*padding-left: 10px;*/
+	text-indent: -25px;
+	margin: auto;
+	width: 100%;
+	justify-content: space-around;
+	text-align: center;
+	text-decoration: none;
+}
+.bg4 :hover {
+	color: #FF0000;
 }
 td {
 overflow: hidden;
@@ -214,8 +293,19 @@ word-wrap: break-word;
 	text-decoration: none;
 	/*text-transform: uppercase;*/
 }
+#header ul li div a span:hover, #header ul li div a span.selected{
+	color:#FFFFFF;
+}
+#header ul li a span:hover, #header ul li a span.selected{
+	color:#FFFFFF;
+}
 /* This is the color that changes when you hover over the menu options*/
 #header ul li a p:hover, #header ul li.selected a p{
+	color: #FFFFFF;
+}
+#header ul li a span:hover, #header ul li.selected a span{
+	/*color: #FF0000;*/
+	background-color:#000000;
 	color: #FFFFFF;
 }
 #content {

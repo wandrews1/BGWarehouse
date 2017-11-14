@@ -1,19 +1,22 @@
-# Each item will have all of these parameters
+
+# SHOPPING CART
+
+# Each item will have all of these parameters in bg.sql
 class Item(object): 
-	def __init__(self, name, description, barcode, price, units, vat):
+	def __init__(self, name, description, productID, price, quantity, cat):
 		self._name = name
 		self._description = description
-		self._barcode = barcode
+		self._productID = productID
 		self._price = price
-		self._units = units
-		self._vat = vat
-		
+		self._quantity = quantity
+		self._cat = cat
+
 	def __str__(self):
-		return ("Item: " + self._name + "\nDescription: " + self._description + "\nBarcode: " + str(self._barcode) + "\nPrice: £" + int(self._price) + "\nUnits: " + str(self._units) + "\nVAT: " + str(self._vat))
+		return (self._name)
 		
 	def __repr__(self):
-		return ("Item(" + self._name + ", " + self._description + ", " + self._barcode + ", " + self._price + ", " + self._units + ", " + self._vat + ")")
-	
+		return (str(self._productID))
+
 	# Mutator methods for Item class
 	def set_description(self, description):
 		self._description = description
@@ -21,11 +24,11 @@ class Item(object):
 	def set_price(self, price):
 		self._price = price
 		
-	def set_units(self, units):
-		self._units = units
+	def set_quantity(self, quantity):
+		self._quantity = quantity
 		
-	def set_vat(self, vat):
-		self._vat = vat
+	def set_vat(self, cat):
+		self._cat = cat
 		
 	# Accessor methods for Item class
 	def get_name(self):
@@ -34,50 +37,28 @@ class Item(object):
 	def get_description(self):
 		return self._description
 				
-	def get_barcode(self):
-		return self._barcode
+	def get_productID(self):
+		return self._productID
 		
 	def get_price(self):
 		return self._price
 		
-	def get_units(self):
-		return self._units 
+	def get_quantity(self):
+		return self._quantity 
 				
-	def get_vat(self):
-		return self._vat
+	def get_cat(self):
+		return self._cat
 		
-	def get_total_item_price(self):
-		total_price = self._price * self._units 
-		price_with_vat = total_price + (total_price * self._vat)
-		return price_with_vat
-	
-class Clothing(Item):
-	def __init__(self, size):
-		self._size = size
-		
-	def get_size(self):
-		return self._size
+	def get_total_item_price(self): 
+		return self._price * self._quantity
 	
 
-class Electronic(Item):
-	def __init__(self, brand, warranty, name, description, barcode, price, units, vat):
-		super(Electronic, self).__init__(self, name, description, barcode, price, units, vat)
-		self._brand = brand
-		self._warranty = warranty
-		
-	def get_brand(self):
-		return self._brand
-		
-	def get_warranty(self):
-		return self._warranty
-		
-		
-		
 		
 class Basket(object):
 	def __init__(self):
 		self._items = []
 		self._price = 0 
+		self._count = 0
 		
 	def __str__(self):
 		output = ("Items currently in your basket: ")
@@ -97,67 +78,69 @@ class Basket(object):
 		return self._items
 		
 	def add_item(self, item): 
-		self._items.append(item) # Add item to the current list of items 
-		self._price += item.get_price() # Add price of current item to the price of items already added 
+		if item in self._items:
+			item.set_quantity(item.get_quantity()+1)
+			self._price += item.get_price()
+			self._count += 1
+		else:
+			self._items.append(item) # Add item to the current list of items 
+			self._price += item.get_price() # Add price of current item to the price of items already added 
+			self._count += 1 # Add to the total number of items held within the cart
 		
 	def remove_item(self, item):
 		for x in self._items:
-			if item == x:
+			if item == x.get_productID:
 				self._items.remove(item)
 				self._price -= item.get_price()
+				self._count -= 1
 		return(currentBasket)
 
 
 
+currentBasket = Basket()
+print("New Basket Created")
 
-# A list of the items currently in stock which the user can choose from
-print("Items currently in stock: \nBook \nCup \nKettle \nCoat \n")		
-book = Item('Pride and Prejudice', 'Jane Austen', '4394839', 10, '1', '0.1')
-cup = Item('Red cup', 'a cup that is red', '432432', 3, '2', '0.2')
-kettle = Item('Blue kettle', 'a kettle that is blue', '323232', 12, '2', '0.3')
-coat = Item('Children\'s coat', 'a coat for children', '43232', 20, '1', '0.2')
-list = ['book','cup','kettle','coat']
 
-currentBasket = Basket() 
-# Initialise cont variable to True to ensure while loop runs at least once
-cont = True
-while cont:
-	add_to_basket = input("Select an item to add to your basket: ").lower() # Give user option to add something to the basket
-# If the user the item selects is in the list above, add it to the basket
-	for x in list:
-		if add_to_basket == x:
-			currentBasket.add_item(eval(add_to_basket))
-# If the item is not in list, return an erorr.		
-	if add_to_basket not in list:
-		print("Sorry! We do not have this item in stock.")
-# If the length of the string is 0 then the user has not added any items to the basket and it is empty.		
-	if len(currentBasket.get_items()) == 0:
-		print("Your basket is empty.")
+@app.route('/searchresults', methods=['GET','POST'])
+def addToCart(PID,WID):
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		cart = session[currentBasket]
 	else:
-		print(currentBasket) # If the length of the string is not 0 then there is something in the basket. Print this to allow the user to see it.
-# After adding something to the basket or realising it is out of stock, ask the user if they want to add anything else.
-	choice = input("Would you like to add something else? ")
-	if choice.lower() == "no":
-		cont = False # If the answer is no, set cont to False and end while loop. Else, cont will remain as true and loop will restart.
-		print(currentBasket)
-		print("Total price: £" + str(currentBasket.get_price())) # Finally, return the overall price of the basket by adding up price of all items.
+		user = ['','','','','','','']
+		cart = []
+	try:
+		# itemQuantity = pg.getItemQuantity(PID,WID)
+		itemInfo = pg.getItemInfo(PID)
+		newItem = Item(itemInfo[3],itemInfo[4],itemInfo[0],float(itemInfo[1]),1,itemInfo[2])
+		currentBasket.add_item(newItem)
+		# REMOVE QUANTITY FROM WID
+		# search=request.form['search']
+		# print("***Search Term: " , search)
+	except:
+		print("Error putting item in cart")
+	return render_template('searchresults.html', user=user, cart=cart)
+	
+	
+def listCartItems(cart):
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		cart = session[currentBasket]
+	else:
+		user = ['','','','','','','']
+		cart = []
+	try:
+		i = 1
+		for item in currentBasket.get_items():
+			print(i,item.get_productID(),item.get_quantity(),item.get_price(),round(item.get_total_item_price(),2))
+			cart.append(i,item.get_productID(),item.get_quantity(),item.get_price(),round(item.get_total_item_price(),2))
+			i+=1
+		print("Total: $$$", round(currentBasket.get_price(),2))
+		return cart
+	except:
+		print("Cart is empty?")
+		return cart
+	# return render_template('searchresults.html', user=user, cart=cart)
+	
 		
-# Remove item from basket
-remove = input("Would you like to remove an item? ").lower()
-remove_item = True
-while remove_item:
-	if remove == "yes":
-		item = input("Select an item to remove: ")
-		if eval(item) in currentBasket.get_items():
-			currentBasket.remove_item(eval(item))
-			choice = input("Remove something else? ").lower()
-	print(currentBasket)
-	print("Total price: £" + str(currentBasket.get_price()))
-	if choice == "no":
-		remove_item = False
-		print(currentBasket)
-		print("Total price: £" + str(currentBasket.get_price()))
-
-# Price is 0, therefore no items left in basket		
-if currentBasket.get_price() == 0:
-    print("Your basket is empty!")
+addToCart(841,4)
