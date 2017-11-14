@@ -21,32 +21,60 @@
 			<ul class="nav navbar-nav">
 			
 				{% if ( ( user[5] == 'Administrator') ):  %}
-					<li class="nav-item"><a href="/addwarehouse" class="nav-link"><p class="bg3">Add Warehouse</p></a></li>
+					<li class="nav-item dropdown">
+        				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          					<span class="bg3">Administrator</span>
+        				</a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="/addwarehouse"><span class="bg3">Add Warehouse</span></a>
+				        </div>
+      				</li>
+					
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
-					<li class="nav-item"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
-					<li class="nav-item"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
-					<li class="nav-item"><a href="/remove" class="nav-link"><p class="bg3">Remove Account</p></a></li>
-					<li class="nav-item"><a href="/manageitems" class="nav-link"><p class="bg3">Manage Items</p></a></li>
+				<li class="nav-item dropdown">
+        				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          					<span class="bg3">Manager</span>
+        				</a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<a href="/form" class="dropdown-item"><span class="bg3">New Registration</span></a>
+							<a href="/remove" class="dropdown-item"><span class="bg3">Remove Account</span></a>
+							<a href="/manageitems" class="dropdown-item"><span class="bg3">Manage Items</span></a>
+				        </div>
+      				</li>
+
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
-					<li class="nav-item"><a href="/sales" class="nav-link"><p class="bg3">Sales Associate</p></a></li>
-					<li class="nav-item"><a href="/altercustomer" class="nav-link"><p class="bg3">Alter Customer</p></a></li>
+				<li class="nav-item dropdown">
+        				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          					<span class="bg3">Sales Associate</span>
+        				</a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<a href="/altercustomer" class="dropdown-item"><span class="bg3">Edit Profile</span></a>
+				        </div>
+      				</li>
 				{% endif %}
 				
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
-					<!--<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3">Customer</p></a></li>-->
-					<li class="nav-item selected"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
-					<li class="nav-item"><a href="/invoice" class="nav-link"><p class="bg3">Invoice</p></a></li>
+				<li class="nav-item dropdown">
+        				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          					<span class="bg3 selected">Customer</span>
+        				</a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					        <a href="/search" class="dropdown-item"><span class="bg3 selected">Product Search</span></a>
+							<a href="/invoice" class="dropdown-item"><span class="bg3">Invoice</span></a>
+				        </div>
+      				</li>
 				{% endif %}
 				
 			</ul>
 	
 			<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-				<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3"><i class="fa fa-user" aria-hidden="true"></i>{{user[2]}} - {{user[5]}}</p></a></li>
-				<li class="nav-item"><a href="/logout" class="nav-link"><p class="bg3"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</p></a></li>
+				<li class="nav-item"><a href="/profile" class="nav-link"><span class="bg3"><i class="fa fa-user" aria-hidden="true"></i>{{user[2]}} - {{user[5]}}</span></a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link"><span class="bg3"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</span></a></li>
+				<li class="nav-item"><a href="/cart" class="nav-link"><span class="bg3"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart </span><spanNotification class="badge badge-pill badge-danger">{{cartCount}}</span></a></li>
 			</ul>
 
 		</div>
@@ -100,7 +128,7 @@
 				<tbody>
 					
 					
-						{% for item in results %}
+						{% for item in items %}
 							<tr>
 								<th scope="row">{{item[0]}}</th>
 								<td>{{item[1]}}</td>
