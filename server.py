@@ -102,8 +102,6 @@ class Item(object):
 	def get_total_item_price(self): 
 		return self._price * self._quantity
 	
-
-		
 class Basket(object):
 	def __init__(self):
 		self._items = []
@@ -150,60 +148,85 @@ with app.test_request_context():
 	# session['currentBasket'] = currentBasket
 	print("New Basket Created")
 
-# def getCart():
-
-
-
-
-
 
 @app.route('/', methods=['GET','POST'])
 def mainIndex():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
-		# cart = session['currentBasket']
 	else:
 		user = ['','','','','','','']
-		# currentBasket = ['']
-	return render_template('login.html', user=user, currentBasket=currentBasket)
+		
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+		
+	return render_template('login.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 	
 
 @app.route('/addwarehouse')
 def showAddWarehouse():
+	
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		# cart = session['currentBasket']
 
 		if (user[5] == 'Administrator'):
-			return render_template('addwarehouse.html', user=user, currentBasket=currentBasket)
+			return render_template('addwarehouse.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 		else:
-			return render_template('forbidden.html', user=user, currentBasket=currentBasket)
+			return render_template('forbidden.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 	else:
 		user = ['','','','','','','']
 		# currentBasket = ['']
-		return render_template('search.html', user=user)	
+		return render_template('search.html', user=user, cartCount=cartCount)	
 
 
 @app.route('/manager', methods=['GET','POST'])
 def showManager():
+	
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
 	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		# cart = session['currentBasket']
 
 		if (user[5] == 'Administrator') or (user[5] == 'Manager'):
-			return render_template('manager.html', user=user, currentBasket=currentBasket)
+			return render_template('manager.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 		else:
-			return render_template('forbidden.html', user=user, currentBasket=currentBasket)
+			return render_template('forbidden.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 	else:
 		user = ['','','','','','','']
-		# currentBasket = ['']
-
-		return render_template('search.html', user=user, currentBasket=currentBasket)	
+		return render_template('search.html', user=user, currentBasket=currentBasket, cartCount=cartCount)	
 
 
 @app.route('/sales')
 def showSales():
+	
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		# cart = session['currentBasket']
@@ -214,21 +237,28 @@ def showSales():
 			return render_template('forbidden.html', user=user, currentBasket=currentBasket)
 	else:
 		user = ['','','','','','','']
-		# currentBasket = ['']
 
-		return render_template('search.html', user=user, currentBasket=currentBasket)	
+		return render_template('search.html', user=user, currentBasket=currentBasket, cartCount=cartCount)	
 
 
 @app.route('/profile', methods=['GET','POST'])
 def showProfile():
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		# cart = session['currentBasket']
 
-		return render_template('profile.html', user=user, currentBasket=currentBasket)
+		return render_template('profile.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 	else:
 		user = ['','','','','','','']
-		return render_template('login.html', user=user, currentBasket=currentBasket)
+		return render_template('login.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 
 
 @app.route('/invoice', methods=['GET','POST'])
@@ -238,6 +268,14 @@ def showInvoice():
 		# cart = session['currentBasket']
 	else:
 		user = ['','','','','','','']
+
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
 
 	invoicenum = 1
 		
@@ -254,7 +292,7 @@ def showInvoice():
 	
 	mail.send(msg)
 
-	return render_template('invoice.html', user=user, currentBasket=currentBasket)
+	return render_template('invoice.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 
 
 def showInvoiceMaker(user, invoicenum):
@@ -477,18 +515,24 @@ def showInvoiceMaker(user, invoicenum):
 
 @app.route('/remove', methods=['GET','POST'])
 def showRemove():
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0	
+
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		# cart = session['currentBasket']
 		if(user[5] == 'Administrator') or (user[5] == 'Manager'):
-			return render_template('remove.html', user = user, currentBasket=currentBasket)
+			return render_template('remove.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 		else:
-			return render_template('forbidden.html', user = user, currentBasket=currentBasket)
+			return render_template('forbidden.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 	else:
 		user = ['','','','','','','']
-		return render_template('search.html', user = user, currentBasket=currentBasket)
-		
-	return render_template('remove.html', user=user, currentBasket=currentBasket)
+		return render_template('search.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 
 
 @app.route('/removeresults', methods=['GET','POST'])
@@ -499,6 +543,14 @@ def showRemoveResults():
 		# cart = session['currentBasket']
 	else:
 		user = ['','','','','','','']
+
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
 
 	try:
 		fname=request.form['fname']
@@ -515,23 +567,34 @@ def showRemoveResults():
 	if results == 'No Results.':
 		noresults = 1
 	
-	return render_template('removeresults.html', user=user, results=results, noresults = noresults, fname=fname, lname=lname, userlevel = userlevel, currentBasket=currentBasket)
+	return render_template('removeresults.html', user=user, results=results, noresults = noresults, fname=fname, lname=lname, userlevel=userlevel, currentBasket=currentBasket, cartCount=cartCount)
+
 
 @app.route('/altercustomer', methods=['GET', 'POST'])
 def showAlterCust():
+	
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
-		# cart = session['currentBasket']
+		
 		if(user[5] == 'Administrator') or (user[5] == 'Manager') or (user[5] == 'Sales Associate'):
-			return render_template('altercustomer.html', user = user, currentBasket=currentBasket)
+			return render_template('altercustomer.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 		else:
-			return render_template('forbidden.html', user = user, currentBasket=currentBasket)
+			return render_template('forbidden.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 	else:
 		user = ['','','','','','','']
-		return render_template('search.html', user = user, currentBasket=currentBasket)
+		return render_template('search.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 	
-	return render_template('altercustomer.html', user = user, currentBasket=currentBasket)
-	
+	return render_template('altercustomer.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
+
+
 @app.route('/alterresults', methods=['GET', 'POST'])
 def showAlterResults():
 	noresults = 0
@@ -542,6 +605,14 @@ def showAlterResults():
 	else:
 		user = ['','','','','','','']
 	
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+		
 	try:
 		custemail=request.form['custemail']
 		fname=request.form['fname']
@@ -569,7 +640,8 @@ def showAlterResults():
 	print("SHOW: ", results)
 	if results == 'No Results.':
 		noresults = 1
-	return render_template('alterresults.html', user = user, noresults = noresults, custemail = custemail, currentBasket=currentBasket)
+	return render_template('alterresults.html', user=user, noresults=noresults, custemail=custemail, currentBasket=currentBasket, cartCount=cartCount)
+
 
 
 @app.route('/form', methods=['GET','POST'])
@@ -588,7 +660,15 @@ def showForm():
 	else:
 		user = ['','','','','','','']
 		return render_template('search.html', user = user)
-	
+
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+
 	if request.method == 'POST':
 		fname=request.form['fname']
 		firstname=fname
@@ -609,7 +689,7 @@ def showForm():
 		print(level)
 	print("end of function")
 	
-	return render_template('form.html', user=user, currentBasket=currentBasket)
+	return render_template('form.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 
 
 @app.route('/form2', methods=['GET','POST'])
@@ -622,6 +702,13 @@ def showForm2():
 	else:
 		user = ['','','','','','','']
 		
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
 
 	if request.method == 'POST':
 		print("-- METHOD IS POST")
@@ -644,16 +731,16 @@ def showForm2():
 				print("pg.newMember worked!")
 				if results == None:
 					print("ERROR 2")
-					return render_template('badform.html', user=user, currentBasket=currentBasket)
+					return render_template('badform.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 			except:
 				print("ERROR INSERTING INTO login")
-			return render_template('form2.html', fname=fname, lname=lname, user=user, email=email, zipcode=zipcode, userlevel=userlevel, currentBasket=currentBasket)
+			return render_template('form2.html', fname=fname, lname=lname, user=user, email=email, zipcode=zipcode, userlevel=userlevel, currentBasket=currentBasket, cartCount=cartCount)
 		else:
 			print("ERROR 4")
-			return render_template('badform.html', user=user, fname=fname, lname=lname, email=email, pw1=pw1, pw2=pw2, zipcode=zipcode, userlevel=userlevel, currentBasket=currentBasket)
+			return render_template('badform.html', user=user, fname=fname, lname=lname, email=email, pw1=pw1, pw2=pw2, zipcode=zipcode, userlevel=userlevel, cartCount=cartCount, currentBasket=currentBasket)
 	else:
 		print("ERROR 5")
-		return render_template('form3.html', user=user, currentBasket=currentBasket)
+		return render_template('form3.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 
 
 @app.route('/form3', methods=['GET','POST'])
@@ -663,11 +750,20 @@ def showRoster():
 		# currentBasket = [session['currentBasket']]
 	else:
 		user = ['','','','','','','']
+		
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+		
 	try:
 		results = pg.currentRoster()
 	except:
 		print("Error executing select")
-	return render_template('form3.html', results=results, user=user, currentBasket=currentBasket)
+	return render_template('form3.html', results=results, user=user, currentBasket=currentBasket, cartCount=cartCount)
 
 
 @app.route('/login', methods=['GET','POST'])
@@ -677,6 +773,15 @@ def showLogin():
 		# cart = session['currentBasket']
 	else:
 		user = ['','','','','','','']
+
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+
 
 	if request.method == 'POST':
 		email=request.form['username']
@@ -689,7 +794,7 @@ def showLogin():
 				print("ERROR logging in")
 				
 		
-	return render_template('login.html', user=user, currentBasket=currentBasket)
+	return render_template('login.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 
 
 @app.route('/search', methods=['GET','POST'])
@@ -722,21 +827,31 @@ def showSearch():
 	
 	return render_template('search.html', user=user, cartCount=cartCount, currentBasket=currentBasket)
 
+
 @app.route('/manageitems', methods=['GET','POST'])
 def showManageItems():
 	
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		# cart = session['currentBasket']
+		
+		try:
+			cartCount = 0
+			for item in currentBasket.get_items():
+				print(item.get_name())
+				cartCount += item.get_quantity()
+		except:
+			cartCount = 0
+		
 		if (user[5] == 'Administrator') or (user[5] == 'Manager'):
 			return render_template('manageitems.html', user=user, currentBasket=currentBasket)
 		else:
 			return render_template('forbidden.html', user=user, currentBasket=currentBasket)
 	else:
 		user = ['','','','','','','']
-		return render_template('search.html', user=user, currentBasket=currentBasket)
-	
-	
+		return render_template('login.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
+
+
 @app.route('/searchresults', methods=['GET','POST'])
 def showSearchResults():
 
@@ -745,11 +860,13 @@ def showSearchResults():
 		# cart = session['currentBasket']
 	else:
 		user = ['','','','','','','']
+	
 	try:
 		search=request.form['search']
 		print("***Search Term: " , search)
 	except:
 		print("Error fetching search term")
+	
 	results = pg.superSearch(search)
 	
 	items = []
@@ -778,8 +895,6 @@ def showSearchResults():
 	print("SHOW: ", results)
 	
 	return render_template('searchresults3.html', user=user, results=results, search=search, items=items, cartCount=cartCount, currentBasket=currentBasket)
-	
-
 
 
 @app.route('/cart', methods=['GET','POST'])
@@ -830,8 +945,8 @@ def showCart():
 		cartCount = 0
 
 	return render_template('cart.html', user=user, cart=cart, cartCount=cartCount, currentBasket=currentBasket)
-	
-	
+
+
 def listCartItems():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
@@ -850,8 +965,6 @@ def listCartItems():
 		print("Cart is empty?")
 		return cart
 	return render_template('cart.html', user=user, currentBasket=currentBasket)
-	
-		
 
 
 @app.route('/logout', methods=['GET','POST'])
@@ -871,10 +984,8 @@ def logout():
 		user = ['','','','','','','']
 		currentBasket = ['']
 		return render_template('login.html', user=user, currentBasket=currentBasket)
-	
+
 
 # Start the server
 if __name__ == '__main__':
 	socketio.run(app, host='0.0.0.0', port=8080, debug=True)
-	addToCart(841,4)
-	listCartItems()
