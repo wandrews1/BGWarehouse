@@ -92,8 +92,8 @@ ul.dropdown-menu {
 	"Helvetica Neue", sans-serif;
 	
     font-size: 108px;
-	font-weight: normal;
-	line-height: .75;
+	font-weight: bold;
+	/*line-height: .75;*/
 	margin: 0 auto;
 	width: 100%;
 	justify-content: space-around;
@@ -107,8 +107,8 @@ ul.dropdown-menu {
 	"Helvetica Neue", sans-serif;
 	
     font-size: 40px;
-	font-weight: normal;
-	line-height: .75;
+	font-weight: bold;
+	/*line-height: .75;*/
 	margin: 0 auto;
 	width: 100%;
 	justify-content: space-around;
