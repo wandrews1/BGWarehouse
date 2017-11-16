@@ -50,7 +50,6 @@ usernames = {}
 
 
 # SHOPPING CART
-
 # Each item will have all of these parameters in bg.sql
 class Item(object): 
 	def __init__(self, name, description, productID, price, quantity, cat):
@@ -107,6 +106,7 @@ class Basket(object):
 		self._items = []
 		self._price = 0 
 		self._count = 0
+		self._current = 0
 		
 	def __str__(self):
 		output = ("Items currently in your basket: ")
@@ -118,6 +118,16 @@ class Basket(object):
 	def __repr__(self):
 		for x in self._items:
 			return str(x)
+			
+	def __iter__(self):
+		return self
+
+	def next(self): # Python 3: def __next__(self)
+		if self._current > self._count:
+			raise StopIteration
+		else:
+			self._current += 1
+			return self._current - 1
 		
 	def get_price(self):
 		return self._price
@@ -147,6 +157,12 @@ with app.test_request_context():
 	currentBasket = Basket()
 	# session['currentBasket'] = currentBasket
 	print("New Basket Created")
+	
+# session["cart"] = currentBasket.__dict__
+
+@socketio.on('message')
+def handle_message(message):
+    print('received message: ' + message)
 
 
 @app.route('/', methods=['GET','POST'])
@@ -903,7 +919,6 @@ def showSearchResults():
 def showCart():
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
-		# cart = []
 	else:
 		user = ['','','','','','','']
 
@@ -913,6 +928,7 @@ def showCart():
 		itemInfo = pg.getItemInfo(841)
 		newItem = Item(itemInfo[3],itemInfo[4],itemInfo[0],float(itemInfo[1]),1,itemInfo[2])
 		currentBasket.add_item(newItem)
+		
 		itemInfo = pg.getItemInfo(985)
 		newItem = Item(itemInfo[3],itemInfo[4],itemInfo[0],float(itemInfo[1]),1,itemInfo[2])
 		currentBasket.add_item(newItem)
