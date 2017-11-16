@@ -160,9 +160,9 @@ with app.test_request_context():
 	
 # session["cart"] = currentBasket.__dict__
 
-@socketio.on('message')
-def handle_message(message):
-    print('received message: ' + message)
+# @socketio.on('message')
+# def handle_message(message):
+#     print('received message: ' + message)
 
 
 @app.route('/', methods=['GET','POST'])
@@ -913,6 +913,10 @@ def showSearchResults():
 	print("SHOW: ", results)
 	
 	return render_template('searchresults3.html', user=user, results=results, search=search, items=items, cartCount=cartCount, currentBasket=currentBasket)
+
+
+# @app.route('/addToCart', methods=['GET','POST'])
+# def addToCart(item)
 
 
 @app.route('/cart', methods=['GET','POST'])
