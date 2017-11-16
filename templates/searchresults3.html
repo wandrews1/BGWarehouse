@@ -114,7 +114,7 @@
 				{% if (search != ''): %}
 				<h3>Searching for '{{search}}'</h3>
 				{% endif %}
-			<table class="table table-hover table-sm table-dark">
+			<table class="table table-hover table-sm card50">
 				<thead>
 					<tr>
 						<th scope="col">Product ID</th>
@@ -173,7 +173,7 @@
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn btn-outline-warning" data-dismiss="modal">Close</button>
-									        <a href="#"><button type="button" class="btn btn btn-outline-dark" onclick="addToCart(item.get_productID(),1)"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Add to Cart</button></a>
+									        <a href="#"><button type="button" class="btn btn-outline-dark" onclick="addToCart()"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Add to Cart</button></a>
 									      </div>
 									    </div>
 									  </div>
@@ -182,7 +182,18 @@
 								</td>
 							</tr>
 							
-							
+
+<script>
+// $(document).on('click', function(event){
+//     socket.emit('myClick', {id: event.target});
+// }
+
+// var socket = io.connect('http://localhost');
+
+// socket.on('myClick', function (data) {
+//     $(data.id).trigger('click');
+// }
+</script>
 							
 						{% endfor %}
 				</tbody>

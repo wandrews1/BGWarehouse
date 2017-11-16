@@ -101,7 +101,7 @@
 
 			{% if ( cartCount != 0 ):  %}
 				
-			<table class="table table-hover table-sm table-dark">
+			<table class="table table-hover table-sm">
 				<thead>
 					<tr>
 						<th scope="col"><center>Product ID</center></th>
@@ -114,12 +114,7 @@
 				</thead>
 				<tbody>
 					
-						{% set total = 0.00 %}
-
-						{% for item in cart %}
-							{% set price = item.get_price() %}
-							{% set quantity = item.get_quantity() %}
-							{% set total = total + ( price * quantity ) %}
+						{% for item in currentBasket.get_items() %}
 							<tr>
 								<td><center>{{item.get_productID()}}</center></td>
 								<td><center>${{item.get_price()}}</center></td>
@@ -128,16 +123,11 @@
 								<td><center>{{item.get_name()}}</center></td>
 								<td><center><button type="button" class="btn btn-sm btn-outline-dark"><i class="fa fa-trash-o" aria-hidden="true"></i></button></center></td>
 							</tr>
-
 						{% endfor %}
 						
 							<tr>
-								<td>
-									<strong><center>Total: </center></strong>
-								</td>
-								<td>
-									<strong><center>${{total}} - ${{currentBasket.get_price()}}</center></strong>
-								</td>
+								<td><strong><center>Total: </center></strong></td>
+								<td><strong><center>{{"${:,.2f}".format(currentBasket.get_price())}}</center></strong></td>
 							</tr>
 				</tbody>
 			</table>
