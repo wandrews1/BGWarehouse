@@ -90,7 +90,7 @@
 <div class="container-fluid card50">
         
         <h3 class="bg2">
-            Warehouse Created
+            Warehouse Creation
         </h3>           
 
         <br>
@@ -107,16 +107,23 @@
 		
     {% endif %}
     
-    {% if (noresults == 1) or (noemail == 1): %}
+    
+    {% if (noresults == 1) or (noemail == 1) or (noware == 1): %}
         <div class="container-fluid">
 			<div class="alert alert-danger" role="alert">
 				<h3 class="alert-heading" style="text-align:left;"><strong>Error:</strong></h3>
 				<br>
-				<div style="text-align:left;"><strong> Warehouse owned by {{owner}} could not be altered</strong></div>
+				<div style="text-align:left;"><strong> Warehouse owned by {{owner}} could not be created</strong></div>
 				<hr>
-				<div style="text-align:left;">Please check that the email is not associated a user already.</div>
-				<div style="text-align:left;">OR</div>
-				<div style="text-align:left;">Please check that the email was entered properly and try again.</div>
+				{% if (noemail == 1) %}
+					<div style="text-align:left;">The email entered is not associated with a bg team member account.</div>
+					<div style="text-align:left;">Make sure the email was entered correctly and try again.</div>
+				{% endif %}
+				
+				{% if (noware == 1) %}
+					<div style="text-align:left;">The email entered already has a warehouse associated to it.</div>
+					<div style="text-align:left;">Please use an email not already associated with a warehouse and try again.</div>
+				{% endif %}
 			</div>
 		</div>
 	{% endif %}

@@ -207,14 +207,14 @@ def showAddWarehouse():
 		# currentBasket = ['']
 		return render_template('search.html', user=user, cartCount=cartCount)
 		
-	if request.method == 'POST':
-		owner = request.form['owner']
-		name=request.form['name']
-		address=request.form['address']
-		city=request.form['city']
-		state=request.form['state']
-		zipcode = request.form['zipcode']
-		level = request.form['level']
+	# if request.method == 'POST':
+	# 	owner = request.form['owner']
+	# 	name=request.form['name']
+	# 	address=request.form['address']
+	# 	city=request.form['city']
+	# 	state=request.form['state']
+	# 	zipcode = request.form['zipcode']
+	# 	level = request.form['level']
 	
 	return render_template('addwarehouse.html', user=user, currentBasket=currentBasket, cartCount=cartCount)	
 
@@ -223,6 +223,8 @@ def showAddWarehouse():
 def showWarehouseresults():
 	noresults = 0
 	noemail = 0
+	nolevel = 0
+	noware = 0
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		# cart = session['currentBasket']
@@ -255,19 +257,24 @@ def showWarehouseresults():
 	emailcheck = pg.checkEmail(owner)
 	if emailcheck == 'No Email Match.':
 		noemail = 1
-		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount)
+		noresults = 1
+		warecheck = pg.checkWarehouseEmail(owner)
+		if warecheck == 1:
+			noware = 1
+		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount, noware = noware)
+	warecheck = pg.checkWarehouseEmail(owner)
+	if warecheck == 1:
+		noware = 1
+		noresults = 1
+		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount, noware = noware)
 	else:
 		results = pg.addWarehouse(owner, name, address, city, state, zipcode, level)
 		print("SHOW: ", results)
 		if results == 'No Results.':
 			noresults = 1
-		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount)
+		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount, noware = noware)
 
-	# results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
-	# print("SHOW: ", results)
-	# if results == 'No Results.':
-	# 	noresults = 1
-	return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, currentBasket=currentBasket, cartCount=cartCount)
+	return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, currentBasket=currentBasket, cartCount=cartCount, noware = noware)
 
 
 @app.route('/manager', methods=['GET','POST'])

@@ -202,6 +202,20 @@ def checkAlterEmail(email):
 		return noEmail
 	conn.close()
 	return checkemail
+
+def checkWarehouseEmail(email):
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT * FROM warehouses WHERE email = %s"
+	checkemail = execute_query(query_string, conn, select = True, args=(email,))
+	if checkemail:
+		return 1
+	else:
+		return 0
+		
+	conn.close()
+	return 0
 	
 def checkEmail(email):	
 	noEmail = ('No Email Match.')
