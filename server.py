@@ -205,7 +205,57 @@ def showAddWarehouse():
 	else:
 		user = ['','','','','','','']
 		# currentBasket = ['']
+		
 		return render_template('search.html', user=user, cartCount=cartCount)	
+		
+@app.route('/warehouseresults', methods=['GET', 'POST'])
+def showWarehouseresults():
+	noresults = 0
+	noemail = 0
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		# cart = session['currentBasket']
+	else:
+		user = ['','','','','','','']
+	
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+		
+	try:
+		owner = request.form['owner']
+		name=request.form['name']
+		address=request.form['address']
+		city=request.form['city']
+		state=request.form['state']
+		zipcode = request.form['zipcode']
+		level = request.form['level']
+		print("***Owner: , NAME: , ADDRESS , CITY, STATE, ZIPCODE, LEVEL: " , owner, name, address, city, state, zipcode, level)
+	except:
+		print("Error fetching removal characteristics")
+		
+	print("***Owner: , NAME: , ADDRESS , CITY, STATE, ZIPCODE, LEVEL: " , owner, name, address, city, state, zipcode, level)
+
+	emailcheck = pg.checkAlterEmail(owner)
+	if emailcheck == 'No Email Match.':
+		noemail = 1
+		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount)
+	else:
+		results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
+		print("SHOW: ", results)
+		if results == 'No Results.':
+			noresults = 1
+		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount)
+
+	results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
+	print("SHOW: ", results)
+	if results == 'No Results.':
+		noresults = 1
+	return render_template('warehouseresults.html', user=user, noresults=noresults, custemail=custemail, currentBasket=currentBasket, cartCount=cartCount)
 
 
 @app.route('/manager', methods=['GET','POST'])

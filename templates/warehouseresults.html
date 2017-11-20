@@ -1,0 +1,96 @@
+{% extends "layout.html" %} {% block header %}
+<div class="container-fluid headerbanner">
+	<br>
+	<br>
+	<br>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bgblack" role="navigation">
+	<div class="container-fluid">
+	
+		<a class="navbar-brand" href="/search"><img src="/static/images/original_bg_products.png" width=50px></a>
+	
+		<button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+			&#9776;
+		</button>
+
+		<div class="collapse navbar-collapse" id="exCollapsingNavbar">
+			<ul class="nav navbar-nav">
+			
+				{% if ( ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/addwarehouse" class="nav-link"><p class="bg3">Add Warehouse</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/manager" class="nav-link"><p class="bg3">Manager</p></a></li>
+					<li class="nav-item"><a href="/form" class="nav-link"><p class="bg3">New Registration</p></a></li>
+					<li class="nav-item"><a href="/remove" class="nav-link"><p class="bg3">Remove Account</p></a></li>
+					<li class="nav-item"><a href="/manageitems" class="nav-link"><p class="bg3">Manage Items</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<li class="nav-item"><a href="/sales" class="nav-link"><p class="bg3">Sales Associate</p></a></li>
+					<li class="nav-item selected"><a href="/altercustomer" class="nav-link"><p class="bg3">Alter Customer</p></a></li>
+				{% endif %}
+				
+				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+					<!--<li class="nav-item"><a href="/customer" class="nav-link"><p class="bg3">Customer</p></a></li>-->
+					<li class="nav-item"><a href="/search" class="nav-link"><p class="bg3">Product Search</p></a></li>
+					<li class="nav-item"><a href="/invoice" class="nav-link"><p class="bg3">Invoice</p></a></li>
+				{% endif %}
+				
+			</ul>
+	
+			<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+				<li class="nav-item"><a href="/profile" class="nav-link"><p class="bg3"><i class="fa fa-user" aria-hidden="true"></i>{{user[2]}} - {{user[5]}}</p></a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link"><p class="bg3"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</p></a></li>
+			</ul>
+
+		</div>
+	</div>
+</nav>
+
+{% endblock %} {% block content %}
+<br>
+<br>
+<center>
+    
+<div class="container-fluid card50">
+        
+        <h3 class="bg2">
+            Customer Altered
+        </h3>           
+
+        <br>
+        <br>
+    {% if (noresults == 0) and (noemail == 0): %}
+    	<div class="container-fluid">
+			<div class="alert alert-success" role="alert">
+				<h3 class="alert-heading" style="text-align:left;"><strong>Account Altered:</strong></h3>
+				<br>
+				<hr>
+				<div style="text-align:left;">The warehouse owned by {{owner}} has successfully been created.</div>
+			</div>
+		</div>
+		
+    {% endif %}
+    
+    {% if (noresults == 1) or (noemail == 1): %}
+        <div class="container-fluid">
+			<div class="alert alert-danger" role="alert">
+				<h3 class="alert-heading" style="text-align:left;"><strong>Error:</strong></h3>
+				<br>
+				<div style="text-align:left;"><strong> Warehouse owned by {{owner}} could not be altered</strong></div>
+				<hr>
+				<div style="text-align:left;">Please check that the email is not associated a user already.</div>
+				<div style="text-align:left;">OR</div>
+				<div style="text-align:left;">Please check that the email was entered properly and try again.</div>
+			</div>
+		</div>
+	{% endif %}
+    </div>
+</center>
+<br>
+
+
+{% endblock %}
