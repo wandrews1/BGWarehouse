@@ -203,7 +203,21 @@ def checkAlterEmail(email):
 	conn.close()
 	return checkemail
 	
-		
+def checkEmail(email):	
+	noEmail = ('No Email Match.')
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT * FROM login WHERE email = %s"
+	checkemail = execute_query(query_string, conn, select = True, args=(email,))
+	print ("Results ", checkemail)
+	if checkemail:
+		return checkemail
+	else:
+		return noEmail
+	conn.close()
+	return checkemail
+	
 def superSearch(search):
 	noresults = ("No Results.",)
 	print (" - in superSearch()")
@@ -267,7 +281,17 @@ def getLastName(email, pw1):
 	results = execute_query(query_string, conn, select=True, args=(email, pw1))
 	conn.close()
 	return results[0][0]
-	
+
+def addWarehouse(owner, name, address, city, state, zipcode, level):
+	print (" - in addwarehouse()")
+	conn = connectToPostgres()
+	print(conn)
+	if conn == None:
+		return None
+	query_string = "INSERT INTO warehouses (warehouseName, address, city, state, zip, email, warehouseLevel) VALUES (%s, %s, %s, %s, %s, %s, %s)" 
+	execute_query(query_string, conn, select=False,  args=(name, address, city, state, zipcode, owner, level))
+	conn.close()
+	return 0	
 	
 def getZip(email,pw1):
 	print (" - in getZip()")

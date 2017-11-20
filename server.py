@@ -183,7 +183,7 @@ def mainIndex():
 	return render_template('login.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 	
 
-@app.route('/addwarehouse')
+@app.route('/addwarehouse', methods=['GET', 'POST'])
 def showAddWarehouse():
 	
 	try:
@@ -205,8 +205,19 @@ def showAddWarehouse():
 	else:
 		user = ['','','','','','','']
 		# currentBasket = ['']
+		return render_template('search.html', user=user, cartCount=cartCount)
 		
-		return render_template('search.html', user=user, cartCount=cartCount)	
+	if request.method == 'POST':
+		owner = request.form['owner']
+		name=request.form['name']
+		address=request.form['address']
+		city=request.form['city']
+		state=request.form['state']
+		zipcode = request.form['zipcode']
+		level = request.form['level']
+	
+	return render_template('addwarehouse.html', user=user, currentBasket=currentBasket, cartCount=cartCount)	
+
 		
 @app.route('/warehouseresults', methods=['GET', 'POST'])
 def showWarehouseresults():
@@ -225,37 +236,38 @@ def showWarehouseresults():
 			cartCount += item.get_quantity()
 	except:
 		cartCount = 0
-		
-	try:
-		owner = request.form['owner']
-		name=request.form['name']
-		address=request.form['address']
-		city=request.form['city']
-		state=request.form['state']
-		zipcode = request.form['zipcode']
-		level = request.form['level']
-		print("***Owner: , NAME: , ADDRESS , CITY, STATE, ZIPCODE, LEVEL: " , owner, name, address, city, state, zipcode, level)
-	except:
-		print("Error fetching removal characteristics")
-		
+	if request.method == 'POST':	
+		try:
+			print("ADD WAREHOUSE POST")
+			owner = request.form['owner']
+			name=request.form['name']
+			address=request.form['address']
+			city=request.form['city']
+			state=request.form['state']
+			zipcode = request.form['zipcode']
+			level = request.form['level']
+			print("***Owner: , NAME: , ADDRESS , CITY, STATE, ZIPCODE, LEVEL: " , owner, name, address, city, state, zipcode, level)
+		except:
+			print("Error fetching removal characteristics")
+			
 	print("***Owner: , NAME: , ADDRESS , CITY, STATE, ZIPCODE, LEVEL: " , owner, name, address, city, state, zipcode, level)
 
-	emailcheck = pg.checkAlterEmail(owner)
+	emailcheck = pg.checkEmail(owner)
 	if emailcheck == 'No Email Match.':
 		noemail = 1
 		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount)
 	else:
-		results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
+		results = pg.addWarehouse(owner, name, address, city, state, zipcode, level)
 		print("SHOW: ", results)
 		if results == 'No Results.':
 			noresults = 1
 		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount)
 
-	results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
-	print("SHOW: ", results)
-	if results == 'No Results.':
-		noresults = 1
-	return render_template('warehouseresults.html', user=user, noresults=noresults, custemail=custemail, currentBasket=currentBasket, cartCount=cartCount)
+	# results = pg.alterCustomer(custemail, fname, lname, zipcode, password)
+	# print("SHOW: ", results)
+	# if results == 'No Results.':
+	# 	noresults = 1
+	return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, currentBasket=currentBasket, cartCount=cartCount)
 
 
 @app.route('/manager', methods=['GET','POST'])
