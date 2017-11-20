@@ -254,6 +254,7 @@ INSERT INTO warehouses VALUES (DEFAULT,'Mobile: Jacob','8008 Elm Street','Chicag
 INSERT INTO warehouses VALUES (DEFAULT,'BG of Central Virginia','116 Sylvia Road','Ashland','VA',23005,'sales@umw.edu',2);
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON warehouses TO bgtemp;
+GRANT USAGE, INSERT, SELECT ON warehouses_warehouseid_seq TO bgtemp;
 
 
 CREATE OR REPLACE FUNCTION itemQuantities(productID varchar, warehouseID int) 

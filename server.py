@@ -183,7 +183,7 @@ def mainIndex():
 	return render_template('login.html', user=user, currentBasket=currentBasket, cartCount=cartCount)
 	
 
-@app.route('/addwarehouse')
+@app.route('/addwarehouse', methods=['GET', 'POST'])
 def showAddWarehouse():
 	
 	try:
@@ -205,7 +205,76 @@ def showAddWarehouse():
 	else:
 		user = ['','','','','','','']
 		# currentBasket = ['']
-		return render_template('search.html', user=user, cartCount=cartCount)	
+		return render_template('search.html', user=user, cartCount=cartCount)
+		
+	# if request.method == 'POST':
+	# 	owner = request.form['owner']
+	# 	name=request.form['name']
+	# 	address=request.form['address']
+	# 	city=request.form['city']
+	# 	state=request.form['state']
+	# 	zipcode = request.form['zipcode']
+	# 	level = request.form['level']
+	
+	return render_template('addwarehouse.html', user=user, currentBasket=currentBasket, cartCount=cartCount)	
+
+		
+@app.route('/warehouseresults', methods=['GET', 'POST'])
+def showWarehouseresults():
+	noresults = 0
+	noemail = 0
+	nolevel = 0
+	noware = 0
+	if 'username' in session:
+		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
+		# cart = session['currentBasket']
+	else:
+		user = ['','','','','','','']
+	
+	try:
+		cartCount = 0
+		for item in currentBasket.get_items():
+			print(item.get_name())
+			cartCount += item.get_quantity()
+	except:
+		cartCount = 0
+	if request.method == 'POST':	
+		try:
+			print("ADD WAREHOUSE POST")
+			owner = request.form['owner']
+			name=request.form['name']
+			address=request.form['address']
+			city=request.form['city']
+			state=request.form['state']
+			zipcode = request.form['zipcode']
+			level = request.form['level']
+			print("***Owner: , NAME: , ADDRESS , CITY, STATE, ZIPCODE, LEVEL: " , owner, name, address, city, state, zipcode, level)
+		except:
+			print("Error fetching removal characteristics")
+			
+	print("***Owner: , NAME: , ADDRESS , CITY, STATE, ZIPCODE, LEVEL: " , owner, name, address, city, state, zipcode, level)
+
+	emailcheck = pg.checkEmail(owner)
+	if emailcheck == 'No Email Match.':
+		noemail = 1
+		noresults = 1
+		warecheck = pg.checkWarehouseEmail(owner)
+		if warecheck == 1:
+			noware = 1
+		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount, noware = noware)
+	warecheck = pg.checkWarehouseEmail(owner)
+	if warecheck == 1:
+		noware = 1
+		noresults = 1
+		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount, noware = noware)
+	else:
+		results = pg.addWarehouse(owner, name, address, city, state, zipcode, level)
+		print("SHOW: ", results)
+		if results == 'No Results.':
+			noresults = 1
+		return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, noemail=noemail, currentBasket=currentBasket, cartCount=cartCount, noware = noware)
+
+	return render_template('warehouseresults.html', user=user, noresults=noresults, owner=owner, currentBasket=currentBasket, cartCount=cartCount, noware = noware)
 
 
 @app.route('/manager', methods=['GET','POST'])

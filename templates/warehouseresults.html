@@ -82,131 +82,54 @@
 </nav>
 
 {% endblock %}
-
-
 {% block content %}
 <br>
 <br>
 <center>
- 	<div class="container-fluid card50 max">
- 		<!-- replace action below with destination html; "/form2" was there before I disabled it -->
-		<form method="POST" action="/warehouseresults"> 
-			
-			<h3 class="bg2">
-				New Warehouse
-			</h3>
-			
-			<br>
-			<br>
-			
-			<table>
-				<tr>
-					<td class="right">Warehouse Owner: </td>
-					<td><input type="email" class="form-control" id="owner" name="owner" placeholder="jsmith@bg.com"/></td>
-				</tr>
-				<tr>
-					<td class="right">Warehouse Name: </td>
-					<td><input type="text" class="form-control" id="name" name="name" placeholder="BG of Central Virginia"/></td>
-				</tr>
-				<tr>
-					<td class="right">Address: </td>
-					<td><input type="text" class="form-control" id="address" name="address" placeholder="116 Sylvia Rd" /></td>
-				</tr>
-				<tr>
-					<td class="right">City: </td>
-					<td><input type="text" class="form-control" id="city" name="city" placeholder="Ashland"/></td>
-				</tr>
-				<tr>
-					<td class="right">State:</td>
-					<td>
-						<select class="form-control" name="state" id="state"/>
-							<option></option>
-							<option>Alabama</option>
-							<option>Alaska</option>
-							<option>Arizona</option>
-							<option>Arkansas</option>
-							<option>California</option>
-							<option>Colorado</option>
-							<option>Connecticut</option>
-							<option>Disctrict of Columbia</option>
-							<option>Delaware</option>
-							<option>Florida</option>
-							<option>Georgia</option>
-							<option>Hawaii</option>
-							<option>Idaho</option>
-							<option>Illinois</option>
-							<option>Indiana</option>
-							<option>Iowa</option>
-							<option>Kansas</option>
-							<option>Kentucky</option>
-							<option>Louisiana</option>
-							<option>Maine</option>
-							<option>Maryland</option>
-							<option>Massachusetts</option>
-							<option>Michigan</option>
-							<option>Minnesota</option>
-							<option>Mississippi</option>
-							<option>Missouri</option>
-							<option>Montana</option>
-							<option>Nebraska</option>
-							<option>Nevada</option>
-							<option>New Hampshire</option>
-							<option>New Jersey</option>
-							<option>New Mexico</option>
-							<option>New York</option>
-							<option>North Carolina</option>
-							<option>North Dakota</option>
-							<option>Ohio</option>
-							<option>Oklahoma</option>
-							<option>Oregon</option>
-							<option>Pennsylvania</option>
-							<option>Rhode Island</option>
-							<option>South Carolina</option>
-							<option>South Dakota</option>
-							<option>Tennessee</option>
-							<option>Texas</option>
-							<option>Utah</option>
-							<option>Vermont</option>
-							<option>Virginia</option>
-							<option>Washington</option>
-							<option>West Virginia</option>
-							<option>Wisconsin</option>
-							<option>Wyoming</option>
-							<option>Guam</option>
-							<option>Puerto Rico</option>
-							<option>Virgin Islands</option>
-						</select>
-					</td>
-				</tr>
+    
+<div class="container-fluid card50">
+        
+        <h3 class="bg2">
+            Warehouse Creation
+        </h3>           
 
-				<tr>
-					<td class="right">Zipcode: </td>
-					<td><input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="23005"/></td>
-				</tr>
-				<tr>
-					<td class="right"> Level</td>
-					<td>
-						<select class="form-control" name="level" id="level"/>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						</select>
-					</td>
-				</tr>
-			</table>
-			
-			<br>
-			
-			<input type="submit" value="SUBMIT"  class="bgSubmit btn btn-outline-dark"/>
-			
-			<br>
-			<br>
-			
-			<h6>
-				All fields required for signup.
-			</h6>
-		</form>
-	</div>
+        <br>
+        <br>
+    {% if (noresults == 0) and (noemail == 0): %}
+    	<div class="container-fluid">
+			<div class="alert alert-success" role="alert">
+				<h3 class="alert-heading" style="text-align:left;"><strong>Warehouse Created:</strong></h3>
+				<br>
+				<hr>
+				<div style="text-align:left;">The warehouse owned by {{owner}} has successfully been created.</div>
+			</div>
+		</div>
+		
+    {% endif %}
+    
+    
+    {% if (noresults == 1) or (noemail == 1) or (noware == 1): %}
+        <div class="container-fluid">
+			<div class="alert alert-danger" role="alert">
+				<h3 class="alert-heading" style="text-align:left;"><strong>Error:</strong></h3>
+				<br>
+				<div style="text-align:left;"><strong> Warehouse owned by {{owner}} could not be created</strong></div>
+				<hr>
+				{% if (noemail == 1) %}
+					<div style="text-align:left;">The email entered is not associated with a bg team member account.</div>
+					<div style="text-align:left;">Make sure the email was entered correctly and try again.</div>
+				{% endif %}
+				
+				{% if (noware == 1) %}
+					<div style="text-align:left;">The email entered already has a warehouse associated to it.</div>
+					<div style="text-align:left;">Please use an email not already associated with a warehouse and try again.</div>
+				{% endif %}
+			</div>
+		</div>
+	{% endif %}
+    </div>
 </center>
-<br>	
+<br>
+
+
 {% endblock %}
