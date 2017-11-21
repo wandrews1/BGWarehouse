@@ -203,6 +203,34 @@ def checkAlterEmail(email):
 	conn.close()
 	return checkemail
 
+def checkWarehouse(name):
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT * FROM warehouses WHERE LOWER(warehouseName) = LOWER(%s)"
+	whexists = execute_query(query_string, conn, select = True, args=(name,))
+	if whexists:
+		return 1
+	else:
+		return 0
+	
+	conn.close()
+	return 0
+
+def checkItem(productID):
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT * FROM items WHERE productID = %s"
+	itemexists = execute_query(query_string, conn, select = True, args=(productID,))
+	if itemexists:
+		return 1
+	else:
+		return 0
+		
+	conn.close()
+	return 0
+
 def checkWarehouseEmail(email):
 	conn = connectToPostgres()
 	if conn == None:
