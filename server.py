@@ -674,7 +674,7 @@ def showRemove():
 
 @app.route('/removeresults', methods=['GET','POST'])
 def showRemoveResults():
-	noresults = 0
+	noresults = 1
 	if 'username' in session:
 		user = [session['username'],session['password'],session['firstname'],session['zipcode'],' - Logout',session['level'],session['lastname']]
 		# cart = session['currentBasket']
@@ -699,10 +699,11 @@ def showRemoveResults():
 		print("Error fetching removal characteristics")
 	
 	print("***FName: , LNAME: , EMAIL , LEVEL: " , fname, lname, email, userlevel)
-	results = pg.removeUser(fname, lname, email, userlevel)
+	pg.removeUser(fname, lname, email, userlevel)
+	results = pg.checkEmail(email)
 	print("SHOW: ", results)
-	if results == 'No Results.':
-		noresults = 1
+	if results == 'No Email Match.':
+		noresults = 0
 	
 	return render_template('removeresults.html', user=user, results=results, noresults = noresults, fname=fname, lname=lname, userlevel=userlevel, currentBasket=currentBasket, cartCount=cartCount)
 
