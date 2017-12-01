@@ -302,10 +302,6 @@ def showWarehouseTransfer():
 			wh2 = request.form['whName2']
 			item1 = request.form['item1']
 			amount1 = request.form['amount1']
-			item2 = request.form['item2']
-			amount2 = request.form['amount2']
-			item3 = request.form['item3']
-			amount3 = request.form['amount3']
 		except:
 			print("Error fetching transfer items")
 	
@@ -316,27 +312,20 @@ def showWarehouseTransfer():
 		it1 = 1
 	else:
 		it1 = pg.checkItem(item1)
-	if not item2:
-		it2 = 1
-	else:
-		it2 = pg.checkItem(item2)
-	if not item3:
-		it3 = 1
-	else:
-		it3 = pg.checkItem(item3)
 	
 	if (warehouse1 == 0) or (warehouse2 == 0):
 		warehouse = 0
-		return render_template('warehousetransfer.html', user=user, warehouse = warehouse, item = item, amount = amount, results = results, wh1 = wh1, wh2 = wh2, item1 = item1, item2 = item2, item3 = item3, currentBasket=currentBasket, cartCount=cartCount, itementered = itementered)
-	if (not item1) and (not item2) and (not item3):
+		return render_template('warehousetransfer.html', user=user, warehouse = warehouse, item = item, amount = amount, results = results, wh1 = wh1, wh2 = wh2, item1 = item1, currentBasket=currentBasket, cartCount=cartCount, itementered = itementered)
+	if not item1:
 		itementered = 0
-		return render_template('warehousetransfer.html', user=user, warehouse = warehouse, item = item, amount = amount, results = results, wh1 = wh1, wh2 = wh2, item1 = item1, item2 = item2, item3 = item3, currentBasket=currentBasket, cartCount=cartCount, itementered = itementered)
-	if (it1 == 0) or (it2 == 0) or (it3 ==0):
+		return render_template('warehousetransfer.html', user=user, warehouse = warehouse, item = item, amount = amount, results = results, wh1 = wh1, wh2 = wh2, item1 = item1, currentBasket=currentBasket, cartCount=cartCount, itementered = itementered)
+	if it1 == 0:
 		item = 0
-		return render_template('warehousetransfer.html', user=user, warehouse = warehouse, item = item, amount = amount, results = results, wh1 = wh1, wh2 = wh2, item1 = item1, item2 = item2, item3 = item3, currentBasket=currentBasket, cartCount=cartCount, itementered = itementered)
+		return render_template('warehousetransfer.html', user=user, warehouse = warehouse, item = item, amount = amount, results = results, wh1 = wh1, wh2 = wh2, item1 = item1, currentBasket=currentBasket, cartCount=cartCount, itementered = itementered)
 	else:
-		results = 1
-		return render_template('warehousetransfer.html', user=user, warehouse = warehouse, item = item, amount = amount, results = results, wh1 = wh1, wh2 = wh2, item1 = item1, item2 = item2, item3 = item3, currentBasket=currentBasket, cartCount=cartCount, itementered = itementered)
+		print(amount1)
+		results = pg.transferItems(wh1,wh2,item1,amount1)
+		return render_template('warehousetransfer.html', user=user, warehouse = warehouse, item = item, amount = amount, results = results, wh1 = wh1, wh2 = wh2, item1 = item1, currentBasket=currentBasket, cartCount=cartCount, itementered = itementered)
 	
 
 

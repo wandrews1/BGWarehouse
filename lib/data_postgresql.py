@@ -231,6 +231,36 @@ def checkItem(productID):
 	conn.close()
 	return 0
 
+def transferItems(wh1,wh2,item,quantity):
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	productID = 'bg' + item
+	#query_string = "SELECT warehouseID FROM warehouses WHERE warehouseName = %s"
+	#wh1ID = execute_query(query_string, conn, select = True, args=(wh1,))
+	#print(wh1ID)
+	#query_string = "SELECT warehouseID FROM warehouses WHERE warehouseName = %s"
+	#wh2ID = execute_query(query_string, conn, select = True, args=(wh2,))
+	query_string = "SELECT itemQuantities(%s,(SELECT warehouseID FROM warehouses WHERE warehouseName = %s))"
+	amountwh1 = execute_query(query_string, conn, select = True, args=(productID,wh1,))
+	ramountwh1 = amountwh1[0][0]
+	int(ramountwh1)
+	int(quantity)
+	if int(ramountwh1) <= int(quantity):
+		return 0
+	else:
+		amountwh2 = execute_query(query_string, conn, select = True, args=(productID,wh2,))
+		totalwh1 = int(ramountwh1) - int(quantity)
+		ramountwh2 = amountwh2[0][0]
+		int(ramountwh2)
+		totalwh2 = int(ramountwh2) + int(quantity)
+		print (totalwh1)
+		print (totalwh2)
+		query_string = "SELECT changeQuantities(%s,(SELECT warehouseID FROM warehouses WHERE warehouseName = %s),%s)"
+		execute_query(query_string, conn, select = True, args=(productID,wh1,totalwh1,))
+		execute_query(query_string, conn, select = True, args=(productID,wh2,totalwh2,))
+		return 1
+
 def checkWarehouseEmail(email):
 	conn = connectToPostgres()
 	if conn == None:
