@@ -128,10 +128,12 @@
 						
 						
 							{% if ( ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
+							<option value="Sales Associate">Customer</option>
 							<option value="Sales Associate">Sales Associate</option>
 							{% endif %}
 							
 							{% if ( ( user[5] == 'Administrator') ):  %}
+							<option value="Sales Associate">Customer</option>
 							<option value="Manager">Manager</option>
 							<option value="Admin">Administrator</option>
 							{% endif %}
