@@ -699,6 +699,15 @@ def showRemoveResults():
 		print("Error fetching removal characteristics")
 	
 	print("***FName: , LNAME: , EMAIL , LEVEL: " , fname, lname, email, userlevel)
+	saleinvoicecheck = pg.checkInvoiceSaleEmail(email)
+	if(saleinvoicecheck == 1):
+		pg.removeSalesinvoice(email)
+	custinvoicecheck = pg.checkInvoiceCustEmail(email)
+	if(custinvoicecheck == 1):
+		pg.removeCustinvoice(email)
+	whemailcheck = pg.checkWarehouseEmail(email)
+	if(whemailcheck == 1):
+		pg.removeWarehouse(email)
 	pg.removeUser(fname, lname, email, userlevel)
 	results = pg.checkEmail(email)
 	print("SHOW: ", results)

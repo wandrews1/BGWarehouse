@@ -275,6 +275,86 @@ def checkWarehouseEmail(email):
 	conn.close()
 	return 0
 	
+def removeWarehouse(email):
+	print (" - in remove warehouse()")
+	noresults = ("No Results.")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "DELETE FROM warehouses WHERE email=%s"
+	results = execute_query(query_string, conn, select=False, args = (email,))
+	print("-Results: ", results)
+	
+	if results:
+		return results
+	else:
+		return noresults
+	conn.close()
+	return results
+	
+def removeSalesinvoice(email):
+	print (" - in remove warehouse()")
+	noresults = ("No Results.")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "DELETE FROM invoices WHERE emailSales=%s"
+	results = execute_query(query_string, conn, select=False, args = (email,))
+	print("-Results: ", results)
+	
+	if results:
+		return results
+	else:
+		return noresults
+	conn.close()
+	return results
+
+def removeCustinvoice(email):
+	print (" - in remove warehouse()")
+	noresults = ("No Results.")
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "DELETE FROM invoices WHERE emailCust=%s"
+	results = execute_query(query_string, conn, select=False, args = (email,))
+	print("-Results: ", results)
+	
+	if results:
+		return results
+	else:
+		return noresults
+	conn.close()
+	return results
+
+	
+def checkInvoiceSaleEmail(email):
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT * FROM invoices WHERE emailSales = %s"
+	checkemail = execute_query(query_string, conn, select = True, args=(email,))
+	print ("Results ", checkemail)
+	if checkemail:
+		return 1
+	else:
+		return 0
+	conn.close()
+	return checkemail
+
+def checkInvoiceCustEmail(email):
+	conn = connectToPostgres()
+	if conn == None:
+		return None
+	query_string = "SELECT * FROM invoices WHERE emailCust = %s"
+	checkemail = execute_query(query_string, conn, select = True, args=(email,))
+	print ("Results ", checkemail)
+	if checkemail:
+		return 1
+	else:
+		return 0
+	conn.close()
+	return checkemail
+
 def checkEmail(email):	
 	noEmail = ('No Email Match.')
 	conn = connectToPostgres()

@@ -291,7 +291,7 @@ CREATE TABLE invoices (
   FOREIGN KEY (emailCust) REFERENCES login(email)
   );
 
-GRANT SELECT, INSERT ON invoices TO bgtemp;
+GRANT SELECT, INSERT, DELETE ON invoices TO bgtemp;
 
 
 INSERT INTO invoices VALUES (DEFAULT,'jhuffma3@umw.edu','customer@umw.edu','2017-11-05','2017-12-05',40.5);
