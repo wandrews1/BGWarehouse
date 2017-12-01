@@ -49,7 +49,7 @@
 				{% if ( ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 				<li class="nav-item dropdown">
         				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          					<span class="bg3">Sales Associate</span>
+          					<span class="bg3 selected">Sales Associate</span>
         				</a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 							<a href="/altercustomer" class="dropdown-item"><span class="bg3">Edit Profile</span></a>
@@ -60,7 +60,7 @@
 				{% if ( ( user[5] == 'Customer') or ( user[5] == 'Sales Associate') or ( user[5] == 'Manager') or ( user[5] == 'Administrator') ):  %}
 				<li class="nav-item dropdown">
         				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          					<span class="bg3 selected">Customer</span>
+          					<span class="bg3">Customer</span>
         				</a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					        <a href="/search" class="dropdown-item"><span class="bg3">Product Search</span></a>
@@ -80,6 +80,7 @@
 		</div>
 	</div>
 </nav>
+
 
 {% endblock %}
 
