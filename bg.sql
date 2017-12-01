@@ -269,8 +269,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
-
+CREATE OR REPLACE FUNCTION changeQuantities(productID varchar, warehouseID int, change int) 
+RETURNS void AS $$
+BEGIN
+  EXECUTE format('UPDATE warehouses SET %I = %s WHERE warehouseID = %s', productID, change, warehouseID)
+    USING change, warehouseID;
+END;
+$$ LANGUAGE plpgsql;
 
 
 DROP TABLE IF EXISTS invoices;

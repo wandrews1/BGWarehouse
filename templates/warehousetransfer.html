@@ -126,6 +126,11 @@
 					<div style="text-align:left;">Some of the Product ID's you entered do not exist.</div>
 					<div style="text-align:left;">Please enter existing Product ID's and try again.</div>
 				{% endif %}
+				
+				{% if (results == 0) %}
+					<div style="text-align:left;">The amount you entered is greater than the amount available.</div>
+					<div style="text-align:left;">Please enter a different amount</div>
+				{% endif %}
 			</div>
 		</div>
 	{% endif %}
