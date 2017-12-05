@@ -193,8 +193,8 @@ def checkAlterEmail(email):
 	conn = connectToPostgres()
 	if conn == None:
 		return None
-	query_string = "SELECT * FROM login WHERE email = %s and userlevel = %s"
-	checkemail = execute_query(query_string, conn, select = True, args=(email, customer))
+	query_string = "SELECT * FROM login WHERE email = %s"
+	checkemail = execute_query(query_string, conn, select = True, args=(email,))
 	print ("Results ", checkemail)
 	if checkemail:
 		return checkemail
